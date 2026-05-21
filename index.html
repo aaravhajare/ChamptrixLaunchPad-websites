@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width, initial-scale=1.0">
+<title>Champtrix Dev Studio</title>
+<style>
+/* reset and base */
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#0a0e27; color:#e0e0e0; line-height:1.6; }
+a { text-decoration:none; color:inherit; }
+ul { list-style:none; }
+.container { max-width:1200px; margin:auto; padding:0 20px; }
+header { background:#0f1628; padding:20px 0; position:sticky; top:0; z-index:100; border-bottom:1px solid #1a1f3a; }
+header .container { display:flex; justify-content:space-between; align-items:center; }
+.logo { font-size:1.5rem; font-weight:bold; color:#6c5ce7; }
+nav a { margin-left:30px; transition:color .3s; }
+nav a:hover { color:#a29bfe; }
+.hero { padding:100px 0; text-align:center; background:linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%); }
+.hero h1 { font-size:3rem; margin-bottom:20px; color:#fff; }
+.hero p { font-size:1.2rem; margin-bottom:30px; color:#b2b2b2; }
+.btn { display:inline-block; padding:12px 30px; background:#6c5ce7; color:#fff; border-radius:5px; font-size:1rem; transition:background .3s; cursor:pointer; border:none; }
+.btn:hover { background:#a29bfe; }
+.section { padding:80px 0; }
+.section-title { text-align:center; font-size:2rem; margin-bottom:50px; color:#fff; }
+.services { background:#0f1628; }
+.service-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:30px; }
+.service-card { background:#1a1f3a; padding:30px; border-radius:8px; transition:transform .3s, box-shadow .3s; }
+.service-card:hover { transform:translateY(-5px); box-shadow:0 5px 20px rgba(108,92,231,.3); }
+.service-card h3 { margin-bottom:15px; color:#a29bfe; }
+.portfolio { background:#0a0e27; }
+.portfolio-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:20px; }
+.portfolio-item { position:relative; overflow:hidden; border-radius:8px; height:200px; background:#1a1f3a; }
+.portfolio-item img { width:100%; height:100%; object-fit:cover; transition:transform .5s; }
+.portfolio-item:hover img { transform:scale(1.1); }
+.portfolio-item .overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(108,92,231,.7); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .3s; }
+.portfolio-item .overlay span { color:#fff; font-size:1.2rem; }
+.portfolio-item:hover .overlay { opacity:1; }
+.contact { background:#0f1628; }
+.contact-info { display:flex; justify-content:center; gap:60px; flex-wrap:wrap; margin-top:30px; }
+.contact-info div { text-align:center; }
+.contact-info i { font-size:2rem; color:#6c5ce7; margin-bottom:10px; display:block; }
+.contact-info a { color:#e0e0e0; font-size:1.1rem; }
+.contact-info a:hover { color:#a29bfe; }
+footer { background:#0a0e27; text-align:center; padding:20px; border-top:1px solid #1a1f3a; }
+/* icons via unicode */
+@font-face { font-family:'Font Awesome 5 Free'; src:local('Font Awesome 5 Free'); }
+</style>
+</head>
+<body>
+<header>
+<div class=container>
+<div class=logo>Champtrix Dev Studio</div>
+<nav>
+<a href=#home>Home</a>
+<a href=#services>Services</a>
+<a href=#portfolio>Portfolio</a>
+<a href=#contact>Contact</a>
+</nav>
+</div>
+</header>
+<section id=home class=hero>
+<div class=container>
+<h1>Building Digital Experiences</h1>
+<p>We craft high‑performance, beautiful websites that drive results.</p>
+<a class=btn href=#contact>Get in Touch</a>
+</div>
+</section>
+<section id=services class=section services>
+<div class=container>
+<h2 class=section-title>Our Services</h2>
+<div class=service-grid>
+<div class=service-card>
+<h3>Web Development</h3>
+<p>Custom websites built with modern frameworks and best practices.</p>
+</div>
+<div class=service-card>
+<h3>UI/UX Design</h3>
+<p>Intuitive interfaces that delight users and boost engagement.</p>
+</div>
+<div class=service-card>
+<h3>SEO & Marketing</h3>
+<p>Strategic optimization to increase visibility and traffic.</p>
+</div>
+<div class=service-card>
+<h3>Consulting</h3>
+<p>Expert guidance on technology choices and project planning.</p>
+</div>
+</div>
+</div>
+</section>
+<section id=portfolio class=section portfolio>
+<div class=container>
+<h2 class=section-title>Portfolio</h2>
+<div class=portfolio-grid>
+<div class=portfolio-item>
+<img src=https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&h=400&fit=crop alt=Project>
+<div class=overlay><span>Project One</span></div>
+</div>
+<div class=portfolio-item>
+<img src=https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=400&fit=crop alt=Project>
+<div class=overlay><span>Project Two</span></div>
+</div>
+<div class=portfolio-item>
+<img src=https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop alt=Project>
+<div class=overlay><span>Project Three</span></div>
+</div>
+<div class=portfolio-item>
+<img src=https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&h=400&fit=crop alt=Project>
+<div class=overlay><span>Project Four</span></div>
+</div>
+</div>
+</div>
+</section>
+<section id=contact class=section contact>
+<div class=container>
+<h2 class=section-title>Contact Us</h2>
+<div class=contact-info>
+<div>
+<span style=font-size:2rem;>📧</span>
+<a href=mailto:contact@champtrix.com>contact@champtrix.com</a>
+</div>
+<div>
+<span style=font-size:2rem;>📞</span>
+<a href=tel:9876543210>9876543210</a>
+</div>
+<div>
+<span style=font-size:2rem;>📍</span>
+<span>Champtrix HQ</span>
+</div>
+</div>
+<a class=btn href=#home style=display:block;max-width:300px;margin:30px auto 0;>Back to Top</a>
+</div>
+</section>
+<footer>
+<div class=container>
+<p>&copy; 2026 Champtrix Dev Studio. All rights reserved.</p>
+</div>
+</footer>
+<script>
+document.querySelectorAll('a[href^=#]').forEach(anchor => {
+anchor.addEventListener('click', function(e){
+e.preventDefault();
+const target = document.querySelector(this.getAttribute('href'));
+if(target){
+target.scrollIntoView({behavior:'smooth'});
+}
+});
+});
+</script>
+</body>
+</html>
