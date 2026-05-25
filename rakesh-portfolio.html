@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rakesh - Lead Backend Developer</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0a0a0a; color: #fff; line-height: 1.6; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 5%; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; }
+        nav .logo { font-size: 1.5rem; font-weight: bold; color: #00d4ff; }
+        nav ul { display: flex; list-style: none; gap: 2rem; }
+        nav ul li a { color: #ccc; text-decoration: none; transition: color 0.3s; }
+        nav ul li a:hover { color: #00d4ff; }
+        .hero { text-align: center; padding: 8rem 5% 4rem; }
+        .hero h1 { font-size: 3rem; margin-bottom: 0.5rem; background: linear-gradient(135deg, #00d4ff, #7b2ff7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero .role { color: #888; font-size: 1.2rem; margin-bottom: 1rem; }
+        .hero p { max-width: 600px; margin: 0 auto 2rem; color: #aaa; }
+        .btn { display: inline-block; padding: 0.8rem 2rem; background: linear-gradient(135deg, #00d4ff, #7b2ff7); color: #fff; text-decoration: none; border-radius: 50px; transition: transform 0.3s, box-shadow 0.3s; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,212,255,0.3); }
+        .section { padding: 4rem 5%; }
+        .section h2 { font-size: 2rem; margin-bottom: 2rem; text-align: center; color: #00d4ff; }
+        .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+        .card { background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); transition: transform 0.3s, border-color 0.3s; }
+        .card:hover { transform: translateY(-5px); border-color: #00d4ff; }
+        .card h3 { color: #00d4ff; margin-bottom: 0.5rem; }
+        .experience { max-width: 800px; margin: 0 auto; }
+        .exp-item { background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; border-left: 3px solid #00d4ff; }
+        .exp-item h3 { color: #00d4ff; }
+        .exp-item .company { color: #888; }
+        footer { text-align: center; padding: 2rem; color: #666; border-top: 1px solid rgba(255,255,255,0.1); }
+        @media (max-width: 768px) { nav ul { gap: 1rem; } .hero h1 { font-size: 2rem; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Rakesh</div>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    <section class="hero" id="about">
+        <h1>Rakesh Kumar</h1>
+        <p class="role">Lead Backend Developer at Barclays</p>
+        <p>Building scalable and high-performance backend systems with expertise in distributed architectures and cloud-native solutions.</p>
+        <a href="#contact" class="btn">Get in Touch</a>
+    </section>
+    <section class="section" id="skills">
+        <h2>Technical Skills</h2>
+        <div class="skills">
+            <div class="card">
+                <h3>Languages</h3>
+                <p>Java, Python, Go, SQL</p>
+            </div>
+            <div class="card">
+                <h3>Frameworks</h3>
+                <p>Spring Boot, Django, FastAPI</p>
+            </div>
+            <div class="card">
+                <h3>Cloud & DevOps</h3>
+                <p>AWS, Docker, Kubernetes, Jenkins</p>
+            </div>
+            <div class="card">
+                <h3>Databases</h3>
+                <p>PostgreSQL, MongoDB, Redis</p>
+            </div>
+        </div>
+    </section>
+    <section class="section" id="experience">
+        <h2>Experience</h2>
+        <div class="experience">
+            <div class="exp-item">
+                <h3>Lead Backend Developer</h3>
+                <p class="company">Barclays</p>
+                <p>Leading backend architecture for high-throughput financial systems. Designing microservices and ensuring system reliability.</p>
+            </div>
+            <div class="exp-item">
+                <h3>Senior Backend Developer</h3>
+                <p class="company">TechCorp</p>
+                <p>Developed RESTful APIs and optimized database queries for improved performance.</p>
+            </div>
+        </div>
+    </section>
+    <section class="section" id="contact">
+        <h2>Contact</h2>
+        <p style="text-align:center;color:#aaa;">rakesh.kumar@email.com</p>
+    </section>
+    <footer>
+        <p>&copy; 2025 Rakesh Kumar. All rights reserved.</p>
+    </footer>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
