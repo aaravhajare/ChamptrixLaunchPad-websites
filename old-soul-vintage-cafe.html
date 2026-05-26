@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Old Soul Vintage Cafe</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6B4226;
+            --secondary: #C9A96E;
+            --accent: #8B6914;
+            --dark: #2C1810;
+            --light: #F5F0E8;
+            --cream: #EDE4D5;
+            --rose: #C47A5A;
+            --text: #3B2F1E;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s ease;
+            background: transparent;
+        }
+
+        .navbar.scrolled {
+            background: rgba(44, 24, 16, 0.95);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+            padding: 10px 5%;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--secondary);
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-logo span {
+            color: var(--cream);
+            font-size: 0.9rem;
+            font-weight: 300;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--cream);
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 2px;
+            background: var(--cream);
+            transition: 0.3s;
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(44,24,16,0.7), rgba(107,66,38,0.6)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%236B4226" width="1200" height="800"/><circle cx="200" cy="150" r="80" fill="%23C9A96E" opacity="0.15"/><circle cx="900" cy="600" r="120" fill="%23C9A96E" opacity="0.1"/><rect x="400" y="300" width="400" height="200" rx="20" fill="%232C1810" opacity="0.3"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            z-index: 2;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            color: var(--cream);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+
+        .hero .tagline {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            font-weight: 300;
+            margin-bottom: 30px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .hero .subtitle {
+            font-size: 1rem;
+            color: rgba(245,240,232,0.8);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 40px;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.4s;
+            cursor: pointer;
+            background: transparent;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+        }
+
+        .btn:hover {
+            background: var(--secondary);
+            color: var(--dark);
+        }
+
+        .btn-filled {
+            background: var(--secondary);
+            color: var(--dark);
+            border-color: var(--secondary);
+        }
+
+        .btn-filled:hover {
+            background: transparent;
+            color: var(--secondary);
+        }
+
+        /* Section styles */
+        section {
+            padding: 100px 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .section-title .divider {
+            width: 80px;
+            height: 3px;
+            background: var(--secondary);
+            margin: 0 auto 15px;
+        }
+
+        .section-title p {
+            color: #888;
+            font-size: 0.95rem;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* About */
+        .about {
+            background: var(--cream);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(44,24,16,0.15);
+        }
+
+        .about-image-inner {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .about-image-inner::before {
+            content: '☕';
+            font-size: 8rem;
+            opacity: 0.3;
+        }
+
+        .about-image-inner::after {
+            content: '';
+            position: absolute;
+            inset: 15px;
+            border: 2px solid var(--secondary);
+            border-radius: 12px;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            line-height: 1.9;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        .about-feature .icon {
+            width: 36px;
+            height: 36px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        /* Menu */
+        .menu {
+            background: var(--light);
+        }
+
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .menu-cat-btn {
+            padding: 10px 28px;
+            border: 2px solid var(--secondary);
+            background: transparent;
+            color: var(--primary);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+
+        .menu-cat-btn.active, .menu-cat-btn:hover {
+            background: var(--secondary);
+            color: var(--dark);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .menu-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(44,24,16,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(44,24,16,0.15);
+        }
+
+        .menu-card-info h4 {
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .menu-card-info p {
+            font-size: 0.8rem;
+            color: #999;
+            line-height: 1.5;
+        }
+
+        .menu-card-price {
+            font-size: 1.2rem;
+            color: var(--rose);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        /* Booking */
+        .booking {
+            background: linear-gradient(135deg, var(--dark), var(--primary));
+            color: var(--cream);
+        }
+
+        .booking .section-title h2 {
+            color: var(--cream);
+        }
+
+        .booking .section-title p {
+            color: rgba(245,240,232,0.7);
+        }
+
+        .booking .divider {
+            background: var(--secondary);
+        }
+
+        .booking-form {
+            max-width: 700px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            color: var(--secondary);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 14px 18px;
+            border: 2px solid rgba(201,169,110,0.3);
+            background: rgba(245,240,232,0.05);
+            color: var(--cream);
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            transition: border-color 0.3s;
+            outline: none;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(245,240,232,0.4);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--secondary);
+        }
+
+        .form-group select option {
+            background: var(--dark);
+            color: var(--cream);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .booking-form .btn {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 16px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        /* Contact */
+        .contact {
+            background: var(--cream);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .contact-item .icon {
+            width: 45px;
+            height: 45px;
+            background: var(--secondary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .contact-item .detail h5 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .contact-item .detail p {
+            color: #555;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .contact-map {
+            border-radius: 20px;
+            overflow: hidden;
+            height: 400px;
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .contact-map-inner {
+            text-align: center;
+            color: var(--cream);
+        }
+
+        .contact-map-inner .map-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+
+        .contact-map-inner p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--cream);
+            padding: 60px 5% 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto 40px;
+        }
+
+        .footer-about h3 {
+            font-size: 1.4rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .footer-about p {
+            line-height: 1.8;
+            color: rgba(245,240,232,0.6);
+            font-size: 0.9rem;
+        }
+
+        .footer-col h4 {
+            font-size: 1rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: rgba(245,240,232,0.6);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(201,169,110,0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            color: var(--dark);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(201,169,110,0.15);
+            color: rgba(245,240,232,0.4);
+            font-size: 0.85rem;
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: var(--cream);
+            padding: 18px 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.5s;
+            z-index: 9999;
+            font-size: 0.9rem;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 70%;
+                background: rgba(44,24,16,0.98);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.4s;
+                gap: 25px;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .tagline {
+                font-size: 1rem;
+            }
+
+            .about-grid,
+            .contact-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image-inner {
+                height: 280px;
+            }
+
+            .booking-form {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-logo span {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="nav-logo">Old Soul <span>Vintage Cafe</span></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home" onclick="closeNav()">Home</a></li>
+            <li><a href="#about" onclick="closeNav()">About</a></li>
+            <li><a href="#menu" onclick="closeNav()">Menu</a></li>
+            <li><a href="#booking" onclick="closeNav()">Book Table</a></li>
+            <li><a href="#contact" onclick="closeNav()">Contact</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger" onclick="toggleNav()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <p class="tagline">Est. With Love</p>
+            <h1>Old Soul<br>Vintage Cafe</h1>
+            <p class="subtitle">Where every sip tells a story and every bite feels like home. A warm sanctuary for the modern soul.</p>
+            <a href="#menu" class="btn btn-filled">Explore Menu</a>
+            <a href="#booking" class="btn" style="margin-left: 15px;">Reserve Table</a>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+        <div class="section-title fade-in">
+            <h2>Our Story</h2>
+            <div class="divider"></div>
+            <p>A place where vintage charm meets modern comfort</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-image fade-in">
+                <div class="about-image-inner"></div>
+            </div>
+            <div class="about-text fade-in">
+                <h3>Welcome to Old Soul Vintage Cafe</h3>
+                <p>Nestled in the heart of Wagholi, Pune, Old Soul Vintage Cafe is more than just a coffee spot — it's a retreat from the chaos of everyday life. Our vintage-inspired interiors and warm ambiance create the perfect setting for meaningful conversations and quiet moments.</p>
+                <p>We source the finest beans, prepare our recipes with love, and serve every customer like family. Whether you're here for your morning brew or an evening treat, we promise an experience that lingers long after you leave.</p>
+                <div class="about-features">
+                    <div class="about-feature">
+                        <div class="icon">☕</div>
+                        <span>Artisan Coffee</span>
+                    </div>
+                    <div class="about-feature">
+                        <div class="icon">🍰</div>
+                        <span>Fresh Baked Goods</span>
+                    </div>
+                    <div class="about-feature">
+                        <div class="icon">🪑</div>
+                        <span>Cozy Seating</span>
+                    </div>
+                    <div class="about-feature">
+                        <div class="icon">🎶</div>
+                        <span>Live Music Nights</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu -->
+    <section class="menu" id="menu">
+        <div class="section-title fade-in">
+            <h2>Our Menu</h2>
+            <div class="divider"></div>
+            <p>Crafted with passion, served with love</p>
+        </div>
+        <div class="menu-categories fade-in">
+            <button class="menu-cat-btn active" onclick="filterMenu('all', this)">All</button>
+            <button class="menu-cat-btn" onclick="filterMenu('coffee', this)">Coffee</button>
+            <button class="menu-cat-btn" onclick="filterMenu('tea', this)">Tea & Infusions</button>
+            <button class="menu-cat-btn" onclick="filterMenu('bakery', this)">Bakery</button>
+            <button class="menu-cat-btn" onclick="filterMenu('savory', this)">Savory</button>
+        </div>
+        <div class="menu-grid" id="menuGrid">
+            <!-- Coffee -->
+            <div class="menu-card fade-in" data-category="coffee">
+                <div class="menu-card-info">
+                    <h4>Classic Espresso</h4>
+                    <p>Rich, bold single shot of pure Italian-style espresso</p>
+                </div>
+                <div class="menu-card-price">₹80</div>
+            </div>
+            <div class="menu-card fade-in" data-category="coffee">
+                <div class="menu-card-info">
+                    <h4>Cappuccino</h4>
+                    <p>Velvety steamed milk layered over a strong espresso</p>
+                </div>
+                <div class="menu-card-price">₹120</div>
+            </div>
+            <div class="menu-card fade-in" data-category="coffee">
+                <div class="menu-card-info">
+                    <h4>Cold Brew</h4>
+                    <p>Slow-steeped for 18 hours, smooth and refreshing</p>
+                </div>
+                <div class="menu-card-price">₹150</div>
+            </div>
+            <div class="menu-card fade-in" data-category="coffee">
+                <div class="menu-card-info">
+                    <h4>Vintage Mocha</h4>
+                    <p>Our signature blend with rich chocolate and cream</p>
+                </div>
+                <div class="menu-card-price">₹160</div>
+            </div>
+            <!-- Tea -->
+            <div class="menu-card fade-in" data-category="tea">
+                <div class="menu-card-info">
+                    <h4>Earl Grey Latte</h4>
+                    <p>Bergamot-infused black tea with frothy milk</p>
+                </div>
+                <div class="menu-card-price">₹110</div>
+            </div>
+            <div class="menu-card fade-in" data-category="tea">
+                <div class="menu-card-info">
+                    <h4>Herbal Chamomile</h4>
+                    <p>Calming chamomile with honey and lemon</p>
+                </div>
+                <div class="menu-card-price">₹90</div>
+            </div>
+            <div class="menu-card fade-in" data-category="tea">
+                <div class="menu-card-info">
+                    <h4>Masala Chai</h4>
+                    <p>Traditional Indian spiced tea brewed to perfection</p>
+                </div>
+                <div class="menu-card-price">₹70</div>
+            </div>
+            <!-- Bakery -->
+            <div class="menu-card fade-in" data-category="bakery">
+                <div class="menu-card-info">
+                    <h4>Classic Croissant</h4>
+                    <p>Buttery, flaky layers baked fresh every morning</p>
+                </div>
+                <div class="menu-card-price">₹90</div>
+            </div>
+            <div class="menu-card fade-in" data-category="bakery">
+                <div class="menu-card-info">
+                    <h4>Chocolate Brownie</h4>
+                    <p>Dense, fudgy brownie with a molten center</p>
+                </div>
+                <div class="menu-card-price">₹110</div>
+            </div>
+            <div class="menu-card fade-in" data-category="bakery">
+                <div class="menu-card-info">
+                    <h4>Blueberry Muffin</h4>
+                    <p>Soft, moist muffin bursting with fresh blueberries</p>
+                </div>
+                <div class="menu-card-price">₹100</div>
+            </div>
+            <div class="menu-card fade-in" data-category="bakery">
+                <div class="menu-card-info">
+                    <h4>Cinnamon Roll</h4>
+                    <p>Sweet, gooey cinnamon swirl with cream cheese frosting</p>
+                </div>
+                <div class="menu-card-price">₹120</div>
+            </div>
+            <!-- Savory -->
+            <div class="menu-card fade-in" data-category="savory">
+                <div class="menu-card-info">
+                    <h4>Paneer Sandwich</h4>
+                    <p>Grilled sandwich with spiced paneer and mint chutney</p>
+                </div>
+                <div class="menu-card-price">₹130</div>
+            </div>
+            <div class="menu-card fade-in" data-category="savory">
+                <div class="menu-card-info">
+                    <h4>Chicken Club Wrap</h4>
+                    <p>Tender chicken with fresh veggies in a warm wrap</p>
+                </div>
+                <div class="menu-card-price">₹180</div>
+            </div>
+            <div class="menu-card fade-in" data-category="savory">
+                <div class="menu-card-info">
+                    <h4>American Cheeseburger</h4>
+                    <p>Juicy patty with lettuce, tomato, and secret sauce</p>
+                </div>
+                <div class="menu-card-price">₹200</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking -->
+    <section class="booking" id="booking">
+        <div class="section-title fade-in">
+            <h2>Reserve Your Table</h2>
+            <div class="divider"></div>
+            <p>Book your spot and let us take care of the rest</p>
+        </div>
+        <form class="booking-form fade-in" id="bookingForm" onsubmit="handleBooking(event)">
+            <div class="form-group">
+                <label>Your Name</label>
+                <input type="text" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" placeholder="Your phone number" required>
+            </div>
+            <div class="form-group">
+                <label>Date</label>
+                <input type="date" required>
+            </div>
+            <div class="form-group">
+                <label>Time</label>
+                <input type="time" required>
+            </div>
+            <div class="form-group">
+                <label>Number of Guests</label>
+                <select required>
+                    <option value="">Select guests</option>
+                    <option>1 Person</option>
+                    <option>2 People</option>
+                    <option>3 People</option>
+                    <option>4 People</option>
+                    <option>5 People</option>
+                    <option>6+ People</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Special Requests</label>
+                <textarea placeholder="Any allergies or special requests?"></textarea>
+            </div>
+            <button type="submit" class="btn btn-filled">Confirm Booking</button>
+        </form>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="section-title fade-in">
+            <h2>Visit Us</h2>
+            <div class="divider"></div>
+            <p>We'd love to see you</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-info fade-in">
+                <h3>Get In Touch</h3>
+                <p>Stop by for a cup and a chat. We're open daily and always happy to welcome you into our vintage family.</p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="icon">📍</div>
+                        <div class="detail">
+                            <h5>Address</h5>
+                            <p>Shop no. 5 & 6, Opposite to G.H., Raisoni College of Engineering and Management, Yashoda Enclave, Wagholi, Pune, Maharashtra 412207</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="icon">📞</div>
+                        <div class="detail">
+                            <h5>Phone</h5>
+                            <p>+91 98765 43210</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="icon">🕐</div>
+                        <div class="detail">
+                            <h5>Opening Hours</h5>
+                            <p>Mon - Sun: 8:00 AM - 10:00 PM</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="icon">✉️</div>
+                        <div class="detail">
+                            <h5>Email</h5>
+                            <p>hello@oldsoulcafe.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-map fade-in">
+                <div class="contact-map-inner">
+                    <div class="map-icon">📍</div>
+                    <p style="font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 8px;">Raisoni College Area, Wagholi</p>
+                    <p>Pune, Maharashtra 412207</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-about">
+                <h3>Old Soul Vintage Cafe</h3>
+                <p>A vintage-inspired cafe in Wagholi, Pune where every visit feels like stepping back in time. We blend old-world charm with modern flavors to create unforgettable experiences.</p>
+                <div class="social-links">
+                    <a href="#" title="Instagram">📷</a>
+                    <a href="#" title="Facebook">📘</a>
+                    <a href="#" title="Twitter">🐦</a>
+                    <a href="#" title="YouTube">🎬</a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#booking">Book Table</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Opening Hours</h4>
+                <ul>
+                    <li>Monday - Friday</li>
+                    <li>8:00 AM - 10:00 PM</li>
+                    <li>Saturday - Sunday</li>
+                    <li>8:00 AM - 11:00 PM</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Our Address</h4>
+                <ul>
+                    <li>Shop no. 5 & 6</li>
+                    <li>Opposite G.H.</li>
+                    <li>Raisoni College, Wagholi</li>
+                    <li>Pune, Maharashtra 412207</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Old Soul Vintage Cafe. All rights reserved. Crafted with ❤️ by Champtrix</p>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile nav toggle
+        function toggleNav() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        function closeNav() {
+            document.getElementById('navLinks').classList.remove('active');
+        }
+
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Menu filter
+        function filterMenu(category, btn) {
+            document.querySelectorAll('.menu-cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            document.querySelectorAll('.menu-card').forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'flex';
+                    setTimeout(() => card.style.opacity = '1', 10);
+                } else {
+                    card.style.opacity = '0';
+                    setTimeout(() => card.style.display = 'none', 300);
+                }
+            });
+        }
+
+        // Booking form
+        function handleBooking(e) {
+            e.preventDefault();
+            showToast('🎉 Booking confirmed! We look forward to seeing you.');
+            e.target.reset();
+        }
+
+        // Toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3500);
+        }
+
+        // Smooth scroll offset for fixed navbar
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top, behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
