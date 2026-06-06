@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hideout Gaming & Cafe – Premium Esports Lounge & Gaming Café</title>
+  
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* ═══════════════════════════════════════════
+       RESET & BASE
+    ═══════════════════════════════════════════ */
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth;font-size:16px}
+    body{
+      font-family:'Inter',sans-serif;
+      background:#0a0a0f;
+      color:#e8e8e8;
+      overflow-x:hidden;
+      line-height:1.6;
+    }
+    ::selection{background:rgba(0,195,255,0.3);color:#fff}
+    ::-webkit-scrollbar{width:8px}
+    ::-webkit-scrollbar-track{background:#0d0d14}
+    ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#00c3ff,#9b59b6);border-radius:4px}
+
+    /* Preloader */
+    #preloader{
+      position:fixed;inset:0;background:#050508;z-index:99999;
+      display:flex;align-items:center;justify-content:center;flex-direction:column;
+      transition:opacity .6s ease,visibility .6s ease;
+    }
+    #preloader.loaded{opacity:0;visibility:hidden}
+    .loader-logo{
+      font-family:'Orbitron',sans-serif;font-size:2rem;font-weight:900;
+      background:linear-gradient(135deg,#00c3ff,#9b59b6,#ff6b9d);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      animation:pulse-logo 1.5s ease-in-out infinite;
+    }
+    .loader-bar{width:200px;height:3px;background:rgba(255,255,255,0.1);border-radius:2px;margin-top:20px;overflow:hidden}
+    .loader-bar-fill{width:0;height:100%;background:linear-gradient(90deg,#00c3ff,#9b59b6);border-radius:2px;animation:fill-bar 1.8s ease-out forwards}
+    @keyframes pulse-logo{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(0.98)}}
+    @keyframes fill-bar{0%{width:0}100%{width:100%}}
+
+    /* ═══════════════════════════════════════════
+       UTILITIES
+    ═══════════════════════════════════════════ */
+    .container{width:100%;max-width:1300px;margin:0 auto;padding:0 20px}
+    .section{padding:100px 0;position:relative}
+    .section-label{
+      font-family:'Orbitron',sans-serif;font-size:.7rem;font-weight:600;
+      letter-spacing:4px;text-transform:uppercase;color:#00c3ff;margin-bottom:10px;
+      display:inline-block;
+    }
+    .section-title{
+      font-family:'Orbitron',sans-serif;
+      font-size:clamp(1.8rem,4vw,3rem);
+      font-weight:800;
+      background:linear-gradient(135deg,#fff,#b8b8cc);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      margin-bottom:15px;
+    }
+    .section-subtitle{color:#9999aa;max-width:600px;margin-bottom:40px;font-size:1.05rem}
+    .glass{
+      background:rgba(255,255,255,0.04);
+      backdrop-filter:blur(20px);
+      -webkit-backdrop-filter:blur(20px);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px;
+    }
+    .neon-text{
+      text-shadow:0 0 10px rgba(0,195,255,0.5),0 0 40px rgba(0,195,255,0.2);
+    }
+    .gradient-text{
+      background:linear-gradient(135deg,#00c3ff,#9b59b6);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .glow-blue{box-shadow:0 0 20px rgba(0,195,255,0.15),0 0 60px rgba(0,195,255,0.05)}
+    .glow-purple{box-shadow:0 0 20px rgba(155,89,182,0.15),0 0 60px rgba(155,89,182,0.05)}
+
+    /* Buttons */
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:14px 32px;border-radius:12px;font-weight:600;
+      font-size:.95rem;text-decoration:none;cursor:pointer;
+      transition:all .4s cubic-bezier(0.23,1,0.32,1);
+      border:none;position:relative;overflow:hidden;
+    }
+    .btn::before{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(135deg,transparent,rgba(255,255,255,0.1));
+      opacity:0;transition:opacity .4s;
+    }
+    .btn:hover::before{opacity:1}
+    .btn-primary{
+      background:linear-gradient(135deg,#00c3ff,#0080ff);color:#fff;
+      box-shadow:0 4px 25px rgba(0,195,255,0.3);
+    }
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(0,195,255,0.4)}
+    .btn-secondary{
+      background:rgba(255,255,255,0.08);color:#fff;
+      border:1px solid rgba(255,255,255,0.15);
+    }
+    .btn-secondary:hover{
+      background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.3);
+      transform:translateY(-2px);
+    }
+    .btn-whatsapp{
+      background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;
+      box-shadow:0 4px 25px rgba(37,211,102,0.3);
+    }
+    .btn-whatsapp:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(37,211,102,0.4)}
+
+    /* Cursor glow */
+    .cursor-glow{
+      position:fixed;width:400px;height:400px;border-radius:50%;
+      background:radial-gradient(circle,rgba(0,195,255,0.06),transparent 70%);
+      pointer-events:none;z-index:0;transform:translate(-50%,-50%);
+      transition:opacity .3s;
+    }
+
+    /* ═══════════════════════════════════════════
+       NAVBAR
+    ═══════════════════════════════════════════ */
+    .navbar{
+      position:fixed;top:0;left:0;right:0;z-index:1000;
+      padding:15px 0;transition:all .4s ease;
+    }
+    .navbar.scrolled{
+      background:rgba(10,10,15,0.9);
+      backdrop-filter:blur(20px);
+      border-bottom:1px solid rgba(255,255,255,0.05);
+      padding:10px 0;
+    }
+    .navbar .container{
+      display:flex;align-items:center;justify-content:space-between;
+    }
+    .nav-logo{
+      font-family:'Orbitron',sans-serif;font-size:1.4rem;font-weight:900;
+      text-decoration:none;color:#fff;display:flex;align-items:center;gap:8px;
+    }
+    .nav-logo span.gradient-text{color:#00c3ff;
+      background:linear-gradient(135deg,#00c3ff,#9b59b6);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .nav-logo i{color:#00c3ff;font-size:1.3rem}
+    .nav-links{display:flex;list-style:none;gap:8px}
+    .nav-links a{
+      color:#b8b8cc;text-decoration:none;font-size:.9rem;font-weight:500;
+      padding:8px 16px;border-radius:8px;transition:all .3s;position:relative;
+    }
+    .nav-links a:hover{color:#fff;background:rgba(255,255,255,0.05)}
+    .nav-links a.active{color:#00c3ff;background:rgba(0,195,255,0.08)}
+    .nav-cta{
+      display:flex;align-items:center;gap:10px;
+    }
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px}
+    .hamburger span{width:25px;height:2px;background:#b8b8cc;border-radius:2px;transition:all .3s}
+
+    @media(max-width:900px){
+      .nav-links{display:none}
+      .nav-cta .btn-secondary{display:none}
+      .hamburger{display:flex}
+    }
+
+    /* ═══════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════ */
+    .hero{
+      min-height:100vh;display:flex;align-items:center;
+      position:relative;overflow:hidden;
+    }
+    .hero-bg{
+      position:absolute;inset:0;z-index:0;
+      background:
+        linear-gradient(135deg,rgba(0,10,20,0.9),rgba(20,5,30,0.85),rgba(0,0,0,0.95)),
+        radial-gradient(ellipse at 20% 50%,rgba(0,195,255,0.08) 0%,transparent 50%),
+        radial-gradient(ellipse at 80% 50%,rgba(155,89,182,0.08) 0%,transparent 50%),
+        url('https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1920') center/cover no-repeat;
+    }
+    .hero-particles{position:absolute;inset:0;overflow:hidden;z-index:1}
+    .particle{
+      position:absolute;width:3px;height:3px;background:#00c3ff;
+      border-radius:50%;opacity:0;animation:float-particle 8s ease-in infinite;
+    }
+    @keyframes float-particle{
+      0%{opacity:0;transform:translateY(100vh) scale(0)}
+      10%{opacity:.6}
+      90%{opacity:.6}
+      100%{opacity:0;transform:translateY(-20vh) scale(1)}
+    }
+    .hero-grid{
+      position:absolute;inset:0;z-index:1;
+      background-image:
+        linear-gradient(rgba(0,195,255,0.03) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(0,195,255,0.03) 1px,transparent 1px);
+      background-size:60px 60px;
+      animation:grid-move 20s linear infinite;
+    }
+    @keyframes grid-move{0%{transform:translateY(0)}100%{transform:translateY(60px)}}
+
+    .hero .container{
+      position:relative;z-index:10;
+      display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
+      padding-top:120px;padding-bottom:60px;
+    }
+    .hero-content h1{
+      font-family:'Orbitron',sans-serif;
+      font-size:clamp(2.2rem,5vw,3.8rem);font-weight:900;
+      line-height:1.15;margin-bottom:20px;
+    }
+    .hero-content h1 .line{display:block}
+    .hero-content p{
+      font-size:1.15rem;color:#9999aa;margin-bottom:35px;max-width:500px;line-height:1.7;
+    }
+    .hero-buttons{display:flex;flex-wrap:wrap;gap:15px;margin-bottom:50px}
+    .hero-stats{display:flex;gap:40px}
+    .hero-stat{text-align:center}
+    .hero-stat .number{
+      font-family:'Orbitron',sans-serif;font-size:2rem;font-weight:800;
+      background:linear-gradient(135deg,#00c3ff,#9b59b6);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .hero-stat .label{font-size:.8rem;color:#777788;text-transform:uppercase;letter-spacing:1px}
+
+    .hero-visual{position:relative}
+    .hero-card{
+      position:relative;border-radius:20px;overflow:hidden;
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:0 20px 60px rgba(0,0,0,0.5);
+    }
+    .hero-card img{
+      width:100%;height:400px;object-fit:cover;display:block;
+      transition:transform .5s;
+    }
+    .hero-card:hover img{transform:scale(1.05)}
+    .hero-card-overlay{
+      position:absolute;bottom:0;left:0;right:0;
+      background:linear-gradient(transparent,rgba(0,0,0,0.8));
+      padding:30px 20px 20px;
+    }
+    .hero-badge{
+      display:flex;align-items:center;gap:15px;
+    }
+    .hero-badge-icon{
+      width:50px;height:50px;border-radius:12px;
+      background:linear-gradient(135deg,#00c3ff,#9b59b6);
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.3rem;
+    }
+    .hero-badge-text span{font-family:'Orbitron',sans-serif;font-weight:700;font-size:.9rem}
+    .hero-badge-text p{font-size:.75rem;color:#999}
+
+    .floating-badge{
+      position:absolute;border-radius:12px;padding:12px 16px;
+      background:rgba(10,10,15,0.8);backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,0.1);z-index:5;
+      animation:float 6s ease-in-out infinite;
+    }
+    .floating-badge.top-right{top:-15px;right:-15px;animation-delay:.5s}
+    .floating-badge.bottom-left{bottom:-15px;left:-15px;animation-delay:1.5s}
+    @keyframes float{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-12px)}
+    }
+
+    @media(max-width:900px){
+      .hero .container{grid-template-columns:1fr;text-align:center}
+      .hero-content p{margin:0 auto 35px}
+      .hero-buttons{justify-content:center}
+      .hero-stats{justify-content:center}
+    }
+
+    /* ═══════════════════════════════════════════
+       GAMING ZONES
+    ═══════════════════════════════════════════ */
+    .zones{position:relative}
+    .zones::before{
+      content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+      width:600px;height:600px;
+      background:radial-gradient(circle,rgba(155,89,182,0.05),transparent 70%);
+      z-index:0;
+    }
+    .zones-grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+      gap:25px;position:relative;z-index:1;
+    }
+    .zone-card{
+      padding:35px;border-radius:20px;position:relative;overflow:hidden;
+      transition:all .5s cubic-bezier(0.23,1,0.32,1);
+      background:linear-gradient(135deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.06);
+    }
+    .zone-card::before{
+      content:'';position:absolute;inset:0;border-radius:20px;
+      background:linear-gradient(135deg,rgba(0,195,255,0.1),rgba(155,89,182,0.1));
+      opacity:0;transition:opacity .5s;
+    }
+    .zone-card:hover{transform:translateY(-8px);border-color:rgba(0,195,255,0.2)}
+    .zone-card:hover::before{opacity:1}
+    .zone-icon{
+      width:65px;height:65px;border-radius:16px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.6rem;margin-bottom:20px;position:relative;z-index:1;
+    }
+    .zone-icon.ps5{background:linear-gradient(135deg,#0070d1,#0058a8);box-shadow:0 8px 30px rgba(0,112,209,0.2)}
+    .zone-icon.xbox{background:linear-gradient(135deg,#107c10,#0b5a0b);box-shadow:0 8px 30px rgba(16,124,16,0.2)}
+    .zone-icon.pc{background:linear-gradient(135deg,#00c3ff,#0080ff);box-shadow:0 8px 30px rgba(0,195,255,0.2)}
+    .zone-icon.racing{background:linear-gradient(135deg,#ff6b35,#ff2e63);box-shadow:0 8px 30px rgba(255,107,53,0.2)}
+    .zone-content{position:relative;z-index:1}
+    .zone-content h3{
+      font-family:'Orbitron',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:10px;
+    }
+    .zone-content p{color:#9999aa;font-size:.92rem;margin-bottom:15px}
+    .zone-features{display:flex;flex-wrap:wrap;gap:8px}
+    .zone-feature{
+      padding:5px 12px;border-radius:20px;font-size:.78rem;font-weight:500;
+      background:rgba(255,255,255,0.05);color:#b8b8cc;
+      border:1px solid rgba(255,255,255,0.08);
+    }
+
+    /* ═══════════════════════════════════════════
+       DRIVING SIM
+    ═══════════════════════════════════════════ */
+    .sim-section{position:relative;overflow:hidden}
+    .sim-section::before{
+      content:'';position:absolute;right:-200px;top:0;width:500px;height:500px;
+      background:radial-gradient(circle,rgba(255,107,53,0.08),transparent 70%);
+    }
+    .sim-content{
+      display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:center;
+    }
+    .sim-visual{
+      position:relative;border-radius:20px;overflow:hidden;
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .sim-visual img{width:100%;height:450px;object-fit:cover;display:block}
+    .sim-overlay{
+      position:absolute;inset:0;
+      background:linear-gradient(135deg,rgba(0,0,0,0.3),rgba(0,0,0,0.7));
+    }
+    .sim-badge{
+      position:absolute;bottom:20px;left:20px;right:20px;
+      padding:20px;border-radius:14px;
+      background:rgba(10,10,15,0.85);backdrop-filter:blur(15px);
+      border:1px solid rgba(255,255,255,0.1);
+    }
+    .sim-badge h4{font-family:'Orbitron',sans-serif;font-size:1rem;margin-bottom:5px}
+    .sim-badge p{color:#999;font-size:.85rem}
+    .sim-info h2{font-family:'Orbitron',sans-serif;font-size:2rem;font-weight:800;margin-bottom:15px}
+    .sim-info > p{color:#9999aa;margin-bottom:25px;line-height:1.7}
+    .sim-features-list{list-style:none;display:flex;flex-direction:column;gap:15px}
+    .sim-feature-item{
+      display:flex;align-items:flex-start;gap:15px;padding:15px;
+      border-radius:12px;background:rgba(255,255,255,0.02);
+      border:1px solid rgba(255,255,255,0.05);transition:all .3s;
+    }
+    .sim-feature-item:hover{background:rgba(255,107,53,0.05);border-color:rgba(255,107,53,0.15)}
+    .sim-feature-icon{
+      width:45px;height:45px;border-radius:10px;flex-shrink:0;
+      background:linear-gradient(135deg,#ff6b35,#ff2e63);
+      display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+    }
+    .sim-feature-text h4{font-weight:600;margin-bottom:3px;font-size:.95rem}
+    .sim-feature-text p{color:#888;font-size:.82rem}
+
+    @media(max-width:800px){
+      .sim-content{grid-template-columns:1fr}
+    }
+
+    /* ═══════════════════════════════════════════
+       FOOD & DRINKS
+    ═══════════════════════════════════════════ */
+    .food{position:relative}
+    .food-grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;
+    }
+    .food-card{
+      border-radius:16px;overflow:hidden;
+      background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);
+      transition:all .4s;position:relative;
+    }
+    .food-card:hover{transform:translateY(-5px);border-color:rgba(0,195,255,0.15)}
+    .food-img{
+      height:180px;background-size:cover;background-position:center;
+      position:relative;overflow:hidden;
+    }
+    .food-img::after{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(transparent 50%,rgba(0,0,0,0.6));
+    }
+    .food-tag{
+      position:absolute;top:12px;left:12px;padding:4px 10px;border-radius:20px;
+      font-size:.75rem;font-weight:600;z-index:2;
+    }
+    .food-tag.purple{background:rgba(155,89,182,0.9);color:#fff}
+    .food-tag.blue{background:rgba(0,195,255,0.9);color:#fff}
+    .food-tag.orange{background:rgba(255,107,53,0.9);color:#fff}
+    .food-info{padding:20px}
+    .food-info h4{font-weight:700;font-size:1.05rem;margin-bottom:5px}
+    .food-info p{color:#888;font-size:.85rem;margin-bottom:12px}
+    .food-price{font-family:'Orbitron',sans-serif;font-weight:700;color:#00c3ff;font-size:1.1rem}
+
+    /* ═══════════════════════════════════════════
+       TOURNAMENTS
+    ═══════════════════════════════════════════ */
+    .tournaments{position:relative;overflow:hidden}
+    .tournaments::before{
+      content:'';position:absolute;left:0;top:50%;
+      width:400px;height:400px;
+      background:radial-gradient(circle,rgba(0,195,255,0.05),transparent 70%);
+      transform:translate(-50%,-50%);
+    }
+    .tournaments-grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:25px;
+      position:relative;z-index:1;
+    }
+    .tournament-card{
+      padding:30px;border-radius:20px;position:relative;overflow:hidden;
+      background:linear-gradient(135deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.06);transition:all .4s;
+    }
+    .tournament-card:hover{transform:translateY(-5px);border-color:rgba(0,195,255,0.2)}
+    .tournament-bar{
+      position:absolute;top:0;left:0;right:0;height:3px;
+    }
+    .tournament-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px}
+    .tournament-game{
+      font-family:'Orbitron',sans-serif;font-size:1.1rem;font-weight:700;
+    }
+    .tournament-status{
+      padding:4px 10px;border-radius:20px;font-size:.75rem;font-weight:600;
+    }
+    .tournament-status.live{background:rgba(255,50,50,0.15);color:#ff4444;border:1px solid rgba(255,50,50,0.3);animation:blink 1.5s infinite}
+    .tournament-status.upcoming{background:rgba(0,195,255,0.15);color:#00c3ff;border:1px solid rgba(0,195,255,0.3)}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:0.5}}
+    .tournament-meta{display:flex;flex-wrap:wrap;gap:15px;margin-bottom:15px}
+    .tournament-meta-item{display:flex;align-items:center;gap:6px;color:#999;font-size:.82rem}
+    .tournament-prize{
+      font-family:'Orbitron',sans-serif;font-size:1.5rem;font-weight:800;
+      background:linear-gradient(135deg,#ffd700,#ffb700);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      margin-bottom:15px;
+    }
+    .tournament-details{display:flex;gap:30px;margin-bottom:20px}
+    .tournament-detail-item span{display:block;font-size:.75px;color:#777;font-size:.78rem;color:#888}
+    .tournament-detail-item p{font-weight:600;font-size:.95rem}
+
+    /* ═══════════════════════════════════════════
+       MEMBERSHIP
+    ═══════════════════════════════════════════ */
+    .membership{position:relative}
+    .membership::before{
+      content:'';position:absolute;left:50%;top:0;transform:translateX(-50%);
+      width:800px;height:800px;
+      background:radial-gradient(circle,rgba(155,89,182,0.05),transparent 60%);
+    }
+    .plans-grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:25px;
+      position:relative;z-index:1;
+    }
+    .plan-card{
+      padding:35px;border-radius:20px;position:relative;
+      background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);
+      transition:all .4s;overflow:hidden;
+    }
+    .plan-card.featured{
+      background:linear-gradient(135deg,rgba(0,195,255,0.08),rgba(155,89,182,0.08));
+      border-color:rgba(0,195,255,0.2);transform:scale(1.05);
+      box-shadow:0 10px 40px rgba(0,195,255,0.1);
+    }
+    .plan-card:hover{transform:translateY(-8px)}
+    .plan-card.featured:hover{transform:scale(1.05) translateY(-8px)}
+    .plan-popular{
+      position:absolute;top:15px;right:15px;
+      padding:4px 12px;border-radius:20px;font-size:.72rem;font-weight:700;
+      background:linear-gradient(135deg,#00c3ff,#9b59b6);color:#fff;
+    }
+    .plan-name{
+      font-family:'Orbitron',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:5px;
+    }
+    .plan-icon{
+      width:55px;height:55px;border-radius:14px;margin-bottom:15px;
+      display:flex;align-items:center;justify-content:center;font-size:1.4rem;
+    }
+    .plan-bronze .plan-icon{background:linear-gradient(135deg,#cd7f32,#8b5e3c)}
+    .plan-silver .plan-icon{background:linear-gradient(135deg,#c0c0c0,#8a8a8a)}
+    .plan-gold .plan-icon{background:linear-gradient(135deg,#ffd700,#b8860b)}
+    .plan-price{font-family:'Orbitron',sans-serif;font-size:2.2rem;font-weight:800;color:#fff;margin:10px 0}
+    .plan-price span{font-size:.9rem;color:#888;font-family:'Inter',sans-serif}
+    .plan-features{list-style:none;margin:20px 0;display:flex;flex-direction:column;gap:10px}
+    .plan-features li{display:flex;align-items:center;gap:10px;color:#b8b8cc;font-size:.88rem}
+    .plan-features li i{color:#00c3ff;font-size:.75rem}
+    .plan-btn{
+      width:100%;text-align:center;justify-content:center;margin-top:10px;
+    }
+
+    @media(max-width:768px){
+      .plan-card.featured{transform:scale(1)}
+      .plan-card.featured:hover{transform:translateY(-8px)}
+    }
+
+    /* ═══════════════════════════════════════════
+       GALLERY
+    ═══════════════════════════════════════════ */
+    .gallery{display:flex;flex-wrap:wrap;gap:8px;padding:40px 0}
+    .gallery-item{
+      flex:1 1 calc(25% - 8px);min-width:200px;height:250px;border-radius:12px;overflow:hidden;
+      position:relative;cursor:pointer;transition:all .4s;
+    }
+    .gallery-item:nth-child(1),.gallery-item:nth-child(7){flex:1 1 calc(50% - 8px)}
+    .gallery-item:hover{flex-grow:1.5;z-index:2}
+    .gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+    .gallery-item:hover img{transform:scale(1.1)}
+    .gallery-overlay{
+      position:absolute;inset:0;background:linear-gradient(transparent 60%,rgba(0,0,0,0.6));
+      display:flex;align-items:flex-end;padding:20px;opacity:0;transition:opacity .4s;
+    }
+    .gallery-item:hover .gallery-overlay{opacity:1}
+    .gallery-overlay span{
+      font-size:.85rem;font-weight:600;
+    }
+    @media(max-width:600px){
+      .gallery-item,.gallery-item:nth-child(1){flex:1 1 100%;height:200px}
+    }
+
+    /* ═══════════════════════════════════════════
+       TESTIMONIALS
+    ═══════════════════════════════════════════ */
+    .testimonials{position:relative}
+    .testimonials-slider{
+      max-width:800px;margin:0 auto;
+    }
+    .testimonial-card{
+      padding:40px;border-radius:20px;text-align:center;
+      background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);
+    }
+    .testimonial-avatar{
+      width:70px;height:70px;border-radius:50%;margin:0 auto 20px;
+      border:2px solid #00c3ff;overflow:hidden;
+    }
+    .testimonial-avatar img{width:100%;height:100%;object-fit:cover}
+    .testimonial-stars{color:#ffd700;margin-bottom:15px;font-size:.9rem}
+    .testimonial-text{color:#b8b8cc;font-size:1.05rem;line-height:1.7;margin-bottom:20px;font-style:italic}
+    .testimonial-name{
+      font-family:'Orbitron',sans-serif;font-weight:700;font-size:1.05rem;
+    }
+    .testimonial-role{color:#00c3ff;font-size:.82rem}
+
+    /* ═══════════════════════════════════════════
+       CONTACT
+    ═══════════════════════════════════════════ */
+    .contact{position:relative;overflow:hidden}
+    .contact::before{
+      content:'';position:absolute;right:-100px;bottom:-100px;
+      width:500px;height:500px;
+      background:radial-gradient(circle,rgba(0,195,255,0.06),transparent 70%);
+    }
+    .contact-grid{
+      display:grid;grid-template-columns:1fr 1fr;gap:40px;position:relative;z-index:1;
+    }
+    .contact-info h2{font-family:'Orbitron',sans-serif;font-size:1.8rem;font-weight:800;margin-bottom:15px}
+    .contact-info > p{color:#999;margin-bottom:30px;line-height:1.7}
+    .contact-details{display:flex;flex-direction:column;gap:20px;margin-bottom:30px}
+    .contact-detail{
+      display:flex;align-items:flex-start;gap:15px;padding:15px;border-radius:12px;
+      background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);
+    }
+    .contact-detail-icon{
+      width:45px;height:45px;border-radius:10px;flex-shrink:0;
+      background:linear-gradient(135deg,#00c3ff,#9b59b6);
+      display:flex;align-items:center;justify-content:center;
+    }
+    .contact-detail-text h4{font-weight:600;font-size:.95rem;margin-bottom:3px}
+    .contact-detail-text p{color:#888;font-size:.85rem}
+    .social-links{display:flex;gap:10px;margin-top:20px}
+    .social-link{
+      width:45px;height:45px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+      background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+      color:#b8b8cc;text-decoration:none;transition:all .3s;font-size:1.1rem;
+    }
+    .social-link:hover{
+      background:linear-gradient(135deg,#00c3ff,#9b59b6);color:#fff;
+      border-color:transparent;transform:translateY(-3px);
+    }
+
+    .contact-form{
+      padding:35px;border-radius:20px;
+      background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);
+    }
+    .form-group{margin-bottom:18px}
+    .form-group label{display:block;font-size:.85rem;font-weight:600;margin-bottom:6px;color:#b8b8cc}
+    .form-group input,.form-group select,.form-group textarea{
+      width:100%;padding:12px 16px;border-radius:10px;font-size:.9rem;
+      background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+      color:#fff;font-family:'Inter',sans-serif;transition:all .3s;outline:none;
+    }
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+      border-color:rgba(0,195,255,0.5);box-shadow:0 0 15px rgba(0,195,255,0.1);
+    }
+    .form-group textarea{min-height:100px;resize:vertical}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+
+    @media(max-width:800px){
+      .contact-grid{grid-template-columns:1fr}
+      .form-row{grid-template-columns:1fr}
+    }
+
+    /* ═══════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════ */
+    .footer{
+      padding:60px 0 30px;
+      border-top:1px solid rgba(255,255,255,0.06);
+      background:rgba(0,0,0,0.3);
+    }
+    .footer-grid{
+      display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px;
+    }
+    .footer-brand h3{
+      font-family:'Orbitron',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:12px;
+    }
+    .footer-brand p{color:#888;font-size:.88rem;line-height:1.6;margin-bottom:15px}
+    .footer-col h4{font-size:.95rem;font-weight:700;margin-bottom:15px;position:relative}
+    .footer-col ul{list-style:none}
+    .footer-col ul li{margin-bottom:8px}
+    .footer-col ul li a{
+      color:#888;text-decoration:none;font-size:.85rem;transition:color .3s;
+    }
+    .footer-col ul li a:hover{color:#00c3ff}
+    .footer-bottom{
+      display:flex;justify-content:space-between;align-items:center;
+      padding-top:25px;border-top:1px solid rgba(255,255,255,0.06);
+    }
+    .footer-bottom p{color:#666;font-size:.82rem}
+    @media(max-width:800px){
+      .footer-grid{grid-template-columns:1fr 1fr}
+      .footer-bottom{flex-direction:column;gap:10px;text-align:center}
+    }
+
+    /* ═══════════════════════════════════════════
+       WHATSAPP FLOAT
+    ═══════════════════════════════════════════ */
+    .whatsapp-float{
+      position:fixed;bottom:30px;right:30px;z-index:999;
+      width:60px;height:60px;border-radius:50%;
+      background:linear-gradient(135deg,#25d366,#128c7e);
+      display:flex;align-items:center;justify-content:center;
+      color:#fff;font-size:1.6rem;text-decoration:none;
+      box-shadow:0 4px 20px rgba(37,211,102,0.4);
+      transition:all .3s;animation:wobble 2s ease-in-out infinite;
+    }
+    .whatsapp-float:hover{transform:scale(1.1);box-shadow:0 8px 30px rgba(37,211,102,0.5)}
+    @keyframes wobble{
+      0%,100%{transform:rotate(0deg)}
+      15%{transform:rotate(-10deg)}
+      30%{transform:rotate(8deg)}
+      45%{transform:rotate(-5deg)}
+    }
+
+    /* ═══════════════════════════════════════════
+       SCROLL TO TOP
+    ═══════════════════════════════════════════ */
+    .scroll-top{
+      position:fixed;bottom:30px;left:30px;z-index:999;
+      width:45px;height:45px;border-radius:12px;
+      background:rgba(0,195,255,0.1);border:1px solid rgba(0,195,255,0.3);
+      color:#00c3ff;font-size:1.1rem;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      transition:all .3s;opacity:0;visibility:hidden;
+    }
+    .scroll-top.visible{opacity:1;visibility:visible}
+    .scroll-top:hover{background:rgba(0,195,255,0.2)}
+
+    /* ═══════════════════════════════════════════
+       ANIMATIONS
+    ═══════════════════════════════════════════ */
+    .fade-up{opacity:0;transform:translateY(40px);transition:opacity .8s,transform .8s}
+    .fade-up.visible{opacity:1;transform:translateY(0)}
+    .fade-left{opacity:0;transform:translateX(-40px);transition:opacity .8s,transform .8s}
+    .fade-left.visible{opacity:1;transform:translateX(0)}
+    .fade-right{opacity:0;transform:translateX(40px);transition:opacity .8s,transform .8s}
+    .fade-right.visible{opacity:1;transform:translateX(0)}
+
+    /* ═══════════════════════════════════════════
+       MOBILE NAV
+    ═══════════════════════════════════════════ */
+    .mobile-nav{
+      position:fixed;inset:0;z-index:9999;background:rgba(5,5,8,0.98);
+      display:flex;align-items:center;justify-content:center;
+      opacity:0;visibility:hidden;transition:all .4s;
+    }
+    .mobile-nav.open{opacity:1;visibility:visible}
+    .mobile-nav-links{list-style:none;text-align:center;display:flex;flex-direction:column;gap:20px}
+    .mobile-nav-links a{
+      font-family:'Orbitron',sans-serif;font-size:1.5rem;font-weight:700;color:#fff;
+      text-decoration:none;transition:color .3s;
+    }
+    .mobile-nav-links a:hover{color:#00c3ff}
+    .mobile-nav-close{
+      position:absolute;top:25px;right:25px;font-size:1.5rem;cursor:pointer;color:#fff;
+      background:none;border:none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="loader-logo">HIDEOUT</div>
+    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+  </div>
+
+  <!-- Cursor Glow -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav">
+    <button class="mobile-nav-close" onclick="closeMobileNav()"><i class="fas fa-times"></i></button>
+    <ul class="mobile-nav-links">
+      <li><a href="#zones" onclick="closeMobileNav()">Gaming Zones</a></li>
+      <li><a href="#sim" onclick="closeMobileNav()">Driving Sim</a></li>
+      <li><a href="#food" onclick="closeMobileNav()">Food & Drinks</a></li>
+      <li><a href="#tournaments" onclick="closeMobileNav()">Tournaments</a></li>
+      <li><a href="#membership" onclick="closeMobileNav()">Membership</a></li>
+      <li><a href="#contact" onclick="closeMobileNav()">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#" class="nav-logo">
+        <i class="fas fa-gamepad"></i>
+        <span>HIDEOUT</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#zones">Gaming Zones</a></li>
+        <li><a href="#sim">Driving Sim</a></li>
+        <li><a href="#food">Food & Drinks</a></li>
+        <li><a href="#tournaments">Tournaments</a></li>
+        <li><a href="#membership">Membership</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="javascript:void(0)" class="btn btn-secondary" onclick="openMobileNav()">Menu</a>
+        <a href="javascript:void(0)" class="btn btn-primary" onclick="alert('Booking system coming soon!')">Book Now</a>
+      </div>
+      <div class="hamburger" onclick="openMobileNav()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-particles" id="particles"></div>
+    <div class="hero-grid"></div>
+    <div class="container">
+      <div class="hero-content">
+        <h1>
+          <span class="line gradient-text neon-text">THE ULTIMATE</span>
+          <span class="line">GAMING & CAFÉ</span>
+          <span class="line gradient-text">EXPERIENCE</span>
+        </h1>
+        <p>Step into the most electrifying gaming destination in the city. Premium setups, driving simulators, esports tournaments, and gourmet food — all under one roof.</p>
+        <div class="hero-buttons">
+          <a href="javascript:void(0)" class="btn btn-primary" onclick="alert('Booking system coming soon!')">
+            <i class="fas fa-calendar-check"></i> Reserve Your Spot
+          </a>
+          <a href="javascript:void(0)" class="btn btn-whatsapp" onclick="alert('WhatsApp booking coming soon!')">
+            <i class="fab fa-whatsapp"></i> WhatsApp Us
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="number" data-count="50">0</div>
+            <div class="label">Gaming Setups</div>
+          </div>
+          <div class="hero-stat">
+            <div class="number" data-count="5000">0</div>
+            <div class="label">Happy Gamers</div>
+          </div>
+          <div class="hero-stat">
+            <div class="number" data-count="200">0</div>
+            <div class="label">Tournaments</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card">
+          <img src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=700" alt="Gaming Setup" loading="eager">
+          <div class="floating-badge top-right">
+            <i class="fas fa-star" style="color:#ffd700"></i>
+            <span style="font-weight:700;font-size:.85rem;margin-left:6px">4.9 Rating</span>
+          </div>
+          <div class="floating-badge bottom-left">
+            <i class="fas fa-bolt" style="color:#00c3ff"></i>
+            <span style="font-weight:700;font-size:.85rem;margin-left:6px">Live Esports</span>
+          </div>
+          <div class="hero-card-overlay">
+            <div class="hero-badge">
+              <div class="hero-badge-icon"><i class="fas fa-trophy"></i></div>
+              <div class="hero-badge-text">
+                <span>Weekly Esports Tournaments</span>
+                <p>Prize pools up to ₹50,000</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gaming Zones -->
+  <section class="section zones" id="zones">
+    <div class="container">
+      <div style="text-align:center" class="fade-up">
+        <span class="section-label">Gaming Zones</span>
+        <h2 class="section-title">Choose Your Arena</h2>
+        <p class="section-subtitle" style="margin:0 auto">From consoles to PCs to racing simulators — we've got every zone covered with top-tier hardware and immersive setups.</p>
+      </div>
+      <div class="zones-grid">
+        <div class="zone-card fade-up" style="transition-delay:.1s">
+          <div class="zone-icon ps5"><i class="fab fa-playstation"></i></div>
+          <div class="zone-content">
+            <h3>PS5 Zone</h3>
+            <p>50+ PS5 consoles with 4K HDR displays, premium headsets, and the latest AAA titles. Ultimate couch gaming experience.</p>
+            <div class="zone-features">
+              <span class="zone-feature">4K 120Hz</span>
+              <span class="zone-feature">100+ Games</span>
+              <span class="zone-feature">Premium Headsets</span>
+              <span class="zone-feature">Cozy Lounges</span>
+            </div>
+          </div>
+        </div>
+        <div class="zone-card fade-up" style="transition-delay:.2s">
+          <div class="zone-icon xbox"><i class="fab fa-xbox"></i></div>
+          <div class="zone-content">
+            <h3>Xbox Zone</h3>
+            <p>Full Xbox Series X lineup with Game Pass loaded, ultra-low latency monitors, and competitive gaming stations.</p>
+            <div class="zone-features">
+              <span class="zone-feature">Series X Consoles</span>
+              <span class="zone-feature">Game Pass</span>
+              <span class="zone-feature">Low Latency</span>
+              <span class="zone-feature">Pro Controllers</span>
+            </div>
+          </div>
+        </div>
+        <div class="zone-card fade-up" style="transition-delay:.3s">
+          <div class="zone-icon pc"><i class="fas fa-desktop"></i></div>
+          <div class="zone-content">
+            <h3>PC Gaming</h3>
+            <p>RTX 4080+ rigs, 240Hz mechanical displays, custom RGB setups. Battle royale, MOBAs, or FPS — dominate every genre.</p>
+            <div class="zone-features">
+              <span class="zone-feature">RTX 4080+</span>
+              <span class="zone-feature">240Hz Monitors</span>
+              <span class="zone-feature">Mechanical KBs</span>
+              <span class="zone-feature">Pro Peripherals</span>
+            </div>
+          </div>
+        </div>
+        <div class="zone-card fade-up" style="transition-delay:.4s">
+          <div class="zone-icon racing"><i class="fas fa-steering-wheel" style="font-family:'Font Awesome 6 Free'"></i><i class="fas fa-car"></i></div>
+          <div class="zone-content">
+            <h3>Driving Simulator</h3>
+            <p>Full-motion racing sims with force feedback wheels, triple pedal setups, and panoramic displays. Feel every turn.</p>
+            <div class="zone-features">
+              <span class="zone-feature">Force Feedback</span>
+              <span class="zone-feature">Triple Pedals</span>
+              <span class="zone-feature">Panoramic Display</span>
+              <span class="zone-feature">GT3 Seats</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Driving Sim -->
+  <section class="section sim-section" id="sim">
+    <div class="container">
+      <div class="sim-content">
+        <div class="sim-visual fade-left">
+          <img src="https://images.unsplash.com/photo-1616588589676-62b3d4ff6a4c?w=800" alt="Driving Simulator">
+          <div class="sim-overlay"></div>
+          <div class="sim-badge">
+            <h4><i class="fas fa-circle" style="color:#ef4444;font-size:.6rem;margin-right:8px"></i>EXPERIENCE ZONE</h4>
+            <p>Full-motion F1 & GT Racing Experience</p>
+          </div>
+        </div>
+        <div class="sim-info fade-right">
+          <span class="section-label">Premium Simulator</span>
+          <h2>Driving Simulator <span style="color:#ff6b35">Experience</span></h2>
+          <p>Experience the thrill of professional-grade racing without leaving the city. Our full-motion simulators replicate real-world physics with stunning accuracy.</p>
+          <ul class="sim-features-list">
+            <li class="sim-feature-item">
+              <div class="sim-feature-icon"><i class="fas fa-tachometer-alt"></i></div>
+              <div class="sim-feature-text">
+                <h4>Force Feedback Wheels</h4>
+                <p>Logitech G923 & Fanatec DD Pro with true force feedback technology</p>
+              </div>
+            </li>
+            <li class="sim-feature-item">
+              <div class="sim-feature-icon"><i class="fas fa-tv"></i></div>
+              <div class="sim-feature-text">
+                <h4>Triple Screen Panoramic</h4>
+                <p>3x 32" 4K displays for 180° field of view immersion</p>
+              </div>
+            </li>
+            <li class="sim-feature-item">
+              <div class="sim-feature-icon"><i class="fas fa-gamepad"></i></div>
+              <div class="sim-feature-text">
+                <h4>20+ Racing Titles</h4>
+                <p>iRacing, Assetto Corsa, F1 24, Forza Motorsport & more</p>
+              </div>
+            </li>
+            <li class="sim-feature-item">
+              <div class="sim-feature-icon"><i class="fas fa-couch"></i></div>
+              <div class="sim-feature-text">
+                <h4>GT Racing Seats</h4>
+                <p>Permanent-mounted bucket seats with full motion platform</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Food & Drinks -->
+  <section class="section food" id="food">
+    <div class="container">
+      <div style="text-align:center" class="fade-up">
+        <span class="section-label">Food & Drinks</span>
+        <h2 class="section-title">Fuel Your Gaming</h2>
+        <p class="section-subtitle" style="margin:0 auto">Gourmet burgers, loaded fries, specialty coffee, energy drinks, and cheat meals designed for gamers.</p>
+      </div>
+      <div class="food-grid">
+        <div class="food-card fade-up" style="transition-delay:.1s">
+          <div class="food-img" style="background-image:url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400')">
+            <span class="food-tag blue">BESTSELLER</span>
+          </div>
+          <div class="food-info">
+            <h4>Combo Meal</h4>
+            <p>Burger + Fries + Drink</p>
+            <div class="food-price">₹299</div>
+          </div>
+        </div>
+        <div class="food-card fade-up" style="transition-delay:.15s">
+          <div class="food-img" style="background-image:url('https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400')">
+            <span class="food-tag purple">POPULAR</span>
+          </div>
+          <div class="food-info">
+            <h4>Loaded Nachos</h4>
+            <p>Cheese, jalapeños & dip</p>
+            <div class="food-price">₹199</div>
+          </div>
+        </div>
+        <div class="food-card fade-up" style="transition-delay:.2s">
+          <div class="food-img" style="background-image:url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400')">
+            <span class="food-tag orange">ENERGY</span>
+          </div>
+          <div class="food-info">
+            <h4>Cold Brew Coffee</h4>
+            <p>Double shot espresso blend</p>
+            <div class="food-price">₹149</div>
+          </div>
+        </div>
+        <div class="food-card fade-up" style="transition-delay:.25s">
+          <div class="food-img" style="background-image:url('https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400')">
+          </div>
+          <div class="food-info">
+            <h4>Milkshakes</h4>
+            <p>12 flavors to choose</p>
+            <div class="food-price">₹179</div>
+          </div>
+        </div>
+        <div class="food-card fade-up" style="transition-delay:.3s">
+          <div class="food-img" style="background-image:url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400')">
+            <span class="food-tag blue">NEW</span>
+          </div>
+          <div class="food-info">
+            <h4>Personal Pizza</h4>
+            <p>6" artisan crust pizza</p>
+            <div class="food-price">₹249</div>
+          </div>
+        </div>
+        <div class="food-card fade-up" style="transition-delay:.35s">
+          <div class="food-img" style="background-image:url('https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400')">
+            <span class="food-tag purple">SIGNATURE</span>
+          </div>
+          <div class="food-info">
+            <h4>Energy Booster</h4>
+            <p>Protein shake + banana</p>
+            <div class="food-price">₹139</div>
+          </div>
+        </div>
+        <div class="food-card fade-up" style="transition-delay:.4s">
+          <div class="food-img" style="background-image:url('https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400')">
+          </div>
+          <div class="food-info">
+            <h4>Cookie Platter</h4>
+            <p>Fresh-baked selection</p>
+            <div class="food-price">₹169</div>
+          </div>
+        </div>
+        <div class="food-card fade-up" style="transition-delay:.45s">
+          <div class="food-img" style="background-image:url('https://images.unsplash.com/photo-1525385133512-2f3bdd039054?w=400')">
+            <span class="food-tag orange">CHEF'S PICK</span>
+          </div>
+          <div class="food-info">
+            <h4>Loaded Wings</h4>
+            <p>BBQ / Buffalo / Garlic</p>
+            <div class="food-price">₹329</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tournaments -->
+  <section class="section tournaments" id="tournaments">
+    <div class="container">
+      <div style="text-align:center" class="fade-up">
+        <span class="section-label">Tournaments & Events</span>
+        <h2 class="section-title">Compete & Conquer</h2>
+        <p class="section-subtitle" style="margin:0 auto">Weekly esports tournaments with massive prize pools. Show your skills, climb the leaderboard, and become a champion.</p>
+      </div>
+      <div class="tournaments-grid">
+        <div class="tournament-card fade-up" style="transition-delay:.1s">
+          <div class="tournament-bar" style="background:linear-gradient(90deg,#ff4444,#ff6b6b)"></div>
+          <div class="tournament-header">
+            <div class="tournament-game">BGMI Squad</div>
+            <span class="tournament-status live">● LIVE NOW</span>
+          </div>
+          <div class="tournament-meta">
+            <div class="tournament-meta-item"><i class="fas fa-users"></i> 48 Teams</div>
+            <div class="tournament-meta-item"><i class="fas fa-clock"></i> 8 Hours</div>
+            <div class="tournament-meta-item"><i class="fas fa-calendar"></i> Today</div>
+          </div>
+          <div class="tournament-prize">₹50,000</div>
+          <div class="tournament-details">
+            <div class="tournament-detail-item">
+              <span>Format</span>
+              <p>Squad Battle Royale</p>
+            </div>
+            <div class="tournament-detail-item">
+              <span>Slots Left</span>
+              <p>4 Teams</p>
+            </div>
+          </div>
+          <a href="javascript:void(0)" class="btn btn-primary" style="width:100%;justify-content:center" onclick="alert('Registration coming soon!')">Join Tournament</a>
+        </div>
+        <div class="tournament-card fade-up" style="transition-delay:.2s">
+          <div class="tournament-bar" style="background:linear-gradient(90deg,#00c3ff,#0080ff)"></div>
+          <div class="tournament-header">
+            <div class="tournament-game">FIFA 24</div>
+            <span class="tournament-status upcoming">UPCOMING</span>
+          </div>
+          <div class="tournament-meta">
+            <div class="tournament-meta-item"><i class="fas fa-users"></i> 32 Players</div>
+            <div class="tournament-meta-item"><i class="fas fa-clock"></i> 4 Hours</div>
+            <div class="tournament-meta-item"><i class="fas fa-calendar"></i> Sat, 25 Jan</div>
+          </div>
+          <div class="tournament-prize">₹25,000</div>
+          <div class="tournament-details">
+            <div class="tournament-detail-item">
+              <span>Format</span>
+              <p>1v1 Knockout</p>
+            </div>
+            <div class="tournament-detail-item">
+              <span>Slots Left</span>
+              <p>12 Players</p>
+            </div>
+          </div>
+          <a href="javascript:void(0)" class="btn btn-secondary" style="width:100%;justify-content:center" onclick="alert('Registration coming soon!')">Register Now</a>
+        </div>
+        <div class="tournament-card fade-up" style="transition-delay:.3s">
+          <div class="tournament-bar" style="background:linear-gradient(90deg,#ffd700,#ffb700)"></div>
+          <div class="tournament-header">
+            <div class="tournament-game">Valorant 5v5</div>
+            <span class="tournament-status upcoming">UPCOMING</span>
+          </div>
+          <div class="tournament-meta">
+            <div class="tournament-meta-item"><i class="fas fa-users"></i> 16 Teams</div>
+            <div class="tournament-meta-item"><i class="fas fa-clock"></i> 6 Hours</div>
+            <div class="tournament-meta-item"><i class="fas fa-calendar"></i> Sun, 26 Jan</div>
+          </div>
+          <div class="tournament-prize">₹75,000</div>
+          <div class="tournament-details">
+            <div class="tournament-detail-item">
+              <span>Format</span>
+              <p>5v5 Double Elim</p>
+            </div>
+            <div class="tournament-detail-item">
+              <span>Slots Left</span>
+              <p>3 Teams</p>
+            </div>
+          </div>
+          <a href="javascript:void(0)" class="btn btn-secondary" style="width:100%;justify-content:center" onclick="alert('Registration coming soon!')">Register Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Membership -->
+  <section class="section membership" id="membership">
+    <div class="container">
+      <div style="text-align:center" class="fade-up">
+        <span class="section-label">Membership Plans</span>
+        <h2 class="section-title">Go Premium</h2>
+        <p class="section-subtitle" style="margin:0 auto">Unlock exclusive perks, priority access, discounts, and VIP treatment with our membership plans.</p>
+      </div>
+      <div class="plans-grid">
+        <div class="plan-card plan-bronze fade-up" style="transition-delay:.1s">
+          <div class="plan-icon"><i class="fas fa-medal"></i></div>
+          <div class="plan-name">Bronze</div>
+          <div class="plan-price">₹999<span>/month</span></div>
+          <ul class="plan-features">
+            <li><i class="fas fa-check"></i> 10% off all gaming sessions</li>
+            <li><i class="fas fa-check"></i> 5% off food & drinks</li>
+            <li><i class="fas fa-check"></i> Priority tournament entry</li>
+            <li><i class="fas fa-check"></i> Free headset sanitization</li>
+            <li><i class="fas fa-check"></i> Birthday bonus hours</li>
+          </ul>
+          <a href="javascript:void(0)" class="btn btn-secondary plan-btn" onclick="alert('Membership coming soon!')">Get Bronze</a>
+        </div>
+        <div class="plan-card plan-silver featured fade-up" style="transition-delay:.2s">
+          <div class="plan-popular">MOST POPULAR</div>
+          <div class="plan-icon"><i class="fas fa-gem"></i></div>
+          <div class="plan-name">Silver</div>
+          <div class="plan-price">₹2,499<span>/month</span></div>
+          <ul class="plan-features">
+            <li><i class="fas fa-check"></i> 20% off all gaming sessions</li>
+            <li><i class="fas fa-check"></i> 10% off food & drinks</li>
+            <li><i class="fas fa-check"></i> VIP tournament seeding</li>
+            <li><i class="fas fa-check"></i> 5 free hours/month</li>
+            <li><i class="fas fa-check"></i> Exclusive member events</li>
+            <li><i class="fas fa-check"></i> Free locker storage</li>
+          </ul>
+          <a href="javascript:void(0)" class="btn btn-primary plan-btn" onclick="alert('Membership coming soon!')">Get Silver</a>
+        </div>
+        <div class="plan-card plan-gold fade-up" style="transition-delay:.3s">
+          <div class="plan-icon"><i class="fas fa-crown"></i></div>
+          <div class="plan-name">Gold</div>
+          <div class="plan-price">₹4,999<span>/month</span></div>
+          <ul class="plan-features">
+            <li><i class="fas fa-check"></i> 30% off all gaming sessions</li>
+            <li><i class="fas fa-check"></i> 15% off food & drinks</li>
+            <li><i class="fas fa-check"></i> VIP lounge access</li>
+            <li><i class="fas fa-check"></i> 15 free hours/month</li>
+            <li><i class="fas fa-check"></i> Personal gaming setup</li>
+            <li><i class="fas fa-check"></i> Guest passes (2/month)</li>
+            <li><i class="fas fa-check"></i> Esports team sponsorship</li>
+          </ul>
+          <a href="javascript:void(0)" class="btn btn-secondary plan-btn" onclick="alert('Membership coming soon!')">Get Gold</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="section" id="gallery" style="padding-bottom:0">
+    <div class="container">
+      <div style="text-align:center" class="fade-up">
+        <span class="section-label">Gallery</span>
+        <h2 class="section-title">Inside Hideout</h2>
+        <p class="section-subtitle" style="margin:0 auto">Take a peek at our premium gaming arena, esports stage, and cozy café vibes.</p>
+      </div>
+    </div>
+    <div class="gallery fade-up">
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800" alt="Gaming Arena">
+        <div class="gallery-overlay"><span>Main Gaming Arena</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=600" alt="PC Setup">
+        <div class="gallery-overlay"><span>PC Gaming Zone</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=600" alt="PS5 Setup">
+        <div class="gallery-overlay"><span>PS5 Lounge</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600" alt="Esports Stage">
+        <div class="gallery-overlay"><span>Esports Stage</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600" alt="Cafe Area">
+        <div class="gallery-overlay"><span>Café Lounge</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600" alt="Racing Sim">
+        <div class="gallery-overlay"><span>Racing Simulator</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=800" alt="Tournament">
+        <div class="gallery-overlay"><span>Tournament Night</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section testimonials" id="testimonials">
+    <div class="container">
+      <div style="text-align:center" class="fade-up">
+        <span class="section-label">Testimonials</span>
+        <h2 class="section-title">What Gamers Say</h2>
+        <p class="section-subtitle" style="margin:0 auto">Real reviews from our community of passionate gamers.</p>
+      </div>
+      <div class="testimonials-slider fade-up">
+        <div class="testimonial-card">
+          <div class="testimonial-avatar">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150" alt="Rahul">
+          </div>
+          <div class="testimonial-stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <p class="testimonial-text">"Hideout is hands down the best gaming café in the city. The PC rigs are insane, the food is amazing, and the community is incredible. I've made so many friends here. It's my second home!"</p>
+          <div class="testimonial-name">Rahul Sharma</div>
+          <div class="testimonial-role">Valorant Player • Gold Member</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info fade-left">
+          <span class="section-label">Get In Touch</span>
+          <h2>Visit Us & <span style="color:#00c3ff">Level Up</span></h2>
+          <p>Ready to experience the ultimate gaming destination? Drop by, book a station, or reach out to us on WhatsApp for instant reservations.</p>
+          <div class="contact-details">
+            <div class="contact-detail">
+              <div class="contact-detail-icon"><i class="fas fa-map-marker-alt"></i></div>
+              <div class="contact-detail-text">
+                <h4>Location</h4>
+                <p>123 Gaming Street, Tech City, Mumbai 400001</p>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <div class="contact-detail-icon"><i class="fas fa-clock"></i></div>
+              <div class="contact-detail-text">
+                <h4>Open Hours</h4>
+                <p>Mon–Sun: 10:00 AM – 2:00 AM</p>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <div class="contact-detail-icon"><i class="fas fa-phone"></i></div>
+              <div class="contact-detail-text">
+                <h4>Phone</h4>
+                <p>+91 98765 43210</p>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <div class="contact-detail-icon"><i class="fas fa-envelope"></i></div>
+              <div class="contact-detail-text">
+                <h4>Email</h4>
+                <p>hello@hideoutgaming.com</p>
+              </div>
+            </div>
+          </div>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitch"></i></a>
+          </div>
+        </div>
+        <div class="contact-form fade-right">
+          <form onsubmit="event.preventDefault(); alert('Thank you! We will contact you soon.');">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" placeholder="Enter your name" required>
+              </div>
+              <div class="form-group">
+                <label>Phone</label>
+                <input type="tel" placeholder="+91 98765 43210" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" placeholder="your@email.com">
+            </div>
+            <div class="form-group">
+              <label>Service</label>
+              <select>
+                <option value="">Select a service</option>
+                <option>Gaming Session</option>
+                <option>Tournament Registration</option>
+                <option>Membership Inquiry</option>
+                <option>Birthday Party</option>
+                <option>Corporate Event</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Message</label>
+              <textarea placeholder="Tell us what you need..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">
+              <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3><i class="fas fa-gamepad" style="color:#00c3ff;margin-right:8px"></i>HIDEOUT</h3>
+          <p>The ultimate gaming café and esports lounge. Premium setups, thrilling tournaments, and gourmet food — all in one electrifying space.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#zones">Gaming Zones</a></li>
+            <li><a href="#sim">Driving Simulator</a></li>
+            <li><a href="#food">Food & Drinks</a></li>
+            <li><a href="#tournaments">Tournaments</a></li>
+            <li><a href="#membership">Membership</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#">PS5 Gaming</a></li>
+            <li><a href="#">Xbox Gaming</a></li>
+            <li><a href="#">PC Gaming</a></li>
+            <li><a href="#">Racing Simulator</a></li>
+            <li><a href="#">Birthday Parties</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Refund Policy</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Hideout Gaming & Cafe. All rights reserved.</p>
+        <p>Made with <i class="fas fa-heart" style="color:#ff4444"></i> for Gamers</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float -->
+  <a href="javascript:void(0)" class="whatsapp-float" onclick="alert('WhatsApp booking coming soon!')">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Scroll to Top -->
+  <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <script>
+    // ═══════════════════════════════════════
+    // PRELOADER
+    // ═══════════════════════════════════════
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('preloader').classList.add('loaded');
+      }, 2000);
+    });
+
+    // ═══════════════════════════════════════
+    // CURSOR GLOW
+    // ═══════════════════════════════════════
+    const cursorGlow = document.getElementById('cursorGlow');
+    let mouseX = 0, mouseY = 0, glowX = 0, glowY = 0;
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+    function animateGlow() {
+      glowX += (mouseX - glowX) * 0.08;
+      glowY += (mouseY - glowY) * 0.08;
+      cursorGlow.style.left = glowX + 'px';
+      cursorGlow.style.top = glowY + 'px';
+      requestAnimationFrame(animateGlow);
+    }
+    animateGlow();
+
+    // ═══════════════════════════════════════
+    // PARTICLES
+    // ═══════════════════════════════════════
+    const particlesContainer = document.getElementById('particles');
+    for (let i = 0; i < 30; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.animationDelay = Math.random() * 8 + 's';
+      p.style.animationDuration = (6 + Math.random() * 4) + 's';
+      if (Math.random() > 0.5) p.style.background = '#9b59b6';
+      particlesContainer.appendChild(p);
+    }
+
+    // ═══════════════════════════════════════
+    // NAVBAR SCROLL
+    // ═══════════════════════════════════════
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+      document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 500);
+    });
+
+    // ═══════════════════════════════════════
+    // MOBILE NAV
+    // ═══════════════════════════════════════
+    function openMobileNav() { document.getElementById('mobileNav').classList.add('open'); }
+    function closeMobileNav() { document.getElementById('mobileNav').classList.remove('open'); }
+
+    // ═══════════════════════════════════════
+    // SCROLL ANIMATIONS
+    // ═══════════════════════════════════════
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.fade-up, .fade-left, .fade-right').forEach(el => {
+      observer.observe(el);
+    });
+
+    // ═══════════════════════════════════════
+    // ANIMATED COUNTERS
+    // ═══════════════════════════════════════
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counters = entry.target.querySelectorAll('[data-count]');
+          counters.forEach(counter => {
+            const target = parseInt(counter.dataset.count);
+            const duration = 2000;
+            const start = performance.now();
+            function update(now) {
+              const elapsed = now - start;
+              const progress = Math.min(elapsed / duration, 1);
+              const eased = 1 - Math.pow(1 - progress, 3);
+              counter.textContent = Math.floor(eased * target).toLocaleString();
+              if (progress < 1) requestAnimationFrame(update);
+            }
+            requestAnimationFrame(update);
+          });
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    const statsSection = document.querySelector('.hero-stats');
+    if (statsSection) counterObserver.observe(statsSection);
+
+    // ═══════════════════════════════════════
+    // GSAP SCROLL TRIGGER (enhanced animations)
+    // ═══════════════════════════════════════
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+
+      gsap.from('.zone-card', {
+        scrollTrigger: { trigger: '.zones-grid', start: 'top 80%' },
+        y: 60, opacity: 0, stagger: 0.15, duration: 0.8, ease: 'power3.out'
+      });
+
+      gsap.from('.food-card', {
+        scrollTrigger: { trigger: '.food-grid', start: 'top 80
