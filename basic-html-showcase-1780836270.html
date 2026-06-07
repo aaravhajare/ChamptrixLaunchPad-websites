@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic HTML Showcase</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            animation: fadeInDown 1s ease;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        nav {
+            background: white;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #764ba2;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 3px solid #764ba2;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .section p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .html-tags {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .tag-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tag-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .tag-card code {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .tag-card p {
+            margin-top: 8px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .code-block {
+            background: #1e1e2e;
+            color: #cdd6f4;
+            padding: 25px;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .code-block .tag {
+            color: #f38ba8;
+        }
+
+        .code-block .attr {
+            color: #fab387;
+        }
+
+        .code-block .value {
+            color: #a6e3a1;
+        }
+
+        .code-block .text {
+            color: #cdd6f4;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:nth-child(2) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .feature-card:nth-child(3) {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .feature-card:nth-child(4) {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: rgba(255,255,255,0.9);
+            font-size: 0.95rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        table tr:hover {
+            background-color: #f5f7fa;
+        }
+
+        footer {
+            background: #1e1e2e;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 40px;
+        }
+
+        footer p {
+            opacity: 0.7;
+        }
+
+        footer .social-links {
+            margin-top: 20px;
+        }
+
+        footer .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 15px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer .social-links a:hover {
+            color: #667eea;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav a {
+                margin: 0 10px;
+                font-size: 0.9rem;
+            }
+
+            .section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🌐 Basic HTML Showcase</h1>
+        <p>A simple and elegant demonstration of fundamental HTML elements</p>
+    </header>
+
+    <nav>
+        <a href="#intro">Introduction</a>
+        <a href="#tags">HTML Tags</a>
+        <a href="#example">Code Example</a>
+        <a href="#features">Features</a>
+        <a href="#elements">Elements</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="container">
+
+        <div id="intro" class="section">
+            <h2>📖 What is HTML?</h2>
+            <p><strong>HTML (HyperText Markup Language)</strong> is the standard markup language used to create and structure content on the web. It describes the structure of a web page using a series of elements and tags.</p>
+            <p>HTML was first developed by <strong>Tim Berners-Lee</strong> in 1991 and has since evolved through multiple versions, with <strong>HTML5</strong> being the latest major version that introduced many new semantic elements and APIs.</p>
+            <p>Every website you visit is built on HTML as its foundation. Combined with <strong>CSS</strong> for styling and <strong>JavaScript</strong> for interactivity, HTML forms the backbone of the modern web.</p>
+            <a href="#tags" class="btn">Explore HTML Tags →</a>
+        </div>
+
+        <div id="tags" class="section">
+            <h2>🏷️ Common HTML Tags</h2>
+            <p>Here are some of the most frequently used HTML tags that form the building blocks of any webpage:</p>
+            <div class="html-tags">
+                <div class="tag-card">
+                    <code>&lt;h1&gt;-&lt;h6&gt;</code>
+                    <p>Headings</p>
+                </div>
+                <div class="tag-card">
+                    <code>&lt;p&gt;</code>
+                    <p>Paragraph</p>
+                </div>
+                <div class="tag-card">
+                    <code>&lt;a&gt;</code>
+                    <p>Anchor / Link</p>
+                </div>
+                <div class="tag-card">
+                    <code>&lt;img&gt;</code>
+                    <p>Image</p>
+                </div>
+                <div class="tag-card">
+                    <code>&lt;div&gt;</code>
+                    <p>Division</p>
+                </div>
+                <div class="tag-card">
+                    <code>&lt;span&gt;</code>
+                    <p>Inline Container</p>
+                </div>
+                <div class="tag-card">
+                    <code>&lt;ul&gt;/&lt;ol&gt;</code>
+                    <p>Lists</p>
+                </div>
+                <div class="tag-card">
+                    <code>&lt;table&gt;</code>
+                    <p>Table</p>
+                </div>
+                <div class="tag-card">
+                    <code>&lt;form&gt;</code>
+                    <p>Form</p>
+                </div>
+                <div class="tag-card">
+                    <code>&lt;input&gt;</code>
+                    <p>Input Field</p>
+                </div>
+                <div class="tag-card">
+                    <code>&lt;button&gt;</code>
+                    <p>Button</p>
+                </div>
+                <div class="tag-card">
+                    <code>&lt;header&gt;</code>
+                    <p>Header</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="example" class="section">
+            <h2>💻 Basic HTML Code Example</h2>
+            <p>Below is a simple example of a basic HTML page structure:</p>
+            <div class="code-block">
+<span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="value">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="value">"UTF-8"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span><span class="text">My First Page</span><span class="tag">&lt;/title&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+    <span class="tag">&lt;h1&gt;</span><span class="text">Hello, World!</span><span class="tag">&lt;/h1&gt;</span>
+    <span class="tag">&lt;p&gt;</span><span class="text">This is my first HTML page.</span><span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="value">"#"</span><span class="tag">&gt;</span><span class="text">Click here</span><span class="tag">&lt;/a&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span>
+            </div>
+            <p>This simple structure includes the document type declaration, html root element, head section with metadata, and the body containing visible content.</p>
+        </div>
+
+        <div id="features" class="section">
+            <h2>✨ Why Learn HTML?</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="icon">🌍</div>
+                    <h3>Universal Language</h3>
+                    <p>HTML is understood by all web browsers and is the foundation of every website on the internet.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">⚡</div>
+                    <h3>Easy to Learn</h3>
+                    <p>HTML has a simple syntax that beginners can start learning and using within hours.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🔧</div>
+                    <h3>Highly Flexible</h3>
+                    <p>Works seamlessly with CSS and JavaScript to create rich, interactive web experiences.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">📱</div>
+                    <h3>Responsive Ready</h3>
+                    <p>HTML5 provides semantic elements that make building responsive websites straightforward.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="elements" class="section">
+            <h2>📋 HTML Element Reference</h2>
+            <p>Here's a quick reference table of important HTML elements and their purposes:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Element</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>&lt;head&gt;</code></td>
+                        <td>Metadata</td>
+                        <td>Contains page metadata like title, charset, and links</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;body&gt;</code></td>
+                        <td>Content</td>
+                        <td>Contains all visible page content</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;nav&gt;</code></td>
+                        <td>Semantic</td>
+                        <td>Defines navigation links section</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;section&gt;</code></td>
+                        <td>Semantic</td>
+                        <td>Defines a thematic section of content</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;article&gt;</code></td>
+                        <td>Semantic</td>
+                        <td>Represents self-contained independent content</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;footer&gt;</code></td>
+                        <td>Semantic</td>
+                        <td>Defines footer for document or section</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;form&gt;</code></td>
+                        <td>Interactive</td>
+                        <td>Creates user input form</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;canvas&gt;</code></td>
+                        <td>Graphics</td>
+                        <td>Drawing surface for graphics via JavaScript</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="contact" class="section">
+            <h2>📬 Get In Touch</h2>
+            <p>Want to learn more about HTML and web development? Feel free to reach out!</p>
+            <form onsubmit="event.preventDefault(); alert('Thanks for your message! (This is a demo form)');">
+                <div style="margin-bottom: 15px;">
+                    <input type="text" placeholder="Your Name" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s;" onfocus="this.style.borderColor='#667eea'" onblur="this.style.borderColor='#e0e0e0'">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <input type="email" placeholder="Your Email" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s;" onfocus="this.style.borderColor='#667eea'" onblur="this.style.borderColor='#e0e0e0'">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <textarea placeholder="Your Message" rows="4" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; resize: vertical; transition: border-color 0.3s;" onfocus="this.style.borderColor='#667eea'" onblur="this.style.borderColor='#e0e0e0'"></textarea>
+                </div>
+                <button type="submit" class="btn">Send Message ✉️</button>
+            </form>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>🌐 Basic HTML Showcase — Built with ❤️ using HTML, CSS & JavaScript</p>
+        <p style="margin-top: 10px;">© 2024 Champtrix Launch Pad. All rights reserved.</p>
+        <div class="social-links">
+            <a href="#" title="GitHub">🐙</a>
+            <a href="#" title="Twitter">🐦</a>
+            <a href="#" title="LinkedIn">💼</a>
+            <a href="#" title="YouTube">📺</a>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll animation to sections
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+
+        // Tag card click interaction
+        document.querySelectorAll('.tag-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const code = this.querySelector('code').textContent;
+                alert(`Tag: ${code}\n\nThis is a commonly used HTML element. Click OK to learn more about it!`);
+            });
+        });
+    </script>
+
+</body>
+</html>
