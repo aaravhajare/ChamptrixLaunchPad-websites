@@ -1,0 +1,2011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WoodCraft Furniture - Premium handcrafted furniture with modern design. Shop sofas, beds, dining tables, office furniture and more. Custom furniture with nationwide delivery and warranty.">
+    <title>WoodCraft Furniture | Premium Handcrafted Modern Furniture</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --brown: #5C3D2E;
+            --brown-light: #8B6F4E;
+            --brown-dark: #3A2318;
+            --gold: #C5A55A;
+            --gold-light: #E0C986;
+            --black: #1A1A1A;
+            --white: #FFFFFF;
+            --off-white: #FAF8F5;
+            --gray: #6B6B6B;
+            --gray-light: #E8E4DE;
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--black);
+            background: var(--off-white);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Loader */
+        .loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--brown-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .loader-wrapper.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(191, 165, 90, 0.2);
+            border-top: 3px solid var(--gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 12px 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .logo span {
+            color: var(--white);
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--gold);
+            opacity: 0.5;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 36px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--gold) !important;
+            color: var(--black) !important;
+            padding: 10px 28px !important;
+            border-radius: 2px !important;
+            font-weight: 600 !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--gold-light) !important;
+            transform: translateY(-1px);
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 6px;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 2px;
+            background: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            min-height: 700px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #3A2318 0%, #5C3D2E 30%, #8B6F4E 60%, #5C3D2E 100%);
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="0.5" fill="rgba(255,255,255,0.03)"/><circle cx="75" cy="75" r="0.5" fill="rgba(255,255,255,0.03)"/><circle cx="50" cy="10" r="0.3" fill="rgba(255,255,255,0.02)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        }
+
+        .hero-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.08;
+            background-image: radial-gradient(circle at 20% 50%, rgba(197, 165, 90, 0.4) 0%, transparent 50%),
+                              radial-gradient(circle at 80% 20%, rgba(197, 165, 90, 0.3) 0%, transparent 50%),
+                              radial-gradient(circle at 60% 80%, rgba(197, 165, 90, 0.2) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            padding: 0 40px;
+            animation: fadeInUp 1.2s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            border: 1px solid rgba(197, 165, 90, 0.4);
+            color: var(--gold);
+            padding: 8px 24px;
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            background: rgba(197, 165, 90, 0.05);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto 44px;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--black);
+            padding: 16px 44px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(197, 165, 90, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            padding: 16px 44px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 60px;
+            justify-content: center;
+            margin-top: 80px;
+            animation: fadeInUp 1.2s ease 0.3s forwards;
+            opacity: 0;
+        }
+
+        .hero-stat h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .hero-stat p {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 0;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            animation: fadeInUp 1.2s ease 0.6s forwards;
+            opacity: 0;
+        }
+
+        .scroll-indicator .line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            animation: scrollLine 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollLine {
+            0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
+            50% { opacity: 1; transform: scaleY(1); }
+        }
+
+        /* Section Common Styles */
+        section {
+            padding: 120px 40px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .section-label::before,
+        .section-label::after {
+            content: '';
+            width: 30px;
+            height: 1px;
+            background: var(--gold);
+            position: absolute;
+            top: 50%;
+        }
+
+        .section-label::before { left: -45px; }
+        .section-label::after { right: -45px; }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            color: var(--brown-dark);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            max-width: 550px;
+            margin: 0 auto;
+            color: var(--gray);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .section-header.light h2,
+        .section-header.light p {
+            color: var(--white);
+        }
+
+        .section-header.light p {
+            opacity: 0.7;
+            color: var(--white);
+        }
+
+        /* Categories Section */
+        .categories {
+            background: var(--off-white);
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .category-card {
+            background: var(--white);
+            border-radius: 4px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid transparent;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(92, 61, 46, 0.1);
+            border-color: rgba(197, 165, 90, 0.2);
+        }
+
+        .category-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .category-card:hover .category-icon {
+            transform: scale(1.15);
+        }
+
+        .category-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: var(--brown-dark);
+            margin-bottom: 6px;
+        }
+
+        .category-card p {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        /* Products Section */
+        .products {
+            background: var(--white);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: var(--off-white);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: var(--brown-dark);
+            color: var(--white);
+            padding: 5px 14px;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        .product-badge.sale {
+            background: #C0392B;
+        }
+
+        .product-image {
+            height: 280px;
+            background: linear-gradient(135deg, #E8E4DE 0%, #D4CFC6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image .product-emoji {
+            font-size: 5rem;
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .product-emoji {
+            transform: scale(1.1);
+        }
+
+        .product-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(26, 26, 26, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .product-card:hover .product-overlay {
+            opacity: 1;
+        }
+
+        .overlay-btn {
+            width: 44px;
+            height: 44px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+            transform: translateY(20px);
+        }
+
+        .product-card:hover .overlay-btn {
+            transform: translateY(0);
+        }
+
+        .overlay-btn:hover {
+            background: var(--gold);
+            color: var(--white);
+        }
+
+        .product-info {
+            padding: 24px;
+        }
+
+        .product-rating {
+            display: flex;
+            gap: 2px;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+        }
+
+        .product-rating .star {
+            color: var(--gold);
+        }
+
+        .product-rating span {
+            color: var(--gray);
+            font-size: 0.8rem;
+            margin-left: 6px;
+        }
+
+        .product-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--brown-dark);
+            margin-bottom: 8px;
+        }
+
+        .product-info .product-category {
+            font-size: 0.8rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .product-price .current {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--brown-dark);
+        }
+
+        .product-price .original {
+            font-size: 0.9rem;
+            color: var(--gray);
+            text-decoration: line-through;
+        }
+
+        /* Why Choose Us */
+        .why-us {
+            background: var(--brown-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .why-us-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.05;
+            background-image: radial-gradient(circle at 30% 70%, var(--gold) 0%, transparent 50%),
+                              radial-gradient(circle at 70% 30%, var(--gold) 0%, transparent 40%);
+        }
+
+        .why-us .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .why-us-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .why-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 4px;
+            padding: 44px 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .why-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-8px);
+            border-color: rgba(197, 165, 90, 0.3);
+        }
+
+        .why-icon {
+            width: 70px;
+            height: 70px;
+            border: 1px solid rgba(197, 165, 90, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 1.8rem;
+            transition: all 0.4s ease;
+        }
+
+        .why-card:hover .why-icon {
+            background: var(--gold);
+            border-color: var(--gold);
+            transform: scale(1.1);
+        }
+
+        .why-card h3 {
+            color: var(--white);
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+
+        .why-card p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--off-white);
+        }
+
+        .testimonials .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 4px;
+            transition: all 0.4s ease;
+            position: relative;
+            border: 1px solid transparent;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(92, 61, 46, 0.08);
+            border-color: rgba(197, 165, 90, 0.15);
+        }
+
+        .quote-icon {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        .testimonial-stars {
+            display: flex;
+            gap: 3px;
+            margin-bottom: 18px;
+            color: var(--gold);
+            font-size: 0.9rem;
+        }
+
+        .testimonial-card blockquote {
+            font-size: 1rem;
+            color: var(--gray);
+            line-height: 1.8;
+            font-style: italic;
+            margin-bottom: 24px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border-top: 1px solid var(--gray-light);
+            padding-top: 20px;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--brown), var(--brown-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .author-info h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--brown-dark);
+        }
+
+        .author-info p {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        /* Gallery */
+        .gallery {
+            background: var(--white);
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .gallery .section-header {
+            padding: 0 40px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 280px);
+            gap: 16px;
+            padding: 0 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            background: linear-gradient(135deg, var(--brown-light), var(--brown));
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .gallery-item:nth-child(1) {
+            grid-column: 1 / 3;
+            grid-row: 1 / 3;
+            background: linear-gradient(135deg, #5C3D2E, #3A2318, #8B6F4E);
+        }
+
+        .gallery-item:nth-child(2) {
+            background: linear-gradient(135deg, #8B6F4E, #5C3D2E);
+        }
+
+        .gallery-item:nth-child(3) {
+            background: linear-gradient(135deg, #3A2318, #2C1A10);
+        }
+
+        .gallery-item:nth-child(4) {
+            background: linear-gradient(135deg, #6B5040, #4A3025);
+        }
+
+        .gallery-item:nth-child(5) {
+            background: linear-gradient(135deg, #7A5F4A, #5C3D2E);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+
+        .gallery-item .gallery-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            color: var(--white);
+            transform: translateY(10px);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-content {
+            transform: translateY(0);
+        }
+
+        .gallery-label {
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 6px;
+        }
+
+        .gallery-item h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .gallery-item.large h3 {
+            font-size: 1.5rem;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            opacity: 0.15;
+            transition: opacity 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 0.25;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--off-white);
+        }
+
+        .about .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-images {
+            position: relative;
+        }
+
+        .about-image-main {
+            width: 85%;
+            height: 480px;
+            background: linear-gradient(135deg, var(--brown), var(--brown-light));
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            box-shadow: 20px 20px 0 rgba(197, 165, 90, 0.15);
+        }
+
+        .about-image-float {
+            position: absolute;
+            bottom: -30px;
+            right: 0;
+            width: 55%;
+            height: 220px;
+            background: linear-gradient(135deg, var(--brown-dark), var(--brown));
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: -10px 10px 40px rgba(0, 0, 0, 0.15);
+            border: 3px solid var(--gold);
+        }
+
+        .about-badge-overlay {
+            position: absolute;
+            top: 20px;
+            right: 10%;
+            background: var(--gold);
+            color: var(--black);
+            padding: 12px 20px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-align: center;
+            border-radius: 4px;
+            z-index: 2;
+        }
+
+        .about-badge-overlay span {
+            display: block;
+            font-size: 2rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .about-content .section-label {
+            text-align: left;
+            display: block;
+        }
+
+        .about-content .section-label::before {
+            display: none;
+        }
+
+        .about-content h2 {
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            color: var(--brown-dark);
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .about-content p {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 32px 0;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .about-feature .check {
+            width: 24px;
+            height: 24px;
+            background: rgba(197, 165, 90, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 0.7rem;
+            flex-shrink: 0;
+        }
+
+        .about-feature span {
+            font-size: 0.9rem;
+            color: var(--brown-dark);
+            font-weight: 500;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--brown-dark);
+            position: relative;
+        }
+
+        .contact .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+        }
+
+        .contact-info h3 {
+            color: var(--white);
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+
+        .contact-info > p {
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.7;
+            margin-bottom: 40px;
+        }
+
+        .contact-detail {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border: 1px solid rgba(197, 165, 90, 0.3);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .contact-detail:hover .contact-icon {
+            background: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .contact-detail-text h4 {
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .contact-detail-text p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        .map-container {
+            margin-top: 40px;
+            border-radius: 4px;
+            overflow: hidden;
+            height: 200px;
+            background: linear-gradient(135deg, #2A1A10, #3D2A1C);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(197, 165, 90, 0.15);
+        }
+
+        .map-placeholder {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .map-placeholder .map-icon {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .contact-form-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 44px;
+            backdrop-filter: blur(20px);
+        }
+
+        .contact-form-card h3 {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .contact-form-card > p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            margin-bottom: 32px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.82rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--gold);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.25);
+        }
+
+        .form-group select option {
+            background: var(--brown-dark);
+            color: var(--white);
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 16px;
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .form-submit:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(197, 165, 90, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            padding: 80px 40px 0;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 50px;
+            padding-bottom: 60px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .footer-brand .logo {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.7;
+            margin-bottom: 24px;
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-link {
+            width: 42px;
+            height: 42px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .social-link:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--black);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h4 {
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.45);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+            padding-left: 6px;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.85rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-bottom-links a {
+            color: rgba(255, 255, 255, 0.3);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 5px 20px rgba(197, 165, 90, 0.3);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--gold-light);
+            transform: translateY(-3px);
+        }
+
+        /* AOS Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.7s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transition: all 0.7s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+        }
+
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; }
+        .stagger-6 { transition-delay: 0.6s; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(26, 26, 26, 0.98);
+                flex-direction: column;
+                justify-content: center;
+                gap: 30px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                font-size: 1.2rem;
+                letter-spacing: 3px;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .why-us-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 220px);
+            }
+
+            .gallery-item:nth-child(1) {
+                grid-column: 1 / 3;
+                grid-row: 1 / 2;
+            }
+
+            .about .container {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .about-images {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero-stats {
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 80px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .category-card {
+                padding: 30px 16px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .why-us-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(5, 200px);
+                padding: 0 20px;
+            }
+
+            .gallery-item:nth-child(1) {
+                grid-column: 1;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image-main {
+                height: 320px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form-card {
+                padding: 30px 20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                max-width: 280px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .categories-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .category-card {
+                padding: 24px 12px;
+            }
+
+            .category-icon {
+                font-size: 2rem;
+            }
+
+            .hero-stats .hero-stat h3 {
+                font-size: 2rem;
+            }
+
+            .about-image-float {
+                width: 65%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Loader -->
+    <div class="loader-wrapper" id="loader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Wood<span>Craft</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#products">Collection</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#contact" class="nav-cta">Visit Store</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg">
+            <div class="hero-pattern"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">Handcrafted Excellence Since 1998</div>
+            <h1>Premium Furniture <br>Tailored for <em>Elegant Living</em></h1>
+            <p>Discover our curated collection of handcrafted furniture designed to transform your living spaces into timeless works of art.</p>
+            <div class="hero-buttons">
+                <a href="#products" class="btn-primary">Explore Collection</a>
+                <a href="#contact" class="btn-secondary">Visit Showroom</a>
+            </div>
+        </div>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <h3>25+</h3>
+                <p>Years Experience</p>
+            </div>
+            <div class="hero-stat">
+                <h3>10K+</h3>
+                <p>Happy Clients</p>
+            </div>
+            <div class="hero-stat">
+                <h3>500+</h3>
+                <p>Designs</p>
+            </div>
+            <div class="hero-stat">
+                <h3>98%</h3>
+                <p>Satisfaction</p>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="line"></div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories" id="categories">
+        <div class="section-header fade-up">
+            <div class="section-label">Browse Categories</div>
+            <h2>Explore Our Collections</h2>
+            <p>From exquisite sofas to sophisticated office furniture, discover pieces that redefine luxury living.</p>
+        </div>
+        <div class="categories-grid">
+            <div class="category-card fade-up stagger-1">
+                <span class="category-icon">🛋️</span>
+                <h3>Sofas</h3>
+                <p>24 Designs</p>
+            </div>
+            <div class="category-card fade-up stagger-2">
+                <span class="category-icon">🛏️</span>
+                <h3>Beds</h3>
+                <p>18 Designs</p>
+            </div>
+            <div class="category-card fade-up stagger-3">
+                <span class="category-icon">🍽️</span>
+                <h3>Dining Tables</h3>
+                <p>16 Designs</p>
+            </div>
+            <div class="category-card fade-up stagger-4">
+                <span class="category-icon">🏢</span>
+                <h3>Office Furniture</h3>
+                <p>32 Designs</p>
+            </div>
+            <div class="category-card fade-up stagger-5">
+                <span class="category-icon">🚪</span>
+                <h3>Wardrobes</h3>
+                <p>14 Designs</p>
+            </div>
+            <div class="category-card fade-up stagger-6">
+                <span class="category-icon">🎨</span>
+                <h3>Decor</h3>
+                <p>28 Designs</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="section-header fade-up">
+            <div class="section-label">Best Sellers</div>
+            <h2>Our Top Collections</h2>
+            <p>Discover our most loved pieces, handpicked for exceptional quality and timeless design.</p>
+        </div>
+        <div class="products-grid">
+            <div class="product-card fade-up stagger-1">
+                <div class="product-badge">Best Seller</div>
+                <div class="product-image">
+                    <span class="product-emoji">🛋️</span>
+                    <div class="product-overlay">
+                        <button class="overlay-btn" title="Quick View">👁</button>
+                        <button class="overlay-btn" title="Add to Wishlist">♡</button>
+                        <button class="overlay-btn" title="Add to Cart">🛒</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">
+                        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                        <span>(48)</span>
+                    </div>
+                    <div class="product-category">Sofa Collection</div>
+                    <h3>Milano Italian Leather Sofa</h3>
+                    <div class="product-price">
+                        <span class="current">$2,499</span>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card fade-up stagger-2">
+                <div class="product-badge sale">Sale</div>
+                <div class="product-image">
+                    <span class="product-emoji">🛏️</span>
+                    <div class="product-overlay">
+                        <button class="overlay-btn" title="Quick View">👁</button>
+                        <button class="overlay-btn" title="Add to Wishlist">♡</button>
+                        <button class="overlay-btn" title="Add to Cart">🛒</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">
+                        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star" style="color: #ddd;">★</span>
+                        <span>(36)</span>
+                    </div>
+                    <div class="product-category">Bedroom</div>
+                    <h3>Kensington Oak King Bed</h3>
+                    <div class="product-price">
+                        <span class="current">$1,899</span>
+                        <span class="original">$2,299</span>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card fade-up stagger-3">
+                <div class="product-badge">Best Seller</div>
+                <div class="product-image">
+                    <span class="product-emoji">🍽️</span>
+                    <div class="product-overlay">
+                        <button class="overlay-btn" title="Quick View">👁</button>
+                        <button class="overlay-btn" title="Add to Wishlist">♡</button>
+                        <button class="overlay-btn" title="Add to Cart">🛒</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">
+                        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                        <span>(52)</span>
+                    </div>
+                    <div class="product-category">Dining</div>
+                    <h3>Walnut Grand Dining Table</h3>
+                    <div class="product-price">
+                        <span class="current">$3,199</span>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card fade-up stagger-4">
+                <div class="product-badge">New</div>
+                <div class="product-image">
+                    <span class="product-emoji">💼</span>
+                    <div class="product-overlay">
+                        <button class="overlay-btn" title="Quick View">👁</button>
+                        <button class="overlay-btn" title="Add to Wishlist">♡</button>
+                        <button class="overlay-btn" title="Add to Cart">🛒</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-rating">
+                        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                        <span>(29)</span>
+                    </div>
+                    <div class="product-category">Office</div>
+                    <h3>Executive Walnut Desk</h3>
+                    <div class="product-price">
+                        <span class="current">$1,649</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-us" id="why-us">
+        <div class="why-us-pattern"></div>
+        <div class="container">
+            <div class="section-header light fade-up">
+                <div class="section-label" style="color: var(--gold);">Why Us</div>
+                <h2>The WoodCraft Advantage</h2>
+                <p>Experience the difference that quality craftsmanship and dedicated service make.</p>
+            </div>
+            <div class="why-us-grid">
+                <div class="why-card fade-up stagger-1">
+                    <div class="why-icon">🪵</div>
+                    <h3>Quality Craftsmanship</h3>
+                    <p>Each piece is meticulously handcrafted by master artisans using premium materials and time-honored techniques.</p>
+                </div>
+                <div class="why-card fade-up stagger-2">
+                    <div class="why-icon">✏️</div>
+                    <h3>Custom Design</h3>
+                    <p>We create bespoke furniture tailored to your exact specifications, ensuring a perfect fit for your space and style.</p>
+                </div>
+                <div class="why-card fade-up stagger-3">
+                    <div class="why-icon">🚚</div>
+                    <h3>Free Delivery</h3>
+                    <p>Complimentary white-glove delivery and professional installation service within 50 miles of our showroom.</p>
+                </div>
+                <div class="why-card fade-up stagger-4">
+                    <div class="why-icon">🛡️</div>
+                    <h3>10-Year Warranty</h3>
+                    <p>Every piece comes with our comprehensive warranty, giving you complete peace of mind for years to come.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header fade-up">
+                <div class="section-label">Testimonials</div>
+                <h2>What Our Clients Say</h2>
+                <p>Hear from those who have experienced the WoodCraft difference in their homes.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-up stagger-1">
+                    <div class="quote-icon">"</div>
+                    <div class="testimonial-stars">★★★★★</div>
+                    <blockquote>"The Milano sofa is absolutely stunning. The craftsmanship is impeccable and the leather quality exceeded our expectations. WoodCraft delivered on time and the installation team was professional."</blockquote>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SM</div>
+                        <div class="author-info">
+                            <h4>Sarah Mitchell</h4>
+                            <p>Interior Designer, NYC</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-up stagger-2">
+                    <div class="quote-icon">"</div>
+                    <div class="testimonial-stars">★★★★★</div>
+                    <blockquote>"We commissioned a custom dining table and the result was beyond beautiful. The walnut grain is exquisite and everyone who visits compliments it. Best investment for our home."</blockquote>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JC</div>
+                        <div class="author-info">
+                            <h4>James Carter</h4>
+                            <p>Architect, Chicago</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-up stagger-3">
+                    <div class="quote-icon">"</div>
+                    <div class="testimonial-stars">★★★★★</div>
+                    <blockquote>"Furnished our entire office with WoodCraft pieces. The quality is exceptional and our clients always comment on the beautiful furniture. Truly premium in every aspect."</blockquote>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">EW</div>
+                        <div class="author-info">
+                            <h4>Emily Watson</h4>
+                            <p>CEO, Tech Innovations</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="gallery" id="gallery">
+        <div class="section-header fade-up">
+            <div class="section-label">Gallery</div>
+            <h2>Modern Interior Inspiration</h2>
+            <p>Explore stunning spaces transformed by WoodCraft furniture collections.</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item large fade-up stagger-1">
+                <div class="gallery-overlay">🛋️</div>
+                <div class="gallery-content">
+                    <div class="gallery-label">Living Room</div>
+                    <h3>Contemporary Living with Milano Collection</h3>
+                </div>
+            </div>
+            <div class="gallery-item fade-up stagger-2">
+                <div class="gallery-overlay">🛏️</div>
+                <div class="gallery-content">
+                    <div class="gallery-label">Master Bedroom</div>
+                    <h3>Kensington Suite Elegance</h3>
+                </div>
+            </div>
+            <div class="gallery-item fade-up stagger-3">
+                <div class="gallery-overlay">🍽️</div>
+                <div class="gallery-content">
+                    <div class="gallery-label">Dining Room</div>
+                    <h3>Grand Dining Experience</h3>
+                </div>
+            </div>
+            <div class="gallery-item fade-up stagger-4">
+                <div class="gallery-overlay">💼</div>
+                <div class="gallery-content">
+                    <div class="gallery-label">Home Office</div>
+                    <h3>Executive Workspace</h3>
+                </div>
+            </div>
+            <div class="gallery-item fade-up stagger-5">
+                <div class="gallery-overlay">🚪</div>
+                <div class="gallery-content">
+                    <div class="gallery-label">Walk-in Closet</div>
+                    <h3>Custom Wardrobe Design</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-images fade-up">
+                <div class="about-image-main">🏠</div>
+                <div class="about-image-float">✨</div>
+                <div class="about-badge-overlay"><span>25+</span>Years of Excellence</div>
+            </div>
+            <div class="about-content fade-up" style="transition-delay: 0.2s;">
+                <div class="section-label">Our Story</div>
+                <h2>Crafting Excellence Since 1998</h2>
+                <p>WoodCraft Furniture was born from a passion for fine craftsmanship and a vision to create furniture that transcends ordinary living. Founded by master woodworker Antonio Rossi, our brand has grown from a small workshop to one of the most respected names in premium furniture design.</p>
+                <p>Every piece we create reflects our unwavering commitment to quality, sustainability, and timeless design. We source only the finest hardwoods from certified sustainable forests and employ traditional joinery techniques that ensure lasting beauty and durability.</p>
+                <div class="about-features">
+                    <div class="about-feature">
+                        <div class="check">✓</div>
+                        <span>Sustainably Sourced Wood</span>
+                    </div>
+                    <div class="about-feature">
+                        <div class="check">✓</div>
+                        <span>Master Craftsmen</span>
+                    </div>
+                    <div class="about-feature">
+                        <div class="check">✓</div>
+                        <span>Lifetime Warranty</span>
+                    </div>
+                    <div class="about-feature">
+                        <div class="check">✓</div>
+                        <span>Bespoke Designs</span>
+                    </div>
+                    <div class="about-feature">
+                        <div class="check">✓</div>
+                        <span>Eco-Friendly Finishes</span>
+                    </div>
+                    <div class="about
