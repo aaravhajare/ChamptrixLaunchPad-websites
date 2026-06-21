@@ -2728,3 +2728,175 @@
         const showError = (input, errorId) => {
             input.classList.add('error');
             document
+
+        const showError = (input, errorId) => {
+
+            input.classList.add('error');
+
+            document.getElementById(errorId).classList.add('show');
+
+        };
+
+        const hideError = (input, errorId) => {
+
+            input.classList.remove('error');
+
+            document.getElementById(errorId).classList.remove('show');
+
+        };
+
+        contactForm.addEventListener('submit', (e) => {
+
+            e.preventDefault();
+
+            let isValid = true;
+
+            const name = document.getElementById('name');
+
+            const childName = document.getElementById('childName');
+
+            const email = document.getElementById('email');
+
+            const phone = document.getElementById('phone');
+
+            // Name validation
+
+            if (name.value.trim() === '') {
+
+                showError(name, 'nameError');
+
+                isValid = false;
+
+            } else {
+
+                hideError(name, 'nameError');
+
+            }
+
+            // Child Name validation
+
+            if (childName.value.trim() === '') {
+
+                showError(childName, 'childNameError');
+
+                isValid = false;
+
+            } else {
+
+                hideError(childName, 'childNameError');
+
+            }
+
+            // Email validation
+
+            if (!validateEmail(email.value.trim())) {
+
+                showError(email, 'emailError');
+
+                isValid = false;
+
+            } else {
+
+                hideError(email, 'emailError');
+
+            }
+
+            // Phone validation
+
+            if (!validatePhone(phone.value.trim())) {
+
+                showError(phone, 'phoneError');
+
+                isValid = false;
+
+            } else {
+
+                hideError(phone, 'phoneError');
+
+            }
+
+            if (!isValid) return;
+
+            submitBtn.disabled = true;
+
+            submitBtn.innerHTML =
+
+                '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+            setTimeout(() => {
+
+                submitBtn.disabled = false;
+
+                submitBtn.innerHTML =
+
+                    '<i class="fas fa-paper-plane"></i> Send Message';
+
+                contactForm.reset();
+
+                toast.classList.add('show');
+
+                setTimeout(() => {
+
+                    toast.classList.remove('show');
+
+                }, 4000);
+
+            }, 1500);
+
+        });
+
+        // Live validation
+
+        document.querySelectorAll('input, textarea').forEach((field) => {
+
+            field.addEventListener('input', () => {
+
+                field.classList.remove('error');
+
+                const errorMap = {
+
+                    name: 'nameError',
+
+                    childName: 'childNameError',
+
+                    email: 'emailError',
+
+                    phone: 'phoneError'
+
+                };
+
+                if (errorMap[field.id]) {
+
+                    document
+
+                        .getElementById(errorMap[field.id])
+
+                        .classList.remove('show');
+
+                }
+
+            });
+
+        });
+
+        // Accessibility - keyboard support for menu toggle
+
+        navToggle.addEventListener('keypress', (e) => {
+
+            if (e.key === 'Enter' || e.key === ' ') {
+
+                e.preventDefault();
+
+                navToggle.click();
+
+            }
+
+        });
+
+        console.log('Vision Abacus Classes Website Loaded Successfully');
+
+    </script>
+
+</body>
+
+</html>
