@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art of Wood | Premium Handcrafted Furniture on Grant Road</title>
+<meta name="description" content="Art of Wood offers premium handcrafted wooden furniture on Grant Road. Explore our collection of sofas, beds, dining tables, and custom furniture.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#6B4226;--primary-light:#8B6914;--accent:#D4A574;--accent-light:#F0E0C8;--bg:#FDFBF7;--bg-alt:#F5F0E8;--text:#2C1810;--text-light:#6B5B4E;--white:#FFFFFF;--shadow:0 4px 20px rgba(44,24,16,0.08);--shadow-hover:0 8px 30px rgba(44,24,16,0.12);--radius:12px;--transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.3}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;height:auto;display:block}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:8px;font-family:'Lato',sans-serif;font-weight:700;font-size:15px;cursor:pointer;border:none;transition:var(--transition);letter-spacing:0.5px}
+.btn-primary{background:var(--primary);color:var(--white);box-shadow:0 4px 15px rgba(107,66,38,0.3)}
+.btn-primary:hover{background:#5A3520;transform:translateY(-2px);box-shadow:0 6px 20px rgba(107,66,38,0.4)}
+.btn-outline{background:transparent;color:var(--primary);border:2px solid var(--primary)}
+.btn-outline:hover{background:var(--primary);color:var(--white);transform:translateY(-2px)}
+.section-header{text-align:center;margin-bottom:60px}
+.section-header h2{font-size:clamp(28px,5vw,42px);color:var(--text);margin-bottom:12px}
+.section-header p{color:var(--text-light);font-size:17px;max-width:600px;margin:0 auto}
+.section-header .line{width:60px;height:3px;background:var(--accent);margin:16px auto 0;border-radius:2px}
+.fade-in{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+#loader{position:fixed;inset:0;background:var(--bg);z-index:10000;display:flex;align-items:center;justify-content:center;transition:opacity 0.5s ease}
+#loader.hidden{opacity:0;pointer-events:none}
+.loader-content{text-align:center}
+.loader-spinner{width:50px;height:50px;border:3px solid var(--accent-light);border-top:3px solid var(--primary);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader-text{font-family:'Playfair Display',serif;font-size:24px;color:var(--primary);letter-spacing:2px}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(253,251,247,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,165,116,0.15);transition:var(--transition)}
+nav .container{display:flex;align-items:center;justify-content:space-between;height:80px}
+.nav-logo{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--primary);display:flex;align-items:center;gap:10px}
+.nav-logo i{font-size:20px;color:var(--accent)}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-weight:700;font-size:15px;color:var(--text-light);transition:var(--transition);position:relative;letter-spacing:0.3px}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--primary);transition:var(--transition);border-radius:1px}
+.nav-links a:hover,.nav-links a.active{color:var(--primary)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px;z-index:1001}
+.hamburger span{width:26px;height:2.5px;background:var(--primary);border-radius:2px;transition:var(--transition)}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobile-menu{position:fixed;top:0;right:-100%;width:75%;max-width:320px;height:100vh;background:var(--bg);box-shadow:-5px 0 30px rgba(0,0,0,0.1);z-index:999;transition:right 0.4s cubic-bezier(0.4,0,0.2,1);padding:100px 30px 30px}
+.mobile-menu.open{right:0}
+.mobile-menu a{display:block;padding:16px 0;font-size:18px;font-weight:700;color:var(--text);border-bottom:1px solid var(--accent-light);transition:var(--transition)}
+.mobile-menu a:hover{color:var(--primary);padding-left:10px}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:998;opacity:0;pointer-events:none;transition:opacity 0.3s ease}
+.overlay.active{opacity:1;pointer-events:all}
+#hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(135deg,rgba(253,251,247,0.92),rgba(245,240,232,0.88)),url('https://images.unsplash.com/photo-1616486159-b5-ee8d6a66e12?w=1600&q=80') center/cover no-repeat;padding:120px 0 80px;position:relative}
+#hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:120px;background:linear-gradient(to top,var(--bg),transparent);pointer-events:none}
+.hero-content{max-width:650px}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:var(--accent-light);color:var(--primary);padding:8px 20px;border-radius:30px;font-size:14px;font-weight:700;margin-bottom:24px;letter-spacing:1px}
+.hero-tag i{font-size:12px}
+#hero h1{font-size:clamp(36px,6vw,62px);color:var(--text);margin-bottom:20px;font-weight:700}
+#hero h1 span{color:var(--primary)}
+#hero p{font-size:clamp(16px,2vw,19px);color:var(--text-light);margin-bottom:36px;max-width:520px;line-height:1.7}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap}
+#about{padding:100px 0;background:var(--bg)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about-img{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/3}
+.about-img img{width:100%;height:100%;object-fit:cover}
+.about-img::before{content:'';position:absolute;top:-20px;right:-20px;width:180px;height:180px;border:3px solid var(--accent);border-radius:var(--radius);z-index:-1}
+.about-text h2{font-size:clamp(28px,4vw,38px);margin-bottom:20px}
+.about-text .accent-line{width:50px;height:3px;background:var(--accent);margin-bottom:24px;border-radius:2px}
+.about-text p{color:var(--text-light);margin-bottom:16px;line-height:1.8}
+.about-features{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:30px}
+.about-feature{display:flex;align-items:center;gap:10px;color:var(--primary);font-weight:700;font-size:15px}
+.about-feature i{width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:var(--accent-light);border-radius:8px;font-size:14px;flex-shrink:0}
+#products{padding:100px 0;background:var(--bg-alt)}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+.product-card{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:var(--transition);cursor:pointer}
+.product-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-hover)}
+.product-img{position:relative;overflow:hidden;aspect-ratio:4/3}
+.product-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease}
+.product-card:hover .product-img img{transform:scale(1.08)}
+.product-img .badge{position:absolute;top:12px;left:12px;background:var(--primary);color:var(--white);padding:4px 14px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:0.5px}
+.product-info{padding:20px}
+.product-info h3{font-size:20px;margin-bottom:8px;color:var(--text)}
+.product-info p{color:var(--text-light);font-size:14px;line-height:1.6;margin-bottom:16px}
+.product-info .btn{width:100%;justify-content:center;padding:10px;font-size:13px}
+#why-us{padding:100px 0;background:var(--bg)}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px}
+.why-card{background:var(--bg-alt);border-radius:var(--radius);padding:32px 28px;text-align:center;transition:var(--transition);border:1px solid transparent}
+.why-card:hover{border-color:var(--accent);transform:translateY(-5px);box-shadow:var(--shadow)}
+.why-card .icon{width:64px;height:64px;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;background:var(--accent-light);border-radius:16px;color:var(--primary);font-size:24px;transition:var(--transition)}
+.why-card:hover .icon{background:var(--primary);color:var(--white)}
+.why-card h3{font-size:20px;margin-bottom:10px}
+.why-card p{color:var(--text-light);font-size:15px;line-height:1.7}
+#reviews{padding:100px 0;background:var(--bg-alt)}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:24px}
+.review-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);position:relative;transition:var(--transition)}
+.review-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover)}
+.review-card .quote-icon{position:absolute;top:20px;right:24px;font-size:40px;color:var(--accent-light);font-family:'Playfair Display',serif;line-height:1}
+.review-stars{display:flex;gap:3px;margin-bottom:16px}
+.review-stars i{color:#F5A623;font-size:16px}
+.review-text{font-size:16px;color:var(--text-light);line-height:1.8;margin-bottom:20px;font-style:italic}
+.review-author{display:flex;align-items:center;gap:12px}
+.review-avatar{width:48px;height:48px;border-radius:50%;background:var(--accent-light);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--primary);flex-shrink:0}
+.review-author-info h4{font-size:16px;margin-bottom:2px}
+.review-author-info span{font-size:13px;color:var(--text-light)}
+#mission{padding:100px 0;background:var(--bg)}
+.mission-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.mission-content h2{font-size:clamp(28px,4vw,38px);margin-bottom:16px}
+.mission-content .accent-line{width:50px;height:3px;background:var(--accent);margin-bottom:24px;border-radius:2px}
+.mission-content>p{color:var(--text-light);line-height:1.8;margin-bottom:32px}
+.mission-points{display:flex;flex-direction:column;gap:20px}
+.mission-point{display:flex;gap:16px;align-items:flex-start}
+.mission-point .num{width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:var(--primary);color:var(--white);border-radius:10px;font-weight:700;font-size:16px;flex-shrink:0}
+.mission-point div h4{font-size:17px;margin-bottom:4px}
+.mission-point div p{color:var(--text-light);font-size:15px;line-height:1.6}
+.mission-img{border-radius:var(--radius);overflow:hidden;aspect-ratio:4/3;box-shadow:var(--shadow)}
+.mission-img img{width:100%;height:100%;object-fit:cover}
+#contact{padding:100px 0;background:var(--bg-alt)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.contact-form{background:var(--white);border-radius:var(--radius);padding:40px;box-shadow:var(--shadow)}
+.contact-form h3{font-size:24px;margin-bottom:24px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-group{margin-bottom:20px}
+.form-group label{display:block;font-weight:700;font-size:14px;margin-bottom:6px;color:var(--text)}
+.form-group input,.form-group textarea{width:100%;padding:12px 16px;border:1.5px solid #E0D8CC;border-radius:8px;font-family:'Lato',sans-serif;font-size:15px;color:var(--text);background:var(--bg);transition:var(--transition);outline:none}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(107,66,38,0.1)}
+.form-group textarea{resize:vertical;min-height:120px}
+.contact-info{display:flex;flex-direction:column;gap:24px}
+.contact-info-card{background:var(--white);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);display:flex;align-items:center;gap:16px;transition:var(--transition)}
+.contact-info-card:hover{transform:translateX(5px);box-shadow:var(--shadow-hover)}
+.contact-info-card .icon{width:50px;height:50px;display:flex;align-items:center;justify-content:center;background:var(--accent-light);border-radius:12px;color:var(--primary);font-size:20px;flex-shrink:0}
+.contact-info-card h4{font-size:15px;margin-bottom:4px}
+.contact-info-card p{color:var(--text-light);font-size:14px}
+.map-container{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);aspect-ratio:16/9;margin-top:8px}
+.map-container iframe{width:100%;height:100%;border:0}
+footer{background:#1E0F06;color:var(--accent-light);padding:60px 0 0}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:40px;padding-bottom:40px}
+.footer-brand h3{font-family:'Playfair Display',serif;font-size:24px;color:var(--white);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.footer-brand p{font-size:14px;line-height:1.8;margin-bottom:20px;max-width:300px}
+.social-links{display:flex;gap:12px}
+.social-links a{width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.08);border-radius:8px;color:var(--accent-light);font-size:16px;transition:var(--transition)}
+.social-links a:hover{background:var(--primary);color:var(--white);transform:translateY(-3px)}
+.footer-col h4{color:var(--white);font-size:16px;margin-bottom:16px;font-family:'Playfair Display',serif}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:10px}
+.footer-col ul li a{font-size:14px;color:var(--accent-light);transition:var(--transition)}
+.footer-col ul li a:hover{color:var(--white);padding-left:5px}
+.footer-col p{font-size:14px;line-height:1.8;display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.footer-col p i{color:var(--accent);width:16px}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding:20px 0;text-align:center;font-size:13px}
+.footer-bottom span{color:var(--accent)}
+#scroll-top{position:fixed;bottom:30px;right:30px;width:48px;height:48px;background:var(--primary);color:var(--white);border:none;border-radius:12px;font-size:18px;cursor:pointer;box-shadow:0 4px 15px rgba(107,66,38,0.3);z-index:900;opacity:0;transform:translateY(20px);transition:var(--transition);display:flex;align-items:center;justify-content:center}
+#scroll-top.visible{opacity:1;transform:translateY(0)}
+#scroll-top:hover{background:#5A3520;transform:translateY(-3px)}
+.success-msg{display:none;background:#2E7D32;color:var(--white);padding:14px;border-radius:8px;text-align:center;font-weight:700;margin-top:12px;animation:fadeIn 0.5s ease}
+.success-msg.show{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:1024px){.about-grid,.mission-grid,.contact-grid{grid-template-columns:1fr;gap:40px}.footer-grid{grid-template-columns:1fr 1fr;gap:30px}}
+@media(max-width:768px){.hamburger{display:flex}.nav-links{display:none}.hero-btns{flex-direction:column;align-items:flex-start}.about-features{grid-template-columns:1fr}.products-grid{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}.reviews-grid{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}.contact-form{padding:24px}}
+@media(max-width:480px){.products-grid{grid-template-columns:1fr}.why-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}.hero-btns{width:100%}.hero-btns .btn{width:100%;justify-content:center}}
+</style>
+</head>
+<body>
+
+<div id="loader">
+<div class="loader-content">
+<div class="loader-spinner"></div>
+<div class="loader-text">Art of Wood</div>
+</div>
+</div>
+
+<nav>
+<div class="container">
+<a href="#hero" class="nav-logo"><i class="fas fa-tree"></i> Art of Wood</a>
+<ul class="nav-links">
+<li><a href="#hero" class="active">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#products">Products</a></li>
+<li><a href="#reviews">Reviews</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+<div class="hamburger" id="hamburger">
+<span></span><span></span><span></span>
+</div>
+</div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+<a href="#hero">Home</a>
+<a href="#about">About</a>
+<a href="#products">Products</a>
+<a href="#reviews">Reviews</a>
+<a href="#contact">Contact</a>
+</div>
+<div class="overlay" id="overlay"></div>
+
+<section id="hero">
+<div class="container">
+<div class="hero-content fade-in">
+<div class="hero-tag"><i class="fas fa-award"></i> PREMIUM HANDCRAFTED FURNITURE</div>
+<h1>Crafting <span>Timeless</span> Wooden Furniture for Modern Living.</h1>
+<p>Each piece is a testament to exceptional craftsmanship, built from the finest solid woods and designed to elevate your home for generations.</p>
+<div class="hero-btns">
+<a href="#products" class="btn btn-primary">Explore Collection <i class="fas fa-arrow-right"></i></a>
+<a href="#contact" class="btn btn-outline">Contact Us <i class="fas fa-phone"></i></a>
+</div>
+</div>
+</div>
+</section>
+
+<section id="about">
+<div class="container">
+<div class="about-grid">
+<div class="about-img fade-in">
+<img src="https://images.unsplash.com/photo-1555041469-8e345c81c703?w=800&q=80" alt="Art of Wood workshop showing craftsman at work">
+</div>
+<div class="about-text fade-in">
+<h2>The Art of Wood Story</h2>
+<div class="accent-line"></div>
+<p>Located on Grant Road, Art of Wood has been a trusted destination for premium handcrafted furniture for over two decades. Our journey began with a simple belief: that truly great furniture is born from the marriage of exceptional materials and master craftsmanship.</p>
+<p>We source only the finest solid woods — teak, rosewood, sheesham, and oak — ensuring every piece not only looks stunning but stands the test of time. Our artisans carry forward age-old woodworking traditions, blending them seamlessly with contemporary design sensibilities.</p>
+<div class="about-features">
+<div class="about-feature"><i class="fas fa-check"></i> Premium Solid Wood</div>
+<div class="about-feature"><i class="fas fa-check"></i> Master Craftsmanship</div>
+<div class="about-feature"><i class="fas fa-check"></i> Custom Designs</div>
+<div class="about-feature"><i class="fas fa-check"></i> 10-Year Warranty</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="products">
+<div class="container">
+<div class="section-header fade-in">
+<h2>Our Collections</h2>
+<p>Discover furniture designed to transform your spaces into sanctuaries of comfort and style</p>
+<div class="line"></div>
+</div>
+<div class="products-grid">
+<div class="product-card fade-in">
+<div class="product-img"><img src="https://images.unsplash.com/photo-1550257078-a2c3d534e08e?w=600&q=80" alt="Handcrafted wooden sofa"><span class="badge">Popular</span></div>
+<div class="product-info"><h3>Sofas</h3><p>Luxurious handcrafted sofas with plush cushioning and solid teak frames for ultimate comfort.</p><button class="btn btn-primary" onclick="showDetails('Sofas')">View Details</button></div>
+</div>
+<div class="product-card fade-in">
+<div class="product-img"><img src="https://images.unsplash.com/photo-1505330102469-0c281b4b6a2a?w=600&q=80" alt="Solid wood bed"><span class="badge">Bestseller</span></div>
+<div class="product-info"><h3>Beds</h3><p>Elegant beds crafted from premium rosewood and teak, designed for restful nights and beautiful bedrooms.</p><button class="btn btn-primary" onclick="showDetails('Beds')">View Details</button></div>
+</div>
+<div class="product-card fade-in">
+<div class="product-img"><img src="https://images.unsplash.com/photo-1617802226244-03e9e33a0fd6?w=600&q=80" alt="Wooden dining table"></div>
+<div class="product-info"><h3>Dining Tables</h3><p>Stunning dining tables that become the centerpiece of family gatherings and cherished moments.</p><button class="btn btn-primary" onclick="showDetails('Dining Tables')">View Details</button></div>
+</div>
+<div class="product-card fade-in">
+<div class="product-img"><img src="https://images.unsplash.com/photo-1558997519-7e4a9bf46f6b?w=600&q=80" alt="Premium wardrobe"></div>
+<div class="product-info"><h3>Wardrobes</h3><p>Spacious wardrobes with intelligent storage solutions, crafted for both beauty and functionality.</p><button class="btn btn-primary" onclick="showDetails('Wardrobes')">View Details</button></div>
+</div>
+<div class="product-card fade-in">
+<div class="product-img"><img src="https://images.unsplash.com/photo-1526170225585-29e9fa5b4598?w=600&q=80" alt="Modern TV unit"></div>
+<div class="product-info"><h3>TV Units</h3><p>Sleek entertainment units with cable management and ample storage for a clutter-free living room.</p><button class="btn btn-primary" onclick="showDetails('TV Units')">View Details</button></div>
+</div>
+<div class="product-card fade-in">
+<div class="product-img"><img src="https://images.unsplash.com/photo-1497215728801-958dc6b28d60?w=600&q=80" alt="Office furniture"><span class="badge">New</span></div>
+<div class="product-info"><h3>Office Furniture</h3><p>Ergonomic desks and shelves designed for productivity, bringing warmth and professionalism to your workspace.</p><button class="btn btn-primary" onclick="showDetails('Office Furniture')">View Details</button></div>
+</div>
+<div class="product-card fade-in">
+<div class="product-img"><img src="https://images.unsplash.com/photo-1583847789449-6e5a4a5d8d6a?w=600&q=80" alt="Modular furniture"></div>
+<div class="product-info"><h3>Modular Furniture</h3><p>Flexible modular systems that adapt to your space, offering customizable configurations for modern homes.</p><button class="btn btn-primary" onclick="showDetails('Modular Furniture')">View Details</button></div>
+</div>
+<div class="product-card fade-in">
+<div class="product-img"><img src="https://images.unsplash.com/photo-1503607709389-9a49e7ef3924?w=600&q=80" alt="Wooden chair"></div>
+<div class="product-info"><h3>Wooden Chairs</h3><p>Hand-carved chairs that blend traditional artistry with modern ergonomics for everyday comfort.</p><button class="btn btn-primary" onclick="showDetails('Wooden Chairs')">View Details</button></div>
+</div>
+<div class="product-card fade-in">
+<div class="product-img"><img src="https://images.unsplash.com/photo-1532317501017-5ea9575442e4?w=600&q=80" alt="Coffee table"></div>
+<div class="product-info"><h3>Coffee Tables</h3><p>Artisan coffee tables that serve as conversation starters, with exquisite grain patterns and finishes.</p><button class="btn btn-primary" onclick="showDetails('Coffee Tables')">View Details</button></div>
+</div>
+<div class="product-card fade-in">
+<div class="product-img"><img src="https://images.unsplash.com/photo-1616627567789-0f6b5e8e363d?w=600&q=80" alt="Custom furniture"><span class="badge">Bespoke</span></div>
+<div class="product-info"><h3>Custom Furniture</h3><p>Bring your vision to life with our bespoke service — designed by you, handcrafted by our master artisans.</p><button class="btn btn-primary" onclick="showDetails('Custom Furniture')">View Details</button></div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="why-us">
+<div class="container">
+<div class="section-header fade-in">
+<h2>Why Choose Art of Wood</h2>
+<p>Six pillars that set our furniture apart and keep our customers coming back</p>
+<div class="line"></div>
+</div>
+<div class="why-grid">
+<div class="why-card fade-in"><div class="icon"><i class="fas fa-tree"></i></div><h3>Premium Quality Wood</h3><p>We exclusively use solid, sustainably-sourced teak, rosewood, sheesham, and oak — never particle board or veneers.</p></div>
+<div class="why-card fade-in"><div class="icon"><i class="fas fa-pencil-ruler"></i></div><h3>Custom Designs</h3><p>Every home is unique. Our design team works with you to create bespoke furniture tailored to your exact specifications.</p></div>
+<div class="why-card fade-in"><div class="icon"><i class="fas fa-tags"></i></div><h3>Affordable Pricing</h3><p>Premium craftsmanship doesn't have to break the bank. We offer transparent pricing with no hidden costs or middlemen markup.</p></div>
+<div class="why-card fade-in"><div class="icon"><i class="fas fa-hands"></i></div><h3>Expert Craftsmanship</h3><p>Our master artisans bring decades of experience, using traditional joinery techniques that ensure lasting durability.</p></div>
+<div class="why-card fade-in"><div class="icon"><i class="fas fa-truck"></i></div><h3>Timely Delivery</h3><p>We respect your time. Our streamlined logistics ensure safe, on-time delivery and professional installation at your doorstep.</p></div>
+<div class="why-card fade-in"><div class="icon"><i class="fas fa-headset"></i></div><h3>Excellent Customer Support</h3><p>From selection to after-care, our dedicated team provides personalized guidance and post-purchase support you can count on.</p></div>
+</div>
+</div>
+</section>
+
+<section id="reviews">
+<div class="container">
+<div class="section-header fade-in">
+<h2>What Our Customers Say</h2>
+<p>Hear from families who have transformed their homes with Art of Wood furniture</p>
+<div class="line"></div>
+</div>
+<div class="reviews-grid">
+<div class="review-card fade-in">
+<div class="quote-icon">"</div>
+<div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+<p class="review-text">The dining table we ordered is absolutely stunning. The teak wood grain is beautiful, and the craftsmanship is visible in every joint. It has become the heart of our family gatherings.</p>
+<div class="review-author"><div class="review-avatar">R</div><div class="review-author-info"><h4>Rajesh Sharma</h4><span>Purchased: Dining Table</span></div></div>
+</div>
+<div class="review-card fade-in">
+<div class="quote-icon">"</div>
+<div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+<p class="review-text">We got a custom wardrobe designed for our bedroom and it fits perfectly. The team listened to our requirements patiently and delivered exactly what we envisioned. Truly exceptional work!</p>
+<div class="review-author"><div class="review-avatar">P</div><div class="review-author-info"><h4>Priya Kulkarni</h4><span>Purchased: Custom Wardrobe</span></div></div>
+</div>
+<div class="review-card fade-in">
+<div class="quote-icon">"</div>
+<div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+<p class="review-text">From selection to delivery, the entire experience was seamless. The sofa set is incredibly comfortable and the rosewood finish is rich and elegant. Highly recommend Art of Wood to everyone!</p>
+<div class="review-author"><div class="review-avatar">A</div><div class="review-author-info"><h4>Amit Desai</h4><span>Purchased: Sofa Set</span></div></div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="mission">
+<div class="container">
+<div class="mission-grid">
+<div class="mission-content fade-in">
+<h2>Our Mission & Vision</h2>
+<div class="accent-line"></div>
+<p>We are driven by a singular purpose: to create furniture that enriches lives and spaces, while honoring the timeless traditions of woodworking and our responsibility to the planet.</p>
+<div class="mission-points">
+<div class="mission-point"><div class="num">1</div><div><h4>Uncompromising Quality</h4><p>Every piece that leaves our workshop meets the highest standards of construction, finish, and durability — built to be enjoyed for generations.</p></div></div>
+<div class="mission-point"><div class="num">2</div><div><h4>Customer-First Approach</h4><p>Your satisfaction guides every decision. From personalized consultations to after-sales care, we are committed to exceeding your expectations.</p></div></div>
+<div class="mission-point"><div class="num">3</div><div><h4>Sustainable Practices</h4><p>We responsibly source our timber, minimize waste through efficient craftsmanship, and plant trees to give back to the forests that inspire our art.</p></div></div>
+</div>
+</div>
+<div class="mission-img fade-in">
+<img src="https://images.unsplash.com/photo-1558618666-d0dec6e4c279?w=800&q=80" alt="Artisan hand-planing a piece of wood in the workshop">
+</div>
+</div>
+</div>
+</section>
+
+<section id="contact">
+<div class="container">
+<div class="section-header fade-in">
+<h2>Get in Touch</h2>
+<p>Visit our showroom on Grant Road or reach out — we would love to help you find the perfect piece</p>
+<div class="line"></div>
+</div>
+<div class="contact-grid">
+<div class="contact-form fade-in">
+<h3>Send Us a Message</h3>
+<form id="contactForm" onsubmit="handleSubmit(event)">
+<div class="form-row">
+<div class="form-group"><label for="name">Full Name</label><input type="text" id="name" placeholder="Your full name" required></div>
+<div class="form-group"><label for="email">Email Address</label><input type="email" id="email" placeholder="you@example.com" required></div>
+</div>
+<div class="form-row">
+<div class="form-group"><label for="phone">Phone Number</label><input type="tel" id="phone" placeholder="+91 XXXXX XXXXX" required></div>
+<div class="form-group"><label for="subject">Subject</label><input type="text" id="subject" placeholder="How can we help?" required></div>
+</div>
+<div class="form-group"><label for="message">Message</label><textarea id="message" placeholder="Tell us about the furniture you are looking for..." required></textarea></div>
+<button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Send Message <i class="fas fa-paper-plane"></i></button>
+<div class="success-msg" id="successMsg">Thank you! Your message has been sent successfully. We will get back to you shortly.</div>
+</form>
+</div>
+<div class="contact-info fade-in">
+<div class="contact-info-card"><div class="icon"><i class="fas fa-phone"></i></div><div><h4>Phone</h4><p>+91 98765 43210</p></div></div>
+<div class="contact-info-card"><div class="icon"><i class="fas fa-envelope"></i></div><div><h4>Email</h4><p>contact@artofwood.in</p></div></div>
+<div class="contact-info-card"><div class="icon"><i class="fas fa-map-marker-alt"></i></div><div><h4>Address</h4><p>Grant Road, Pune, Maharashtra, India</p></div></div>
+<div class="contact-info-card"><div class="icon"><i class="fas fa-clock"></i></div><div><h4>Showroom Hours</h4><p>Mon–Sat: 10 AM – 8 PM | Sun: 11 AM – 6 PM</p></div></div>
+<div class="map-container">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.0654600255657!2d73.83579767511486!3d18.51958778259651!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c066b3bd7f8f%3A0x4d4f4d8e4f4f4f4f!2sGrant%20Road%2C%20Pune!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Art of Wood location on Google Maps"></iframe>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<h3><i class="fas fa-tree"></i> Art of Wood</h3>
+<p>Premium handcrafted wooden furniture that brings warmth, character, and lasting beauty to every home. Visit our showroom on Grant Road, Pune.</p>
+<div class="social-links">
+<a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+<a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+<a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+<a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+<a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+</div>
+</div>
+<div class="footer-col">
+<h4>Quick Links</h4>
+<ul>
+<li><a href="#hero">Home</a></li>
+<li><a href="#about">About Us</a></li>
+<li><a href="#products">Products</a></li>
+<li><a href="#reviews">Reviews</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Categories</h4>
+<ul>
+<li><a href="#products">Sofas</a></li>
+<li><a href="#products">Beds</a></li>
+<li><a href="#products">Dining Tables</a></li>
+<li><a href="#products">Wardrobes</a></li>
+<li><a href="#products">Custom Furniture</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Contact Info</h4>
+<p><i class="fas fa-phone"></i> +91 98765 43210</p>
+<p><i class="fas fa-envelope"></i> contact@artofwood.in</p>
+<p><i class="fas fa-map-marker-alt"></i> Grant Road, Pune, Maharashtra</p>
+<p><i class="fas fa-clock"></i> Mon–Sat: 10 AM – 8 PM</p>
+</div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2026 Art of Wood. All Rights Reserved. | <span>Designed &amp; Developed by Champtrix Dev Studio</span></p>
+</div>
+</div>
+</footer>
+
+<button id="scroll-top" aria-label="Scroll to top"><i class="fas fa-chevron-up"></i></button>
+
+<div id="detailModal" style="display:none;position:fixed;inset:0;z-index:2000;align-items:center;justify-content:center;background:rgba(0,0,0,0.5);backdrop-filter:blur(4px)">
+<div style="background:var(--white);border-radius:var(--radius);padding:40px;max-width:480px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.2);position:relative">
+<button onclick="closeModal()" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:24px;color:var(--text-light);cursor:pointer;transition:var(--transition)" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-light)'">&times;</button>
+<i class="fas fa-couch" style="font-size:48px;color:var(--accent);margin-bottom:16px"></i>
+<h3 id="modalTitle" style="font-family:'Playfair Display',serif;font-size:24px;margin-bottom:12px"></h3>
+<p id="modalDesc" style="color:var(--text-light);line-height:1.7;margin-bottom:24px"></p>
+<a href="#contact" class="btn btn-primary" onclick="closeModal()" style="text-decoration:none">Enquire Now <i class="fas fa-arrow-right"></i></a>
+</div>
+</div>
+
+<script>
+window.addEventListener('load',function(){setTimeout(function(){document.getElementById('loader').classList.add('hidden')},1200)});
+
+const hamburger=document.getElementById('hamburger');
+const mobileMenu=document.getElementById('mobileMenu');
+const overlay=document.getElementById('overlay');
+function toggleMenu(){hamburger.classList.toggle('active');mobileMenu.classList.toggle('open');overlay.classList.toggle('active')}
+hamburger.addEventListener('click',toggleMenu);
+overlay.addEventListener('click',toggleMenu);
+mobileMenu.querySelectorAll('a').forEach(function(link){link.addEventListener('click',function(){if(mobileMenu.classList.contains('open'))toggleMenu()})});
+
+const navLinks=document.querySelectorAll('.nav-links a');
+const sections=document.querySelectorAll('section[id]');
+function updateActiveNav(){let scrollPos=window.scrollY+120;sections.forEach(function(section){if(section.offsetTop<=scrollPos&&section.offsetTop+section.offsetHeight>scrollPos){let id=section.getAttribute('id');navLinks.forEach(function(link){link.classList.remove('active');if(link.getAttribute('href')==='#'+id)link.classList.add('active')})}})}
+window.addEventListener('scroll',updateActiveNav);
+
+const fadeEls=document.querySelectorAll('.fade-in');
+const observer=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}})},{threshold:0.15,rootMargin:'0px 0px -40px 0px'});
+fadeEls.forEach(function(el){observer.observe(el)});
+
+const scrollTopBtn=document.getElementById('scroll-top');
+window.addEventListener('scroll',function(){if(window.scrollY>500){scrollTopBtn.classList.add('visible')}else{scrollTopBtn.classList.remove('visible')}});
+scrollTopBtn.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
+
+const productDescriptions={Sofas:'Our handcrafted sofas combine solid teak and rosewood frames with premium upholstery. Choose from a range of fabrics and leather options, customized to your living space.',Beds:'From king-size platform beds to elegant four-poster designs, our beds are crafted from the finest solid wood with meticulous attention to joinery and finish.','Dining Tables':'Gather around a table built for memories. Our dining tables feature stunning wood grains and robust construction, available in seating capacities from 4 to 12.',Wardrobes:'Maximize your storage with our intelligently designed wardrobes. Soft-close hardware, adjustable shelving, and premium finishes come standard.','TV Units':'Our entertainment units blend seamlessly into your decor while offering practical cable management, adjustable shelving, and concealed storage compartments.','Office Furniture':'Create a workspace that inspires productivity. Our desks, bookshelves, and filing cabinets bring warmth and professionalism to any office.','Modular Furniture':'Adaptable, scalable, and stylish — our modular systems grow with your needs. Perfect for dynamic spaces that demand flexibility.','Wooden Chairs':'From dining chairs to accent pieces, our chairs are sculpted for comfort and built to last using traditional joinery and ergonomically designed seating.','Coffee Tables':'The centerpiece of your living room deserves something special. Our coffee tables showcase exquisite wood grains and artisan finishing techniques.','Custom Furniture':'Have something unique in mind? Our bespoke service brings your vision to life. Collaborate with our designers and master craftsmen to create one-of-a-kind pieces.'};
+function showDetails(product){document.getElementById('modalTitle').textContent=product;document.getElementById('modalDesc').textContent=productDescriptions[product]||'Premium handcrafted furniture designed with care and built to last for generations.';document.getElementById('detailModal').style.display='flex'}
+function closeModal(){document.getElementById('detailModal').style.display='none'}
+document.getElementById('detailModal').addEventListener('click',function(e){if(e.target===this)closeModal()});
+
+function handleSubmit(e){e.preventDefault();var form=document.getElementById('contactForm');var successMsg=document.getElementById('successMsg');var name=document.getElementById('name').value.trim();var email=document.getElementById('email').value.trim();var phone=document.getElementById('phone').value.trim();var subject=document.getElementById('subject').value.trim();var message=document.getElementById('message').value.trim();if(!name||!email||!phone||!subject||!message){return}successMsg.classList.add('show');form.reset();setTimeout(function(){successMsg.classList.remove('show')},5000)}
+</script>
+</body>
+</html>
