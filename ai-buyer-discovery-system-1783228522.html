@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI-Powered International Buyer Discovery System - Enterprise SaaS Platform">
+    <title>AI Buyer Discovery | Champtrix Dev Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Navigation -->
+        <header class="top-nav" role="banner">
+            <div class="nav-left">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar" aria-expanded="true">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="logo">
+                    <svg class="logo-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                        <rect width="32" height="32" rx="8" fill="#2563EB"/>
+                        <path d="M8 12h16M8 16h12M8 20h8" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                    <span class="logo-text">Champtrix</span>
+                </div>
+                <span class="project-name">AI Buyer Discovery</span>
+            </div>
+            
+            <div class="nav-center">
+                <div class="search-wrapper" role="search">
+                    <i class="fas fa-search search-icon" aria-hidden="true"></i>
+                    <input type="search" class="global-search" id="globalSearch" placeholder="Search companies, countries, contacts..." aria-label="Global search">
+                    <div class="search-suggestions" id="searchSuggestions" role="listbox" aria-label="Search suggestions"></div>
+                </div>
+            </div>
+            
+            <div class="nav-right">
+                <button class="icon-btn" id="notificationBtn" aria-label="Notifications" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-bell" aria-hidden="true"></i>
+                    <span class="badge" id="notificationBadge">3</span>
+                </button>
+                <div class="dropdown-menu" id="notificationDropdown" role="menu" aria-label="Notifications">
+                    <div class="dropdown-header">
+                        <h4>Notifications</h4>
+                        <button class="mark-all-read" id="markAllRead">Mark all read</button>
+                    </div>
+                    <div class="dropdown-items" role="list">
+                        <div class="dropdown-item notification-item unread" role="menuitem">
+                            <div class="notification-icon success"><i class="fas fa-check-circle"></i></div>
+                            <div class="notification-content">
+                                <p class="notification-title">New qualified leads found</p>
+                                <p class="notification-time">5 minutes ago</p>
+                            </div>
+                        </div>
+                        <div class="dropdown-item notification-item unread" role="menuitem">
+                            <div class="notification-icon warning"><i class="fas fa-exclamation-triangle"></i></div>
+                            <div class="notification-content">
+                                <p class="notification-title">Export completed</p>
+                                <p class="notification-time">1 hour ago</p>
+                            </div>
+                        </div>
+                        <div class="dropdown-item notification-item" role="menuitem">
+                            <div class="notification-icon info"><i class="fas fa-info-circle"></i></div>
+                            <div class="notification-content">
+                                <p class="notification-title">Weekly report ready</p>
+                                <p class="notification-time">Yesterday</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dropdown-footer">
+                        <a href="#reports" class="view-all">View all notifications</a>
+                    </div>
+                </div>
+                
+                <button class="icon-btn" id="settingsBtn" aria-label="Settings" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-cog" aria-hidden="true"></i>
+                </button>
+                <div class="dropdown-menu" id="settingsDropdown" role="menu" aria-label="Settings">
+                    <div class="dropdown-header">
+                        <h4>Settings</h4>
+                    </div>
+                    <div class="dropdown-items" role="list">
+                        <a href="#settings" class="dropdown-item" role="menuitem"><i class="fas fa-user-cog"></i> Profile</a>
+                        <a href="#settings?tab=preferences" class="dropdown-item" role="menuitem"><i class="fas fa-sliders-h"></i> Preferences</a>
+                        <a href="#settings?tab=integrations" class="dropdown-item" role="menuitem"><i class="fas fa-plug"></i> Integrations</a>
+                        <a href="#settings?tab=billing" class="dropdown-item" role="menuitem"><i class="fas fa-credit-card"></i> Billing</a>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item danger" id="logoutBtn" role="menuitem"><i class="fas fa-sign-out-alt"></i> Sign out</button>
+                    </div>
+                </div>
+                
+                <div class="user-menu" id="userMenu">
+                    <button class="user-avatar-btn" id="userAvatarBtn" aria-label="User menu" aria-haspopup="true" aria-expanded="false">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah" alt="" class="user-avatar" aria-hidden="true">
+                        <span class="user-name">Sarah Chen</span>
+                        <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <div class="dropdown-menu user-dropdown" id="userDropdown" role="menu" aria-label="User menu">
+                        <div class="dropdown-header user-info">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah" alt="" class="user-avatar-large" aria-hidden="true">
+                            <div>
+                                <p class="user-name-large">Sarah Chen</p>
+                                <p class="user-email">sarah.chen@champtrix.com</p>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="#settings" class="dropdown-item" role="menuitem"><i class="fas fa-user"></i> Profile</a>
+                        <a href="#settings?tab=preferences" class="dropdown-item" role="menuitem"><i class="fas fa-cog"></i> Preferences</a>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item danger" id="logoutBtn2" role="menuitem"><i class="fas fa-sign-out-alt"></i> Sign out</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="main-layout">
+            <!-- Left Sidebar -->
+            <aside class="sidebar" id="sidebar" role="navigation" aria-label="Main navigation">
+                <nav class="sidebar-nav">
+                    <ul class="nav-list" role="list">
+                        <li class="nav-section">
+                            <span class="nav-section-title">MAIN</span>
+                        </li>
+                        <li>
+                            <a href="#dashboard" class="nav-link active" data-page="dashboard" role="menuitem">
+                                <i class="fas fa-tachometer-alt" aria-hidden="true"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#buyer-discovery" class="nav-link" data-page="buyer-discovery" role="menuitem">
+                                <i class="fas fa-compass" aria-hidden="true"></i>
+                                <span>Buyer Discovery</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#lead-database" class="nav-link" data-page="lead-database" role="menuitem">
+                                <i class="fas fa-database" aria-hidden="true"></i>
+                                <span>Lead Database</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#ai-qualification" class="nav-link" data-page="ai-qualification" role="menuitem">
+                                <i class="fas fa-brain" aria-hidden="true"></i>
+                                <span>AI Qualification</span>
+                            </a>
+                        </li>
+                        
+                        <li class="nav-section">
+                            <span class="nav-section-title">ANALYTICS</span>
+                        </li>
+                        <li>
+                            <a href="#reports" class="nav-link" data-page="reports" role="menuitem">
+                                <i class="fas fa-chart-bar" aria-hidden="true"></i>
+                                <span>Reports</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#exports" class="nav-link" data-page="exports" role="menuitem">
+                                <i class="fas fa-file-export" aria-hidden="true"></i>
+                                <span>Exports</span>
+                            </a>
+                        </li>
+                        
+                        <li class="nav-section">
+                            <span class="nav-section-title">SYSTEM</span>
+                        </li>
+                        <li>
+                            <a href="#integrations" class="nav-link" data-page="integrations" role="menuitem">
+                                <i class="fas fa-puzzle-piece" aria-hidden="true"></i>
+                                <span>Integrations</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#settings" class="nav-link" data-page="settings" role="menuitem">
+                                <i class="fas fa-cog" aria-hidden="true"></i>
+                                <span>Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="sidebar-footer">
+                    <div class="plan-info">
+                        <span class="plan-badge professional">Professional Plan</span>
+                        <a href="#settings?tab=billing" class="upgrade-link">Manage subscription</a>
+                    </div>
+                    <div class="version-info">
+                        <span>v2.4.1</span>
+                        <a href="#" class="help-link" target="_blank" rel="noopener">Help Center</a>
+                    </div>
+                </div>
+            </aside>
+            
+            <!-- Main Content -->
+            <main class="main-content" id="mainContent" role="main">
+                <!-- Page content will be rendered here by JavaScript -->
+            </main>
+            
+            <!-- Right AI Assistant Panel -->
+            <aside class="ai-panel" id="aiPanel" role="complementary" aria-label="AI Assistant">
+                <div class="ai-panel-header">
+                    <div class="ai-panel-title">
+                        <div class="ai-avatar" aria-hidden="true">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div>
+                            <h3>AI Assistant</h3>
+                            <span class="ai-status online" aria-label="AI is online"></span>
+                        </div>
+                    </div>
+                    <button class="icon-btn ai-close" id="aiCloseBtn" aria-label="Close AI Assistant">
+                        <i class="fas fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+                
+                <div class="ai-capabilities" role="region" aria-label="AI Capabilities">
+                    <h4>What I can help with</h4>
+                    <ul class="capability-list" role="list">
+                        <li class="capability-item" data-action="summarize">
+                            <i class="fas fa-file-alt" aria-hidden="true"></i>
+                            <span>Summarize selected company</span>
+                        </li>
+                        <li class="capability-item" data-action="explain">
+                            <i class="fas fa-question-circle" aria-hidden="true"></i>
+                            <span>Explain qualification reasoning</span>
+                        </li>
+                        <li class="capability-item" data-action="keywords">
+                            <i class="fas fa-key" aria-hidden="true"></i>
+                            <span>Suggest better keywords</span>
+                        </li>
+                        <li class="capability-item" data-action="countries">
+                            <i class="fas fa-globe" aria-hidden="true"></i>
+                            <span>Recommend additional countries</span>
+                        </li>
+                        <li class="capability-item" data-action="followup">
+                            <i class="fas fa-comments" aria-hidden="true"></i>
+                            <span>Generate follow-up ideas</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="ai-conversation" id="aiConversation" role="log" aria-live="polite" aria-label="Conversation">
+                    <div class="message ai-message">
+                        <div class="message-avatar" aria-hidden="true">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="message-content">
+                            <p>Hello! I'm your AI assistant for buyer discovery. Select a company from the dashboard or lead database, then ask me to analyze it, or choose one of the capabilities above.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ai-input-area">
+                    <div class="ai-suggestions" id="aiSuggestions" role="listbox" aria-label="Quick actions"></div>
+                    <form class="ai-input-form" id="aiInputForm">
+                        <textarea 
+                            class="ai-input" 
+                            id="aiInput" 
+                            placeholder="Ask me about a company, search strategy, or market insights..." 
+                            rows="1"
+                            aria-label="AI Assistant input"
+                        ></textarea>
+                        <button type="submit" class="btn btn-primary ai-send" aria-label="Send message">
+                            <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                        </button>
+                    </form>
+                </div>
+            </aside>
+        </div>
+    </div>
+    
+    <!-- Company Detail Modal -->
+    <div class="modal-overlay" id="companyModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+        <div class="modal modal-lg" role="document">
+            <div class="modal-header">
+                <h2 id="modalTitle">Company Details</h2>
+                <button class="icon-btn modal-close" id="modalClose" aria-label="Close modal">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content rendered by JS -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="modalCloseBtn">Close</button>
+                <button class="btn btn-primary" id="modalExportBtn">
+                    <i class="fas fa-download" aria-hidden="true"></i>
+                    Export Profile
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Loading Skeleton Overlay -->
+    <div class="loading-overlay" id="loadingOverlay" hidden aria-busy="true" aria-label="Loading">
+        <div class="spinner" aria-hidden="true"></div>
+        <p>Loading...</p>
+    </div>
+    
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer" aria-live="polite" aria-label="Notifications"></div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
