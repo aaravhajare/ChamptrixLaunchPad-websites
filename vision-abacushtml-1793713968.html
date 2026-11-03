@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Vision Abacus – Mental Arithmetic & Abacus Learning</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Vision Abacus offers structured abacus and mental arithmetic programs that build number sense, concentration and calculation speed for children.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>">
+
+<style>
+:root {
+  --color-primary: #1a2b4c;          /* deep navy */
+  --color-secondary: #3a7a89;        /* muted teal */
+  --color-bg: #f9fafb;               /* warm gray */
+  --color-white: #ffffff;
+  --color-text: #2b2b2b;             /* dark charcoal */
+  --radius: 6px;
+  --transition: 0.3s ease;
+  --max-width: 1200px;
+  --font-base: 'Inter', system-ui, sans-serif;
+}
+
+/* Reset & Base */
+*,
+*::before,
+*::after { box-sizing: border-box; margin:0; padding:0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-base);
+  line-height: 1.6;
+  color: var(--color-text);
+  background: var(--color-white);
+}
+
+/* Layout */
+.container {
+  width: 90%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* Header & Nav */
+header {
+  background: var(--color-white);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,.05);
+}
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 0;
+}
+.logo {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  gap: 1.2rem;
+}
+.nav-links a {
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.4rem;
+}
+.nav-links a:hover,
+.nav-links a:focus { color: var(--color-primary); outline: none; }
+.cta-btn {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
+}
+.cta-btn:hover,
+.cta-btn:focus {
+  background: var(--color-secondary);
+  outline: none;
+}
+
+/* Mobile Nav */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--color-white);
+    flex-direction: column;
+    width: 200px;
+    border: 1px solid #e5e5e5;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 8px rgba(0,0,0,.1);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition);
+  }
+  .nav-links.open { max-height: 500px; }
+  .menu-toggle { display: block; color: var(--color-primary); }
+}
+
+/* Hero */
+.hero {
+  background: var(--color-bg);
+  padding: 4rem 0;
+}
+.hero .grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+.hero h1 {
+  font-size: clamp(2rem,4vw,2.8rem);
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+.hero p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+.hero .buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.hero img {
+  width: 100%;
+  border-radius: var(--radius);
+}
+
+/* Sections */
+section {
+  padding: 4rem 0;
+}
+section:nth-child(even) { background: var(--color-bg); }
+h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-primary);
+  text-align: center;
+}
+.card-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+@media (min-width: 600px) {
+  .card-grid { grid-template-columns: repeat(2,1fr); }
+}
+@media (min-width: 900px) {
+  .card-grid { grid-template-columns: repeat(3,1fr); }
+}
+.card {
+  background: var(--color-white);
+  border: 1px solid #e5e5e5;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.card h3 { margin-bottom: 0.5rem; color: var(--color-primary); }
+.card p { flex-grow: 1; }
+.card .card-cta {
+  margin-top: 1rem;
+  align-self: flex-start;
+}
+
+/* Process */
+.process {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+@media (min-width: 768px) {
+  .process { flex-direction: row; }
+}
+.step {
+  flex:1;
+  text-align: center;
+}
+.step::before {
+  content: attr(data-step);
+  display: inline-block;
+  background: var(--color-primary);
+  color: var(--color-white);
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
+  border-radius: 50%;
+  margin-bottom: .5rem;
+  font-weight: 600;
+}
+
+/* FAQ Accordion */
+.accordion {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.accordion-item {
+  border-bottom: 1px solid #e5e5e5;
+}
+.accordion-button {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.accordion-button:hover,
+.accordion-button:focus { background: #f0f4f8; outline: none; }
+.accordion-button::after {
+  content: '+';
+  font-size: 1.2rem;
+  transition: var(--transition);
+}
+.accordion-button[aria-expanded="true"]::after { content: '-'; }
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition);
+  padding: 0 1rem;
+}
+.accordion-content p { padding: .5rem 0 1rem; }
+
+/* Contact Form */
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+}
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: .3rem;
+}
+input, textarea {
+  width: 100%;
+  padding: .6rem;
+  border: 1px solid #ccc;
+  border-radius: var(--radius);
+  font-family: inherit;
+}
+input:focus, textarea:focus {
+  border-color: var(--color-primary);
+  outline: none;
+}
+.error {
+  color: #b91c1c;
+  font-size: .9rem;
+}
+
+/* Footer */
+footer {
+  background: var(--color-primary);
+  color: var(--color-white);
+  padding: 2rem 0;
+  font-size: .9rem;
+}
+footer a {
+  color: var(--color-white);
+  text-decoration: underline;
+}
+footer .footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 1.5rem;
+}
+footer .brand { font-size: 1.2rem; font-weight: 600; margin-bottom: .5rem; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="container" aria-label="Main navigation">
+    <a href="#" class="logo">Vision Abacus</a>
+    <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="Toggle menu">
+      ☰
+    </button>
+    <ul class="nav-links" id="primary-menu">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#benefits">Benefits</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#contact" class="cta-btn">Enquire Now</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div class="container grid">
+      <div>
+        <h1>Empower Your Child with Mental Arithmetic</h1>
+        <p>Structured abacus training builds number sense, concentration, and calculation speed—skills that last a lifetime.</p>
+        <div class="buttons">
+          <a href="#contact" class="cta-btn">Enquire Now</a>
+          <a href="#programs" class="cta-btn" style="background:#3a7a89;">Explore Our Programs</a>
+        </div>
+      </div>
+      <div>
+        <img src="https://images.unsplash.com/photo-1603529605042-2f2aab5b3a90?w=800&auto=format&fit=crop" alt="Children learning with an abacus">
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <h2>About Vision Abacus</h2>
+      <p>Vision Abacus provides a systematic approach to abacus and mental arithmetic education. Through regular practice, students develop stronger concentration, enhanced number sense, and faster mental calculation abilities.</p>
+    </div>
+  </section>
+
+  <!-- Programs -->
+  <section id="programs">
+    <div class="container">
+      <h2>Our Programs</h2>
+      <div class="card-grid">
+        <!-- Placeholder Program Cards -->
+        <div class="card">
+          <h3>Beginner Abacus</h3>
+          <p>Designed for children aged 5‑7, this program introduces the basic concepts of the abacus and simple calculations.</p>
+          <ul>
+            <li>Understanding place value</li>
+            <li>Basic addition & subtraction</li>
+            <li>Developing hand‑eye coordination</li>
+          </ul>
+          <a href="#contact" class="cta-btn card-cta">Enquire</a>
+        </div>
+        <div class="card">
+          <h3>Intermediate Abacus</h3>
+          <p>For ages 8‑10, focusing on more complex operations and mental visualization techniques.</p>
+          <ul>
+            <li>Multiplication & division</li>
+            <li>Speed drills</li>
+            <li>Introduction to mental arithmetic</li>
+          </ul>
+          <a href="#contact" class="cta-btn card-cta">Enquire</a>
+        </div>
+        <div class="card">
+          <h3>Advanced Mental Math</h3>
+          <p>Targeted at ages 11‑14, emphasizing rapid mental calculation without the physical abacus.</p>
+          <ul>
+            <li>Large number operations</li>
+            <li>Problem‑solving strategies</li>
+            <li>Preparation for competitions</li>
+          </ul>
+          <a href="#contact" class="cta-btn card-cta">Enquire</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section id="benefits">
+    <div class="container">
+      <h2>Benefits of Abacus Learning</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Improved Number Sense</h3>
+          <p>Children develop a deeper intuitive understanding of numbers and their relationships.</p>
+        </div>
+        <div class="card">
+          <h3>Enhanced Concentration</h3>
+          <p>Focused practice strengthens attention span and reduces distractibility.</p>
+        </div>
+        <div class="card">
+          <h3>Faster Calculation Speed</h3>
+          <p>Regular drills lead to quicker mental arithmetic, beneficial across subjects.</p>
+        </div>
+        <div class="card">
+          <h3>Boosted Confidence</h3>
+          <p>Mastering challenging tasks builds self‑esteem and a growth mindset.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Learning Experience -->
+  <section id="process">
+    <div class="container">
+      <h2>Learning Journey</h2>
+      <div class="process">
+        <div class="step" data-step="1">
+          <h3>Guided Instruction</h3>
+          <p>Qualified teachers demonstrate techniques and monitor progress.</p>
+        </div>
+        <div class="step" data-step="2">
+          <h3>Hands‑On Practice</h3>
+          <p>Students practice on the abacus, reinforcing concepts through tactile learning.</p>
+        </div>
+        <div class="step" data-step="3">
+          <h3>Mental Visualization</h3>
+          <p>Gradual transition from the physical abacus to mental calculations.</p>
+        </div>
+        <div class="step" data-step="4">
+          <h3>Regular Revision</h3>
+          <p>Periodic reviews ensure retention and skill refinement.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+      <div class="accordion" role="region" aria-labelledby="faq-heading">
+        <div class="accordion-item">
+          <button class="accordion-button" aria-expanded="false">What is abacus learning?</button>
+          <div class="accordion-content" aria-hidden="true">
+            <p>Abacus learning uses a physical counting frame to teach fundamental arithmetic concepts, which later transition to mental calculation.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-button" aria-expanded="false">How does a program work?</button>
+          <div class="accordion-content" aria-hidden="true">
+            <p>Classes combine teacher‑led demonstrations, guided practice on the abacus, and progressive mental math exercises.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-button" aria-expanded="false">Who can enrol?</button>
+          <div class="accordion-content" aria-hidden="true">
+            <p>Our programs are open to children aged 5‑14. Parents can discuss the best entry level with our team.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-button" aria-expanded="false">How can I enquire about classes?</button>
+          <div class="accordion-content" aria-hidden="true">
+            <p>Fill out the enquiry form below or call us directly. We'll respond within 24 hours.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-button" aria-expanded="false">What materials are required?</button>
+          <div class="accordion-content" aria-hidden="true">
+            <p>We provide each student with a personal abacus during the course. No additional materials are needed.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form -->
+  <section id="contact">
+    <div class="container">
+      <h2>Enquire Now</h2>
+      <form id="enquiry-form" novalidate>
+        <div>
+          <label for="name">Parent / Guardian Name</label>
+          <input type="text" id="name" name="name" required aria-required="true">
+          <span class="error" id="err-name"></span>
+        </div>
+        <div>
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" required aria-required="true" pattern="[0-9]{10,
