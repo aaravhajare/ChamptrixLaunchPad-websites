@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Northbrew Coffee – Premium Artisan Coffee</title>
+  <meta name="description" content="Northbrew Coffee offers meticulously sourced beans and expertly crafted blends for discerning coffee lovers.">
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <style>
+    :root {
+      --color-bg: #faf8f5;
+      --color-primary: #3e2723; /* charcoal */
+      --color-secondary: #5d4037; /* muted brown */
+      --color-accent: #8d6e63; /* coffee tone */
+      --color-white: #fff;
+      --font-base: 'Inter', system-ui, sans-serif;
+      --radius: 6px;
+      --transition: 0.3s ease;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
+    body {
+      font-family: var(--font-base);
+      line-height: 1.6;
+      background: var(--color-bg);
+      color: var(--color-primary);
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font-family: inherit; }
+    h1,h2,h3,h4 { line-height: 1.2; margin-bottom: .5em; }
+    p { margin-bottom: 1em; }
+    .container { width: min(90%, 1200px); margin: auto; }
+
+    /* Header */
+    header {
+      background: var(--color-white);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0,0,0,.05);
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+    .logo { font-size: 1.5rem; font-weight: 700; color: var(--color-primary); }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a { font-weight: 500; position:relative; }
+    .nav-links a::after {
+      content:"";
+      position:absolute;
+      left:0; bottom:-2px;
+      width:0; height:2px;
+      background:var(--color-accent);
+      transition:width var(--transition);
+    }
+    .nav-links a:hover::after,
+    .nav-links a:focus::after { width:100%; }
+    .cta-btn {
+      background: var(--color-accent);
+      color: var(--color-white);
+      border:none;
+      padding:.6rem 1.2rem;
+      border-radius: var(--radius);
+      cursor:pointer;
+      transition:background var(--transition);
+    }
+    .cta-btn:hover,.cta-btn:focus{background:#6d4c41;}
+
+    /* Mobile Menu */
+    .menu-toggle{display:none;}
+    .menu-icon{
+      display:none;
+      flex-direction:column;
+      gap:4px;
+      cursor:pointer;
+    }
+    .menu-icon span{
+      width:24px;
+      height:2px;
+      background:var(--color-primary);
+    }
+    @media (max-width:768px){
+      .nav-links{display:none;flex-direction:column;background:var(--color-white);position:absolute;top:100%;right:0;width:200px;padding:1rem;box-shadow:0 4px 8px rgba(0,0,0,.1);}
+      .menu-toggle:checked ~ .nav-links{display:flex;}
+      .menu-icon{display:flex;}
+    }
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:4rem 0;}
+    .hero-text{max-width:500px;}
+    .hero h1{font-size:2.5rem;color:var(--color-primary);}
+    .hero .btn-group{display:flex;gap:1rem;margin-top:1.5rem;}
+    .hero .btn-primary{
+      background:var(--color-primary);
+      color:var(--color-white);
+      border:none;
+      padding:.8rem 1.5rem;
+      border-radius:var(--radius);
+      cursor:pointer;
+      transition:background var(--transition);
+    }
+    .hero .btn-primary:hover,.hero .btn-primary:focus{background:#212121;}
+    .hero .btn-secondary{
+      background:transparent;
+      color:var(--color-primary);
+      border:2px solid var(--color-primary);
+      padding:.7rem 1.4rem;
+      border-radius:var(--radius);
+      cursor:pointer;
+      transition:background var(--transition),color var(--transition);
+    }
+    .hero .btn-secondary:hover,.hero .btn-secondary:focus{
+      background:var(--color-primary);
+      color:var(--color-white);
+    }
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr;padding:3rem 0;}
+    }
+    @media (max-width:600px){
+      .hero h1{font-size:2rem;}
+    }
+
+    /* Section Common */
+    section{padding:4rem 0;}
+    .section-title{font-size:2rem;margin-bottom:2rem;text-align:center;color:var(--color-primary);}
+
+    /* Featured Products */
+    .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;}
+    .product-card{
+      background:var(--color-white);
+      border-radius:var(--radius);
+      overflow:hidden;
+      box-shadow:0 2px 8px rgba(0,0,0,.07);
+      transition:transform var(--transition),box-shadow var(--transition);
+    }
+    .product-card:hover,.product-card:focus-within{
+      transform:translateY(-4px);
+      box-shadow:0 6px 12px rgba(0,0,0,.12);
+    }
+    .product-card img{
+      height:200px;
+      object-fit:cover;
+      width:100%;
+    }
+    .product-info{padding:1rem;}
+    .product-info h3{margin-bottom:.5rem;color:var(--color-secondary);}
+    .product-info p{font-size:.9rem;margin-bottom:.8rem;}
+    .price{font-weight:700;color:var(--color-primary);}
+    .product-card button{
+      margin-top:.8rem;
+      width:100%;
+      background:var(--color-accent);
+      color:var(--color-white);
+      border:none;
+      padding:.6rem;
+      border-radius:var(--radius);
+      cursor:pointer;
+      transition:background var(--transition);
+    }
+    .product-card button:hover,.product-card button:focus{background:#5d4037;}
+
+    /* Philosophy */
+    .philosophy{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;}
+    .philosophy img{border-radius:var(--radius);height:100%;object-fit:cover;}
+    @media(max-width:800px){.philosophy{grid-template-columns:1fr;}}
+    
+    /* Brewing Process */
+    .process{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;}
+    .step{
+      background:var(--color-white);
+      padding:2rem;
+      border-radius:var(--radius);
+      flex:1 1 250px;
+      text-align:center;
+      box-shadow:0 2px 6px rgba(0,0,0,.05);
+    }
+    .step-number{
+      font-size:2rem;
+      font-weight:700;
+      color:var(--color-accent);
+      margin-bottom:.5rem;
+    }
+
+    /* Testimonials */
+    .testimonials{display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
+    .testimonial{
+      background:var(--color-white);
+      padding:1.5rem;
+      border-radius:var(--radius);
+      box-shadow:0 2px 6px rgba(0,0,0,.05);
+    }
+    .testimonial p{font-style:italic;margin-bottom:.8rem;}
+    .testimonial .author{font-weight:600;color:var(--color-secondary);font-size:.95rem;}
+
+    /* FAQ */
+    .faq-item{border-bottom:1px solid #e0e0e0;}
+    .faq-question{
+      width:100%;
+      text-align:left;
+      background:none;
+      border:none;
+      padding:1rem 0;
+      font-size:1rem;
+      font-weight:500;
+      cursor:pointer;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .faq-question:focus{outline:2px solid var(--color-accent);}
+    .faq-answer{
+      max-height:0;
+      overflow:hidden;
+      transition:max-height var(--transition);
+    }
+    .faq-item.open .faq-answer{max-height:200px;padding-bottom:1rem;}
+    .faq-icon{transition:transform var(--transition);}
+    .faq-item.open .faq-icon{transform:rotate(180deg);}
+
+    /* Contact */
+    .contact-form{
+      background:var(--color-white);
+      max-width:600px;
+      margin:auto;
+      padding:2rem;
+      border-radius:var(--radius);
+      box-shadow:0 2px 8px rgba(0,0,0,.07);
+    }
+    .form-group{margin-bottom:1rem;}
+    .form-group label{
+      display:block;
+      margin-bottom:.4rem;
+      font-weight:500;
+    }
+    .form-group input,
+    .form-group textarea{
+      width:100%;
+      padding:.6rem;
+      border:1px solid #ccc;
+      border-radius:var(--radius);
+      font-size:1rem;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus{
+      outline:none;
+      border-color:var(--color-accent);
+    }
+    .error{color:#c62828;font-size:.85rem;margin-top:.3rem;}
+    .submit-btn{
+      background:var(--color-primary);
+      color:var(--color-white);
+      border:none;
+      padding:.8rem 1.5rem;
+      border-radius:var(--radius);
+      cursor:pointer;
+      transition:background var(--transition);
+    }
+    .submit-btn:hover,.submit-btn:focus{background:#212121;}
+
+    /* Footer */
+    footer{
+      background:#212121;
+      color:#ddd;
+      padding:2rem 0;
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:1.5rem;
+    }
+    .footer a{color:#bbb;}
+    .footer a:hover{color:#fff;}
+    .social-icons{display:flex;gap:.8rem;}
+    .social-icons a{font-size:1.2rem;}
+    .copy{text-align:center;margin-top:1.5rem;font-size:.85rem;color:#aaa;}
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition:none !important; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header / Navigation -->
+  <header>
+    <div class="container nav">
+      <div class="logo">Northbrew Coffee</div>
+      <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-label="Toggle navigation">
+      <label for="menu-toggle" class="menu-icon" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </label>
+      <nav class="nav-links" role="navigation" aria-label="Main">
+        <a href="#home">Home</a>
+        <a href="#products">Our Coffee</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <button class="cta-btn" onclick="scrollToSection('contact')">Enquire Now</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="hero container">
+    <div class="hero-text">
+      <h1>Elevate Your Daily Ritual</h1>
+      <p>Crafted from responsibly sourced beans, Northbrew Coffee delivers a nuanced palate that awakens the senses. Experience the art of coffee, perfected.</p>
+      <div class="btn-group">
+        <button class="btn-primary" onclick="scrollToSection('products')">Explore Our Coffee</button>
+        <button class="btn-secondary" onclick="scrollToSection('contact')">Enquire Now</button>
+      </div>
+    </div>
+    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=85"
+         alt="Steaming cup of coffee on a wooden table" loading="lazy" style="border-radius:var(--radius);">
+  </section>
+
+  <!-- About / Philosophy -->
+  <section id="about" class="philosophy container">
+    <img src="https://images.unsplash.com/photo-1511925472404-2e4d2b5c7f4e?auto=format&fit=crop&w=1200&q=85"
+         alt="Coffee beans spread on a burlap sack" loading="lazy">
+    <div>
+      <h2 class="section-title">Our Philosophy</h2>
+      <p>At Northbrew, we believe that great coffee begins with great relationships — with farmers, roasters, and our customers. Every batch is a dialogue between terroir and technique, resulting in a cup that tells a story.</p>
+      <p>We source beans from small‑scale farms that practice sustainable cultivation, then roast them in small batches to preserve the nuanced flavors unique to each origin.</p>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section id="products" class="container">
+    <h2 class="section-title">Featured Coffees</h2>
+    <div class="products">
+      <article class="product-card">
+        <img src="https://images.unsplash.com/photo-1527512575302-0e1c0f9e1c7b?auto=format&fit=crop&w=800&q=85"
+             alt="Bag of Northbrew Ethiopian Light Roast" loading="lazy">
+        <div class="product-info">
+          <h3>Ethiopian Light Roast</h3>
+          <p>Floral notes with a bright citrus finish, ideal for pour‑over enthusiasts.</p>
+          <div class="price">$18 / 250g</div>
+          <button type="button">Add to Enquiry</button>
+        </div>
+      </article>
+      <article class="product-card">
+        <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=85"
+             alt="Bag of Northbrew Colombian Medium Roast" loading="lazy">
+        <div class="product-info">
+          <h3>Colombian Medium Roast</h3>
+          <p>Balanced body with chocolate undertones, perfect for espresso or drip.</p>
+          <div class="price">$20 / 250g</div>
+          <button type="button">Add to Enquiry</button>
+        </div>
+      </article>
+      <article class="product-card">
+        <img src="https://images.unsplash.com/photo-1585158538630-5c8f9e4a6d87?auto=format&fit=crop&w=800&q=85"
+             alt="Bag of Northbrew Sumatra Dark Roast" loading="lazy">
+        <div class="product-info">
+          <h3>Sumatra Dark Roast</h3>
+          <p>Rich, earthy depth with a lingering spice, suited for French press.</p>
+          <div class="price">$22 / 250g</div>
+          <button type="button">Add to Enquiry</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Brewing Process -->
+  <section class="container">
+    <h2 class="section-title">Brewing Process</h2>
+    <div class="process">
+      <div class="step">
+        <div class="step-number">01</div>
+        <h4>Measure & Grind</h4>
+        <p>Use a scale for precision and grind beans to match your brewing method.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">02</div>
+        <h4>Bloom & Brew</h4>
+        <p>Allow the coffee to bloom, then brew with water at 93‑96°C for optimal extraction.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">03</div>
+        <h4>Enjoy & Savor</h4>
+        <p>Serve immediately, appreciate the aroma, and enjoy the nuanced flavors.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="container">
+    <h2 class="section-title">What Our Clients Say</h2>
+    <div class="testimonials">
+      <div class="testimonial">
+        <p>“Northbrew’s Ethiopian light roast transformed my morning ritual – bright, clean, and wonderfully aromatic.”</p>
+        <div class="author">— Maya L., Designer</div>
+      </div>
+      <div class="testimonial">
+        <p>“The consistency of the Colombian medium roast is perfect for my espresso machine. No bitterness, just pure balance.”</p>
+        <div class="author">— Ethan R., Barista</div>
+      </div>
+      <div class="testimonial">
+        <p>“I love the depth of the Sumatra dark roast; it’s the go‑to for my weekend French press.”</p>
+        <div class="author">— Priya K., Writer</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="container">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>What is the best storage method for coffee beans?</span>
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer" aria-hidden="true">
+          <p>Store beans in an airtight container away from light, heat, and moisture. Use within two weeks of opening for peak freshness.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>Do you ship internationally?</span>
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer" aria-hidden="true">
+          <p>Yes, we ship to most countries using reliable couriers. Shipping costs are calculated at checkout.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>Can I request a custom roast profile?</span>
+          <span class="faq-icon">▼</span>
+        </button>
+        <div class="faq-answer" aria-hidden="true">
+          <p>Absolutely! Contact us with your preferences, and we’ll work together to craft a roast that matches your taste.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form -->
+  <section id="contact" class="container">
+    <h2 class="section-title">Get In Touch</h2>
+    <form class="contact-form" novalidate>
+      <div class="form-group">
+        <label for="name">Name *</label>
+        <input type="text" id="name" required>
+        <div class="error" id="error-name"></div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" id="email" required>
+        <div class="error" id="error-email"></div>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone *</label>
+        <input type="tel" id="phone" placeholder="e.g., +1 555 123 4567" required>
+        <div class="error" id="error-phone"></div>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" rows="4"></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Send Enquiry</button>
+      <div class="error" id="form-success" style="color:#2e7d32;margin-top:1rem;"></div>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <h4>Northbrew Coffee</h4>
+        <p>Premium Artisan Coffee</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul style="list-style:none;">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#products">Our Coffee</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p>Email: <a href="mailto:info@northbrew.coffee">info@northbrew.coffee</a></p>
+        <p>Phone: <a href="tel:+1234567890">+1 234 567 890</a></p>
+      </div>
+      <div>
+        <h4>Follow Us</h4>
+        <div class="social-icons">
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="Twitter">🐦</a>
+          <a href="#" aria-label="LinkedIn">🔗</a>
+        </div>
+      </div>
+    </div>
+    <div class="copy">© 2026 Northbrew Coffee. All rights reserved.</div>
+  </footer>
+
+  <script>
+    // Smooth scroll helper
+    function scrollToSection(id){
+      document.getElementById(id).scrollIntoView({behavior:'smooth'});
+    }
+
+    // FAQ accordion logic
+    document.querySelectorAll('.faq-question').forEach(btn=>{
+      btn.addEventListener('click',()=> {
+        const item = btn.parentElement;
+        const isOpen = item.classList.toggle('open');
+        btn.setAttribute('aria-expanded', isOpen);
+        const answer = item.querySelector('.faq-answer');
+        answer.setAttribute('aria-hidden', !isOpen);
+      });
+    });
+
+    // Form validation
+    const form = document.querySelector('.contact-form');
+    form.addEventListener('submit', e=>{
+      e.preventDefault();
+      let valid = true;
+
+      const name = document.getElementById('name');
+      const email = document.getElementById('email');
+      const phone = document.getElementById('phone');
+
+      // Simple helper to show errors
+      const setError = (elem, msg)=>{
+        document.getElementById('error-'+elem.id).textContent = msg;
+        valid = false;
+      };
+      const clearError = (elem)=>{ document.getElementById('error-'+elem.id).textContent=''; };
+
+      // Name validation
+      if(name.value.trim()===''){ setError(name,'Name is required'); } else { clearError(name); }
+
+      // Email validation
+      const emailPattern = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+      if(email.value.trim()===''){ setError(email,'Email is required'); }
+      else if(!emailPattern.test(email.value.trim())){ setError(email,'Enter a valid email'); }
+      else { clearError(email); }
+
+      // Phone validation (basic)
+      const phonePattern = /^[+\\d]?[0-9\\s\\-().]{7,}$/;
+      if(phone.value.trim()===''){ setError(phone,'Phone is required'); }
+      else if(!phonePattern.test(phone.value.trim())){ setError(phone,'Enter a valid phone number'); }
+      else { clearError(phone); }
+
+      if(valid){
+        // In a real site we'd POST to a backend. Here we just show a message.
+        document.getElementById('form-success').textContent = 'Thank you! Your enquiry has been received.';
+        form.reset();
+      }
+    });
+  </script>
+</body>
+</html>
