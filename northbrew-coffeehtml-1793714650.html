@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Northbrew Coffee – Premium Coffee Brand</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Experience the art of premium coffee with Northbrew. Hand‑selected beans, meticulous brewing, and a philosophy that honors the craft.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕</text></svg>">
+
+<style>
+:root {
+  --color-bg: #faf8f5;
+  --color-foreground: #2b2b2b;
+  --color-primary: #4a2c2a;
+  --color-accent: #7a5c4c;
+  --color-muted: #8a8a8a;
+  --font-base: 'Inter', system-ui, sans-serif;
+  --radius: 6px;
+  --transition: 0.2s ease;
+}
+
+/* Reset & base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  font-family: var(--font-base);
+  color: var(--color-foreground);
+  background: var(--color-bg);
+  line-height: 1.6;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+button {
+  cursor: pointer;
+  border: none;
+  font: inherit;
+}
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Layout helpers */
+.container {
+  width: min(90%, 1200px);
+  margin-inline: auto;
+  padding-block: 2rem;
+}
+.section {
+  padding-block: 4rem 2rem;
+}
+.flex {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.grid {
+  display: grid;
+  gap: 2rem;
+}
+.text-center { text-align: center; }
+.mt-2 { margin-top: 2rem; }
+.mt-4 { margin-top: 4rem; }
+.mb-2 { margin-bottom: 2rem; }
+.mb-4 { margin-bottom: 4rem; }
+
+/* Header & Nav */
+header {
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 1px 4px rgba(0,0,0,.05);
+}
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+nav .logo {
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--color-primary);
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+}
+nav a {
+  font-weight: 500;
+  color: var(--color-foreground);
+}
+nav a:hover,
+nav a:focus {
+  color: var(--color-primary);
+}
+nav .cta {
+  background: var(--color-primary);
+  color: white;
+  padding: .5rem 1rem;
+  border-radius: var(--radius);
+  transition: background var(--transition);
+}
+nav .cta:hover,
+nav .cta:focus {
+  background: var(--color-accent);
+}
+
+/* Mobile menu */
+#mobile-menu {
+  display: none;
+}
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+}
+@media (max-width: 768px) {
+  .menu-toggle { display: block; }
+  nav ul {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    flex-direction: column;
+    padding: 1rem;
+    border-top: 1px solid #eaeaea;
+    display: none;
+  }
+  nav ul.show {
+    display: flex;
+  }
+}
+
+/* Hero */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  min-height: 70vh;
+}
+.hero-img {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+}
+.hero-img::before {
+  content: "";
+  display: block;
+  padding-top: 75%;
+}
+.hero-img img {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+}
+.hero-text h1 {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  margin: 0 0 .5rem;
+  color: var(--color-primary);
+}
+.hero-text p {
+  font-size: 1.125rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-muted);
+}
+.hero .btn {
+  display: inline-block;
+  padding: .75rem 1.5rem;
+  border-radius: var(--radius);
+  background: var(--color-primary);
+  color: white;
+  margin-right: .75rem;
+  transition: background var(--transition);
+}
+.hero .btn:hover,
+.hero .btn:focus {
+  background: var(--color-accent);
+}
+
+/* Featured Products */
+.products {
+  text-align: center;
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+}
+.product-card {
+  background: white;
+  border: 1px solid #eaeaea;
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.product-card:hover,
+.product-card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+}
+.product-card img {
+  height: 180px;
+  object-fit: cover;
+}
+.product-card .content {
+  padding: 1rem;
+}
+.product-card h3 {
+  margin: 0 0 .5rem;
+  font-size: 1.2rem;
+  color: var(--color-primary);
+}
+.product-card p {
+  margin: 0 0 .75rem;
+  font-size: .95rem;
+  color: var(--color-muted);
+}
+.product-card .price {
+  font-weight: 600;
+  margin-bottom: .75rem;
+}
+.product-card .btn {
+  background: var(--color-primary);
+  color: white;
+  padding: .5rem 1rem;
+  border-radius: var(--radius);
+  font-size: .9rem;
+  transition: background var(--transition);
+}
+.product-card .btn:hover,
+.product-card .btn:focus {
+  background: var(--color-accent);
+}
+
+/* Philosophy */
+.philosophy {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+
+/* Brewing Process */
+.process {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+}
+.step {
+  background: white;
+  border: 1px solid #eaeaea;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  text-align: center;
+  transition: background var(--transition);
+}
+.step:hover,
+.step:focus-within {
+  background: #f9f9f9;
+}
+.step-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: .5rem;
+}
+.step h4 {
+  margin: .5rem 0;
+}
+
+/* Testimonials */
+.testimonials {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 2rem;
+}
+.testimonial {
+  margin-bottom: 2rem;
+}
+.testimonial p {
+  font-style: italic;
+  margin-bottom: .5rem;
+}
+.testimonial .author {
+  font-weight: 600;
+}
+
+/* FAQ Accordion */
+.faq .accordion {
+  border-top: 1px solid #eaeaea;
+}
+.faq .question {
+  width: 100%;
+  text-align: left;
+  padding: 1rem;
+  background: #f5f5f5;
+  border: none;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.faq .question:hover,
+.faq .question:focus {
+  background: #eaeaea;
+}
+.faq .answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition);
+  background: white;
+  padding: 0 1rem;
+}
+.faq .answer.open {
+  max-height: 200px; /* enough for content */
+  padding: 1rem;
+}
+
+/* Contact Form */
+.contact-form {
+  max-width: 600px;
+  margin-inline: auto;
+  background: white;
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+.contact-form label {
+  display: block;
+  margin-bottom: .25rem;
+  font-weight: 500;
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: .5rem;
+  border: 1px solid #ccc;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  font: inherit;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--color-primary);
+  outline: none;
+}
+.contact-form .error {
+  color: #c00;
+  font-size: .9rem;
+  margin-top: -.75rem;
+  margin-bottom: .75rem;
+}
+.contact-form button {
+  background: var(--color-primary);
+  color: white;
+  padding: .75rem 1.5rem;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  transition: background var(--transition);
+}
+.contact-form button:hover,
+.contact-form button:focus {
+  background: var(--color-accent);
+}
+
+/* Footer */
+footer {
+  background: #2b2b2b;
+  color: #eaeaea;
+  padding: 2rem 0;
+  font-size: .9rem;
+}
+footer a { color: #eaeaea; }
+footer .footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0s !important;
+    animation-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .hero-img {
+    order: -1;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="container">
+    <div class="logo">Northbrew Coffee</div>
+    <button class="menu-toggle" aria-label="Toggle menu" aria-controls="primary-menu" aria-expanded="false">&#9776;</button>
+    <ul id="primary-menu">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#products">Our Coffee</a></li>
+      <li><a href="#philosophy">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a class="cta" href="#contact">Enquire Now</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <!-- Hero -->
+  <section id="home" class="hero container">
+    <div class="hero-text">
+      <h1>Crafted for the Connoisseur</h1>
+      <p>At Northbrew we source, roast and brew coffee with an uncompromising respect for the bean. Discover the subtle notes of our premium blends.</p>
+      <a href="#contact" class="btn">Enquire Now</a>
+      <a href="#products" class="btn">Explore Our Coffee</a>
+    </div>
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1511925474378-0a2e5e0f5b8f?auto=format&fit=crop&w=1200&q=85" alt="Barista pouring coffee into a cup" loading="eager">
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section id="products" class="section products container">
+    <h2 class="text-center mb-4">Featured Coffees</h2>
+    <div class="product-grid">
+      <article class="product-card" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=800&q=85" alt="A cup of dark roast coffee with crema" loading="lazy">
+        <div class="content">
+          <h3>Midnight Roast</h3>
+          <p>Deep, velvety notes with a lingering chocolate finish.</p>
+          <div class="price">$18 / 250g</div>
+          <button class="btn">Add to Enquiry</button>
+        </div>
+      </article>
+      <article class="product-card" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1509042239860-2f1d6b5f0a74?auto=format&fit=crop&w=800&q=85" alt="Light roasted coffee beans in a wooden bowl" loading="lazy">
+        <div class="content">
+          <h3>Sunrise Blend</h3>
+          <p>Bright citrus hints balanced by a smooth body.</p>
+          <div class="price">$16 / 250g</div>
+          <button class="btn">Add to Enquiry</button>
+        </div>
+      </article>
+      <article class="product-card" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?auto=format&fit=crop&w=800&q=85" alt="Espresso shot in a demitasse cup" loading="lazy">
+        <div class="content">
+          <h3>Espresso Intenso</h3>
+          <p>Rich, full‑bodied espresso perfect for a powerful start.</p>
+          <div class="price">$20 / 250g</div>
+          <button class="btn">Add to Enquiry</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Philosophy -->
+  <section id="philosophy" class="section philosophy container">
+    <h2 class="text-center mb-4">Our Philosophy</h2>
+    <p>We believe coffee is an art form. From the careful selection of beans grown in sustainable farms to the meticulous roasting process, every step is guided by respect for flavor, aroma, and the people behind each harvest. Our roasters work closely with growers to ensure consistency, while our baristas perfect the extraction to deliver a cup that tells a story.</p>
+  </section>
+
+  <!-- Brewing Process -->
+  <section id="process" class="section container">
+    <h2 class="text-center mb-4">The Northbrew Brewing Process</h2>
+    <div class="process">
+      <div class="step" tabindex="0">
+        <div class="step-number">01</div>
+        <h4>Selection</h4>
+        <p>Only beans from ethically‑certified farms are chosen.</p>
+      </div>
+      <div class="step" tabindex="0">
+        <div class="step-number">02</div>
+        <h4>Roasting</h4>
+        <p>Small‑batch roasting preserves the unique flavor profile.</p>
+      </div>
+      <div class="step" tabindex="0">
+        <div class="step-number">03</div>
+        <h4>Brewing</h4>
+        <p>Precision brewing extracts the perfect balance of aroma and taste.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="section testimonials container">
+    <h2 class="text-center mb-4">What Our Customers Say</h2>
+    <div class="testimonial">
+      <p>“Northbrew’s Midnight Roast is the perfect companion for my late‑night coding sessions. Smooth, bold, and never bitter.”</p>
+      <div class="author">— Alex P., Software Engineer</div>
+    </div>
+    <div class="testimonial">
+      <p>“I love the Sunrise Blend. It’s bright enough to wake me up but gentle on the palate.”</p>
+      <div class="author">— Maya L., Graphic Designer</div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section faq container">
+    <h2 class="text-center mb-4">Frequently Asked Questions</h2>
+    <div class="accordion">
+      <button class="question" aria-expanded="false">What is the difference between light and dark roast?<span aria-hidden="true">▾</span></button>
+      <div class="answer" aria-hidden="true">
+        Light roasts retain more of the bean’s original flavors, often fruity or floral. Dark roasts develop deeper, chocolatey and smoky notes due to longer roasting.
+      </div>
+
+      <button class="question" aria-expanded="false">Do you ship internationally?</button>
+      <div class="answer" aria-hidden="true">
+        Currently we ship within the country only. International shipping is under development.
+      </div>
+
+      <button class="question" aria-expanded="false">How should I store my coffee?</button>
+      <div class="answer" aria-hidden="true">
+        Keep beans in an airtight container, away from light, heat and moisture. For best flavor, use within 2‑3 weeks of opening.
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section container">
+    <h2 class="text-center mb-4">Get In Touch</h2>
+    <form class="contact-form" novalidate>
+      <label for="name">Name *</label>
+      <input type="text" id="name" name="name" required>
+      <div class="error" id="error-name"></div>
+
+      <label for="email">Email *</label>
+      <input type="email" id="email" name="email" required>
+      <div class="error" id="error-email"></div>
+
+      <label for="message">Message *</label>
+      <textarea id="message" name="message" rows="4" required></textarea>
+      <div class="error" id="error-message"></div>
+
+      <button type="submit">Send Enquiry</button>
+      <p id="form-success" style="color:green; margin-top:1rem; display:none;">Thank you! Your enquiry has been recorded (demo only).</p>
+    </form>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <h3>Northbrew Coffee</h3>
+      <p>Premium beans, meticulous craft.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul style="list-style:none;padding:0;">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#products">Our Coffee</a></li>
+        <li><a href="#philosophy">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p>Email: <a href="mailto:info@northbrew.coffee">info@northbrew.coffee</a></p>
+      <p>Phone: +1 (555) 123‑4567</p>
+    </div>
+    <div>
+      <h4>Follow Us</h4>
+      <a href="#" aria-label="Instagram">Instagram</a> |
+      <a href="#" aria-label="Twitter">Twitter</a>
+    </div>
+  </div>
+  <div class="text-center mt-4">
+    &copy; <span id="year"></span> Northbrew Coffee. All rights reserved.
+  </div>
+</footer>
+
+<script>
+/* Mobile menu */
+const menuToggle = document.querySelector('.menu-toggle');
+const primaryMenu = document.getElementById('primary-menu');
+
+menuToggle.addEventListener('click', () => {
+  const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+  menuToggle.setAttribute('aria-expanded', !expanded);
+  primaryMenu.classList.toggle('show');
+});
+
+/* FAQ accordion */
+document.querySelectorAll('.faq .question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', !expanded);
+    const answer = btn.nextElementSibling;
+    answer.setAttribute('aria-hidden', expanded);
+    answer.classList.toggle('open');
+  });
+  btn.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      btn.click();
+    }
+  });
+});
+
+/* Form validation */
+const form = document.querySelector('.contact-form');
+const successMsg = document.getElementById('form-success');
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  let valid = true;
+
+  const name = form.name.value.trim();
+  const email = form.email.value.trim();
+  const message = form.message.value.trim();
+
+  // Name validation
+  if (name === '') {
+    valid = false;
+    document.getElementById('error-name').textContent = 'Please enter your name.';
+  } else {
+    document.getElementById('error-name').textContent = '';
+  }
+
+  // Email validation
+  if (email === '') {
+    valid = false;
+    document.getElementById('error-email').textContent = 'Please enter your email.';
+  } else if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
+    valid = false;
+    document.getElementById('error-email').textContent = 'Enter a valid email address.';
+  } else {
+    document.getElementById('error-email').textContent = '';
+  }
+
+  // Message validation
+  if (message === '') {
+    valid = false;
+    document.getElementById('error-message').textContent = 'Please write a message.';
+  } else {
+    document.getElementById('error-message').textContent = '';
+  }
+
+  if (valid) {
+    // Demo behaviour – no real backend
+    successMsg.style.display = 'block';
+    form.reset();
+  } else {
+    successMsg.style.display = 'none';
+  }
+});
+
+/* Footer year */
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
