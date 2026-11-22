@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Elite Academy – Science & Commerce Coaching</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Elite Academy offers concept‑based Science and Commerce coaching for Class 9 & 10 in Pune. Build strong foundations and shape brighter futures.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#0a274c;      /* navy */
+  --secondary:#1e3a8a;    /* royal */
+  --accent:#b8860b;       /* subtle gold */
+  --bg:#ffffff;
+  --text:#212529;
+  --light:#f8f9fa;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Roboto',Arial,sans-serif;
+  color:var(--text);
+  background:var(--bg);
+  line-height:1.6;
+}
+h1,h2,h3,h4{
+  font-family:'Merriweather',serif;
+  margin-bottom:.5rem;
+}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+section{padding:4rem 1rem;}
+.container{max-width:1200px;margin:auto;width:90%;}
+/* Header */
+header{
+  position:sticky;
+  top:0;
+  background:var(--bg);
+  z-index:1000;
+  box-shadow:0 2px 6px rgba(0,0,0,.1);
+}
+nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:1rem 0;
+}
+nav .logo{
+  font-size:1.5rem;
+  font-weight:900;
+  color:var(--primary);
+}
+nav ul{
+  list-style:none;
+  display:flex;
+  gap:1.5rem;
+}
+nav ul li a{
+  font-weight:500;
+  padding:.5rem;
+  transition:color .3s;
+}
+nav ul li a:hover{color:var(--secondary);}
+nav .cta{
+  background:var(--accent);
+  color:#fff;
+  padding:.6rem 1.2rem;
+  border-radius:4px;
+  font-weight:500;
+  transition:background .3s;
+}
+nav .cta:hover{background:#9a7300;}
+/* Mobile */
+.menu-toggle{
+  display:none;
+  flex-direction:column;
+  gap:.3rem;
+  cursor:pointer;
+}
+.menu-toggle div{
+  width:25px;
+  height:3px;
+  background:var(--text);
+}
+@media (max-width:768px){
+  nav ul{display:none;flex-direction:column;background:var(--light);position:absolute;top:100%;right:0;width:200px;padding:1rem;box-shadow:0 2px 8px rgba(0,0,0,.2);}
+  nav ul.show{display:flex;}
+  .menu-toggle{display:flex;}
+}
+
+/* Hero */
+.hero{
+  background:url('https://source.unsplash.com/featured/1600x900?classroom,education') center/cover no-repeat;
+  color:#fff;
+  text-align:center;
+  padding:10rem 1rem;
+  position:relative;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.4);
+}
+.hero .content{
+  position:relative;
+  max-width:800px;
+  margin:auto;
+}
+.hero h1{
+  font-size:2.8rem;
+  margin-bottom:1rem;
+}
+.hero p{
+  font-size:1.2rem;
+  margin-bottom:2rem;
+}
+.hero .btn{
+  background:var(--accent);
+  color:#fff;
+  padding:.8rem 1.5rem;
+  border-radius:4px;
+  font-weight:500;
+  margin:0 .5rem;
+  transition:background .3s;
+}
+.hero .btn:hover{background:#9a7300;}
+
+/* Sections */
+section:nth-of-type(even){background:var(--light);}
+.section-title{
+  text-align:center;
+  margin-bottom:3rem;
+  color:var(--primary);
+}
+.cards{
+  display:grid;
+  gap:2rem;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+}
+.card{
+  background:#fff;
+  padding:1.5rem;
+  border-radius:8px;
+  box-shadow:0 2px 6px rgba(0,0,0,.1);
+  transition:transform .3s,box-shadow .3s;
+}
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+.card h3{color:var(--secondary);margin-bottom:.5rem;}
+.card p{font-size:.95rem;}
+
+/* Why Choose */
+.features{
+  display:flex;
+  flex-wrap:wrap;
+  gap:2rem;
+  justify-content:center;
+}
+.feature{
+  flex:1 1 260px;
+  background:#fff;
+  padding:1.5rem;
+  border-left:4px solid var(--accent);
+  box-shadow:0 2px 6px rgba(0,0,0,.08);
+}
+.feature h4{color:var(--primary);margin-bottom:.5rem;}
+
+/* Reviews */
+.rating{
+  font-size:2rem;
+  color:var(--accent);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.5rem;
+}
+
+/* Form */
+form{
+  background:#fff;
+  padding:2rem;
+  border-radius:8px;
+  box-shadow:0 2px 6px rgba(0,0,0,.1);
+}
+form .field{
+  margin-bottom:1rem;
+}
+form label{
+  display:block;
+  margin-bottom:.3rem;
+  font-weight:500;
+}
+form input,form select,form textarea{
+  width:100%;
+  padding:.6rem;
+  border:1px solid #ccc;
+  border-radius:4px;
+  font-family:inherit;
+}
+form button{
+  background:var(--secondary);
+  color:#fff;
+  padding:.8rem 1.5rem;
+  border:none;
+  border-radius:4px;
+  cursor:pointer;
+  font-weight:500;
+  transition:background .3s;
+}
+form button:hover{background:#16337a;}
+
+/* Contact */
+.contact-info a{
+  color:var(--primary);
+  display:block;
+  margin:.5rem 0;
+}
+.map{
+  margin-top:1rem;
+}
+
+/* Footer */
+footer{
+  background:var(--primary);
+  color:#fff;
+  padding:2rem 1rem;
+  font-size:.9rem;
+}
+footer a{color:#fff;}
+footer .footer-grid{
+  display:grid;
+  gap:2rem;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+}
+footer .small{font-size:.8rem;text-align:center;margin-top:1rem;}
+
+/* Animations */
+.fade-in{
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity .6s ease-out,transform .6s ease-out;
+}
+.visible{opacity:1;transform:none;}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="container">
+    <div class="logo">Elite Academy</div>
+    <ul id="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#courses">Courses</a></li>
+      <li><a href="#why">Why Choose Us</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#enquiry" class="cta">Enquire Now</a>
+    <div class="menu-toggle" id="menu-toggle">
+      <div></div><div></div><div></div>
+    </div>
+  </nav>
+</header>
+
+<section id="home" class="hero">
+  <div class="content fade-in">
+    <h1>Building Strong Foundations.<br>Shaping Brighter Futures.</h1>
+    <p>Concept‑based Science & Commerce coaching for Class 9‑10 students. Empowering young minds to excel academically.</p>
+    <a href="#courses" class="btn">Explore Courses</a>
+    <a href="#enquiry" class="btn">Enquire Now</a>
+  </div>
+</section>
+
+<section id="about" class="fade-in">
+  <div class="container">
+    <h2 class="section-title">About Elite Academy</h2>
+    <p>Located in the heart of Chandan Nagar, Wadgaon Sheri, Elite Academy offers personalized, concept‑driven coaching for Class 9 and 10 students in Science and Commerce. Our student‑focused approach ensures each learner receives the guidance needed to master fundamentals and excel in board examinations.</p>
+  </div>
+</section>
+
+<section id="courses" class="fade-in">
+  <div class="container">
+    <h2 class="section-title">Our Courses</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Class 9 – Science & Mathematics</h3>
+        <p>Strong foundation in Physics, Chemistry, Biology and Mathematics with interactive problem‑solving sessions.</p>
+      </div>
+      <div class="card">
+        <h3>Class 10 – Science, Mathematics & Board Prep</h3>
+        <p>Comprehensive coverage of CBSE syllabus, focused board‑exam strategies and regular mock tests.</p>
+      </div>
+      <div class="card">
+        <h3>Commerce – Conceptual Learning</h3>
+        <p>In‑depth study of Accountancy, Business Studies and Economics, designed for clear understanding and application.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why" class="fade-in">
+  <div class="container">
+    <h2 class="section-title">Why Choose Us</h2>
+    <div class="features">
+      <div class="feature">
+        <h4>Focused Learning</h4>
+        <p>Small batch sizes ensure individual attention.</p>
+      </div>
+      <div class="feature">
+        <h4>Conceptual Understanding</h4>
+        <p>Every topic is taught from fundamentals to advanced applications.</p>
+      </div>
+      <div class="feature">
+        <h4>Structured Support</h4>
+        <p>Regular assessments, feedback loops, and doubt‑clearing sessions.</p>
+      </div>
+      <div class="feature">
+        <h4>Student‑Centred Teaching</h4>
+        <p>Learning paced to each student’s needs, fostering confidence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews" class="fade-in">
+  <div class="container">
+    <h2 class="section-title">Reviews</h2>
+    <div class="rating">
+      ★ ★ ★ ★ ★
+      <span>4.9/5 (275 reviews)</span>
+    </div>
+  </div>
+</section>
+
+<section id="enquiry" class="fade-in">
+  <div class="container">
+    <h2 class="section-title">Admission Enquiry</h2>
+    <form id="enquiry-form">
+      <div class="field">
+        <label for="studentName">Student Name</label>
+        <input type="text" id="studentName" required>
+      </div>
+      <div class="field">
+        <label for="parentName">Parent/Guardian Name</label>
+        <input type="text" id="parentName" required>
+      </div>
+      <div class="field">
+        <label for="contact">Contact Number</label>
+        <input type="tel" id="contact" pattern="[0-9]{10}" placeholder="10‑digit number" required>
+      </div>
+      <div class="field">
+        <label for="course">Interested Course</label>
+        <select id="course" required>
+          <option value="">Select a course</option>
+          <option>Class 9 – Science & Mathematics</option>
+          <option>Class 10 – Science, Mathematics & Board Prep</option>
+          <option>Commerce – Conceptual Learning</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="message">Message (optional)</label>
+        <textarea id="message" rows="4"></textarea>
+      </div>
+      <button type="submit">Submit Enquiry</button>
+      <p id="form-msg" style="margin-top:1rem;color:var(--secondary);display:none;"></p>
+    </form>
+  </div>
+</section>
+
+<section id="contact" class="fade-in">
+  <div class="container">
+    <h2 class="section-title">Contact Us</h2>
+    <div class="contact-info">
+      <p><strong>Address:</strong> Jyoti Nivas, 3/47, Sangharsh Chowk, Ashtavinayak Nagar, Chandan Nagar, Wadgaon Sheri, Pune, Maharashtra – 411014</p>
+      <p><strong>Phone:</strong> <a href="tel:+919145274707">+91 9145274707</a></p>
+      <p><strong>WhatsApp:</strong> <a href="https://wa.me/919145274707" target="_blank">Chat with us</a></p>
+      <div class="map">
+        <iframe width="100%" height="300" style="border:0;" loading="lazy"
+          src="https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY&q=Jyoti+Nivas,+Chandan+Nagar,+Pune+411014" allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <h4>Elite Academy</h4>
+      <p>Science & Commerce Coaching for Class 9‑10</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul style="list-style:none;">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#courses">Courses</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p>Phone: <a href="tel:+919145274707">+91 9145274707</a></p>
+      <p>Address: Jyoti Nivas, 3/47, Sangharsh Chowk, Pune</p>
+    </div>
+  </div>
+  <p class="small">© 2024 Elite Academy. All rights reserved.</p>
+  <p class="small">Website Concept by Champtrix</p>
+</footer>
+
+<script>
+// Mobile menu toggle
+const menuToggle = document.getElementById('menu-toggle');
+const navLinks = document.getElementById('nav-links');
+menuToggle.addEventListener('click',()=>navLinks.classList.toggle('show'));
+
+// Form validation & feedback
+document.getElementById('enquiry-form').addEventListener('submit',function(e){
+  e.preventDefault();
+  const msg = document.getElementById('form-msg');
+  msg.textContent = 'Thank you! Your enquiry has been received. We will contact you soon.';
+  msg.style.display = 'block';
+  this.reset();
+});
+
+// IntersectionObserver for fade‑in animations
+const observer = new IntersectionObserver((entries)=> {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:0.1});
+
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
