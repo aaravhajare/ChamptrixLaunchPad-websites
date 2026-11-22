@@ -1,0 +1,462 @@
+elite-academy
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Elite Academy – Science & Commerce Coaching</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Premium coaching for Class 9, Class 10 and Commerce students in Pune. Build strong foundations and shape brighter futures.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --color-primary:#0a2740;   /* navy */
+  --color-secondary:#1c6ea4;/* royal */
+  --color-white:#ffffff;
+  --color-gold:#caa858;
+  --font-base:"Roboto",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:var(--font-base);
+  line-height:1.6;
+  color:#333;
+  background:#f9f9f9;
+}
+a{color:var(--color-secondary);text-decoration:none;}
+a:hover{text-decoration:underline;}
+header{
+  background:var(--color-primary);
+  color:#fff;
+  position:sticky;top:0;z-index:1000;
+}
+.navbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  max-width:1200px;
+  margin:auto;
+  padding:0.8rem 1rem;
+}
+.logo{
+  font-size:1.5rem;
+  font-weight:700;
+}
+nav ul{
+  list-style:none;
+  display:flex;
+  gap:1.2rem;
+}
+nav ul li a{
+  color:#fff;
+  font-weight:500;
+  transition:color .2s;
+}
+nav ul li a:hover{color:var(--color-gold);}
+.cta-btn{
+  background:var(--color-gold);
+  color:#000;
+  padding:0.5rem 1rem;
+  border:none;
+  border-radius:4px;
+  font-weight:500;
+  cursor:pointer;
+}
+.cta-btn:hover{opacity:.9;}
+/* Hamburger */
+#nav-toggle{display:none;}
+.hamburger{
+  display:none;
+  flex-direction:column;
+  cursor:pointer;
+}
+.hamburger span{
+  height:3px;
+  width:25px;
+  background:#fff;
+  margin:4px 0;
+  transition:0.3s;
+}
+@media(max-width:768px){
+  .hamburger{display:flex;}
+  nav ul{
+    position:absolute;
+    top:100%;
+    left:0;
+    right:0;
+    background:var(--color-primary);
+    flex-direction:column;
+    display:none;
+  }
+  #nav-toggle:checked + .hamburger + ul{display:flex;}
+}
+
+/* Hero */
+.hero{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  max-width:1200px;
+  margin:auto;
+  padding:2rem 1rem;
+  gap:2rem;
+}
+.hero-text{
+  flex:1 1 300px;
+}
+.hero-text h1{
+  font-size:2.5rem;
+  color:var(--color-primary);
+  margin-bottom:1rem;
+}
+.hero-text p{
+  font-size:1.1rem;
+  margin-bottom:1.5rem;
+}
+.hero-img{
+  flex:1 1 300px;
+}
+.hero-img img{
+  width:100%;
+  height:auto;
+  border-radius:8px;
+  object-fit:cover;
+}
+
+/* Sections */
+section{
+  padding:3rem 1rem;
+}
+.section-title{
+  text-align:center;
+  margin-bottom:2rem;
+  font-size:2rem;
+  color:var(--color-primary);
+}
+.about,.why,.contact{
+  max-width:1000px;
+  margin:auto;
+}
+.cards{
+  display:flex;
+  flex-wrap:wrap;
+  gap:1.5rem;
+  justify-content:center;
+}
+.card{
+  background:#fff;
+  padding:1.5rem;
+  border-radius:8px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.1);
+  flex:1 1 260px;
+  transition:transform .2s;
+}
+.card:hover{transform:translateY(-4px);}
+.card h3{margin-bottom:.5rem;color:var(--color-secondary);}
+.card ul{margin-left:1rem;margin-bottom:1rem;}
+.card button{
+  background:var(--color-primary);
+  color:#fff;
+  border:none;
+  padding:.5rem 1rem;
+  border-radius:4px;
+  cursor:pointer;
+}
+.card button:hover{background:var(--color-secondary);}
+
+/* Why Choose */
+.features{
+  display:flex;
+  flex-wrap:wrap;
+  gap:1.5rem;
+  justify-content:center;
+}
+.feature{
+  flex:1 1 200px;
+  text-align:center;
+}
+.feature span{
+  display:inline-block;
+  font-size:2rem;
+  margin-bottom:.5rem;
+  color:var(--color-primary);
+}
+
+/* Form */
+form{
+  background:#fff;
+  padding:2rem;
+  border-radius:8px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.1);
+  max-width:600px;
+  margin:auto;
+}
+form .field{
+  margin-bottom:1rem;
+}
+form label{
+  display:block;
+  margin-bottom:.3rem;
+  font-weight:500;
+}
+form input,form select,form textarea{
+  width:100%;
+  padding:.6rem;
+  border:1px solid #ccc;
+  border-radius:4px;
+  font-family:inherit;
+}
+form button{
+  background:var(--color-gold);
+  color:#000;
+  border:none;
+  padding:.7rem 1.5rem;
+  border-radius:4px;
+  cursor:pointer;
+  font-weight:500;
+}
+form button:hover{opacity:.9;}
+.success-msg{
+  display:none;
+  text-align:center;
+  padding:1rem;
+  background:#e0f7e9;
+  color:#2e7d32;
+  margin-top:1rem;
+  border-radius:4px;
+}
+
+/* Footer */
+footer{
+  background:var(--color-primary);
+  color:#fff;
+  padding:2rem 1rem;
+}
+footer .footer-container{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  flex-wrap:wrap;
+  gap:2rem;
+  justify-content:space-between;
+}
+footer a{color:#fff;}
+footer .small{font-size:.9rem;}
+
+/* Scroll */
+html{scroll-behavior:smooth;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="navbar">
+    <div class="logo">Elite Academy</div>
+    <input type="checkbox" id="nav-toggle">
+    <label class="hamburger" for="nav-toggle">
+      <span></span><span></span><span></span>
+    </label>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#courses">Courses</a></li>
+        <li><a href="#why">Why Choose Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><button class="cta-btn" onclick="document.getElementById('enquiry').scrollIntoView({behavior:'smooth'});">Enquire Now</button></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section id="home" class="hero">
+  <div class="hero-text">
+    <h1>Building Strong Foundations. Shaping Brighter Futures.</h1>
+    <p>Quality coaching for Science and Commerce students, with focused academic support for Classes 9th, 10th and beyond.</p>
+    <button class="cta-btn" onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'});">Explore Courses</button>
+    <button class="cta-btn" style="margin-left:0.8rem;" onclick="document.getElementById('enquiry').scrollIntoView({behavior:'smooth'});">Enquire Now</button>
+  </div>
+  <div class="hero-img">
+    <img src="https://source.unsplash.com/800x600?classroom,education" alt="Classroom learning environment">
+  </div>
+</section>
+
+<section id="about" class="about">
+  <h2 class="section-title">About Elite Academy</h2>
+  <p style="max-width:800px;margin:auto;text-align:center;">
+    At Elite Academy we focus on concept‑based learning, academic guidance and a student‑centred approach. Our aim is to build strong foundational understanding and support the academic development of each learner.
+  </p>
+</section>
+
+<section id="courses" class="courses">
+  <h2 class="section-title">Our Courses</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Class 9 Coaching</h3>
+      <ul>
+        <li>Science</li>
+        <li>Mathematics</li>
+        <li>Academic foundation building</li>
+      </ul>
+      <button onclick="document.getElementById('enquiry').scrollIntoView({behavior:'smooth'});">Enquire Now</button>
+    </div>
+    <div class="card">
+      <h3>Class 10 Coaching</h3>
+      <ul>
+        <li>Science</li>
+        <li>Mathematics</li>
+        <li>Board exam preparation</li>
+        <li>Revision and practice</li>
+      </ul>
+      <button onclick="document.getElementById('enquiry').scrollIntoView({behavior:'smooth'});">Enquire Now</button>
+    </div>
+    <div class="card">
+      <h3>Commerce Coaching</h3>
+      <ul>
+        <li>Commerce subjects</li>
+        <li>Conceptual understanding</li>
+        <li>Academic support</li>
+      </ul>
+      <button onclick="document.getElementById('enquiry').scrollIntoView({behavior:'smooth'});">Enquire Now</button>
+    </div>
+  </div>
+</section>
+
+<section id="why" class="why">
+  <h2 class="section-title">Why Choose Elite Academy?</h2>
+  <div class="features">
+    <div class="feature">
+      <span>📚</span>
+      <h4>Focused Academic Learning</h4>
+    </div>
+    <div class="feature">
+      <span>🔎</span>
+      <h4>Conceptual Understanding</h4>
+    </div>
+    <div class="feature">
+      <span>🗂️</span>
+      <h4>Structured Support</h4>
+    </div>
+    <div class="feature">
+      <span>👩‍🏫</span>
+      <h4>Student‑Centred Approach</h4>
+    </div>
+    <div class="feature">
+      <span>⚛️</span>
+      <h4>Science & Commerce Learning</h4>
+    </div>
+  </div>
+</section>
+
+<section id="enquiry" class="enquiry">
+  <h2 class="section-title">Admission Enquiry</h2>
+  <form id="enquiryForm" novalidate>
+    <div class="field">
+      <label for="studentName">Student Name</label>
+      <input type="text" id="studentName" required>
+    </div>
+    <div class="field">
+      <label for="parentName">Parent/Guardian Name</label>
+      <input type="text" id="parentName" required>
+    </div>
+    <div class="field">
+      <label for="contactNumber">Contact Number</label>
+      <input type="tel" id="contactNumber" pattern="\\d{10,}" required placeholder="e.g., 9145274707">
+    </div>
+    <div class="field">
+      <label for="courseInterest">Class / Course Interested In</label>
+      <select id="courseInterest" required>
+        <option value="">Select...</option>
+        <option>Class 9 Coaching</option>
+        <option>Class 10 Coaching</option>
+        <option>Commerce Coaching</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="message">Message (optional)</label>
+      <textarea id="message" rows="4"></textarea>
+    </div>
+    <button type="submit">Submit Enquiry</button>
+    <div class="success-msg" id="successMsg">Thank you! Your enquiry has been received.</div>
+  </form>
+</section>
+
+<section id="testimonials" class="testimonials">
+  <h2 class="section-title">What Parents Say</h2>
+  <p style="text-align:center;">Rating: <strong>4.9/5</strong> based on <strong>275</strong> reviews</p>
+</section>
+
+<section id="contact" class="contact">
+  <h2 class="section-title">Contact Us</h2>
+  <p style="text-align:center;">
+    Elite Academy<br>
+    Jyoti Nivas, 3/47, Sangharsh Chowk,<br>
+    Ashtavinayak Nagar, Chandan Nagar,<br>
+    Wadgaon Sheri, Pune, Maharashtra – 411014<br>
+    Phone: <a href="tel:9145274707">9145274707</a>
+  </p>
+  <div style="text-align:center;margin:1rem 0;">
+    <a href="https://wa.me/9145274707" target="_blank" style="background:#25D366;color:#fff;padding:.5rem 1rem;border-radius:4px;">WhatsApp Enquiry</a>
+  </div>
+  <div style="width:100%;max-width:800px;margin:auto;">
+    <iframe
+      src="https://www.google.com/maps?q=Jyoti%20Nivas%203%2F47%20Sangharsh%20Chowk%20Pune&output=embed"
+      width="100%" height="300" style="border:0;border-radius:8px;" allowfullscreen="" loading="lazy"></iframe>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-container">
+    <div>
+      <h3>Elite Academy</h3>
+      <p>Science & Commerce Coaching</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul style="list-style:none;">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#courses">Courses</a></li>
+        <li><a href="#why">Why Choose Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p>Phone: <a href="tel:9145274707">9145274707</a></p>
+      <p>Address: Jyoti Nivas, 3/47, Sangharsh Chowk, Pune</p>
+    </div>
+  </div>
+  <p class="small" style="text-align:center;margin-top:1rem;">
+    © 2024 Elite Academy. All rights reserved.<br>
+    Website concept by Champtrix
+  </p>
+</footer>
+
+<script>
+document.getElementById('enquiryForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  const form=this;
+  const name=form.studentName.value.trim();
+  const parent=form.parentName.value.trim();
+  const phone=form.contactNumber.value.trim();
+  const course=form.courseInterest.value;
+  if(!name||!parent||!phone||!course){
+    alert('Please fill in all required fields.');
+    return;
+  }
+  // Simple phone validation
+  if(!/^\\d{10,}$/.test(phone)){
+    alert('Enter a valid contact number.');
+    return;
+  }
+  form.reset();
+  document.getElementById('successMsg').style.display='block';
+  setTimeout(()=>{document.getElementById('successMsg').style.display='none';},4000);
+});
+</script>
+</body>
+</html>
